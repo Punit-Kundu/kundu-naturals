@@ -1,0 +1,8 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f5f0e8"/>
+  <rect x="50" y="50" width="300" height="200" fill="none" stroke="#d4c9b8" stroke-width="2" stroke-dasharray="10,10"/>
+  <text x="200" y="130" font-family="system-ui, sans-serif" font-size="18" fill="#8b6914" text-anchor="middle">गैलरी छवि</text>
+  <text x="200" y="155" font-family="system-ui, sans-serif" font-size="14" fill="#8b6914" text-anchor="middle">Gallery Image</text>
+  <circle cx="200" cy="190" r="20" fill="none" stroke="#d4a80a" stroke-width="2"/>
+  <path d="M190 190 L200 200 L215 175" fill="none" stroke="#d4a80a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

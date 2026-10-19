@@ -1,0 +1,7 @@
+<svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="500" fill="#f5f0e8"/>
+  <circle cx="200" cy="160" r="80" fill="#e8dcc8"/>
+  <ellipse cx="200" cy="420" rx="120" ry="150" fill="#e8dcc8"/>
+  <text x="200" y="480" font-family="system-ui, sans-serif" font-size="16" fill="#8b6914" text-anchor="middle">व्यक्ति छवि</text>
+  <text x="200" y="500" font-family="system-ui, sans-serif" font-size="12" fill="#8b6914" text-anchor="middle">Person Placeholder</text>
+</svg>

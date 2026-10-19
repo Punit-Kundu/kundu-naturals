@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#14532D" />
+    <meta name="description" content="Kundu Naturals — Pure Food • Healthy Life. Authentic Indian organic, desi, chemical-free food delivered farm-to-home: A2 ghee, cold-pressed oils, stone-ground atta, pulses, spices, honey & jaggery." />
+    <meta name="keywords" content="Kundu Naturals, organic Indian food, desi ghee, cold pressed oil, atta flour, natural farming, no chemicals, farm fresh" />
+    <meta name="author" content="Kundu Naturals" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Kundu Naturals — Pure Food, Healthy Life" />
+    <meta property="og:description" content="Authentic Indian organic, desi and chemical-free food — directly from farmers to your family." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kundu Naturals" />
+    <meta property="og:image" content="/images/og-cover.jpg" />
+    <meta property="og:url" content="/" />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kundu Naturals — Pure Food • Healthy Life" />
+    <meta name="twitter:description" content="Authentic Indian organic, desi and chemical-free food — directly from farmers to your family." />
+    <meta name="twitter:image" content="/images/og-cover.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <title>Kundu Naturals — Pure Food • Healthy Life</title>
+
+    <!-- Preload the hero image (LCP) -->
+    <link rel="preload" as="image" href="/homepage%20hero%20section%20image.png" fetchpriority="high" />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Page loader styles (inline, avoid FOUC) -->
+    <style>
+      #page-loader {
+        position: fixed; inset: 0; z-index: 100000;
+        display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+        background: linear-gradient(160deg, #0F2A1B 0%, #14532D 100%);
+        color: #F6E3B4;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #page-loader.hide { opacity: 0; visibility: hidden; }
+      .loader-leaf {
+        width: 80px; height: 80px; position: relative;
+      }
+      .loader-leaf svg { width: 100%; height: 100%; animation: leaf-spin 1.4s ease-in-out infinite; }
+      @keyframes leaf-spin { 0%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.12)} 100%{transform:rotate(360deg) scale(1)} }
+      .loader-label { font-family: 'Poppins', sans-serif; font-size: 0.875rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; }
+      @media (prefers-reduced-motion: reduce) { .loader-leaf svg { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- Page loader (auto-hidden after app mounts) -->
+    <div id="page-loader" role="status" aria-label="Loading">
+      <div class="loader-leaf">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 56 C32 56 12 44 12 24 C12 12 20 8 32 8 C44 8 52 12 52 24 C52 44 32 56 32 56 Z" />
+          <path d="M32 30 L32 14 M32 30 L22 40 M32 30 L42 40" opacity="0.6" />
+        </svg>
+      </div>
+      <span class="loader-label">Kundu Naturals • Loading</span>
+    </div>
+    <!-- Scroll progress bar -->
+    <div id="progress-bar" aria-hidden="true"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/index.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+          var el = document.getElementById('page-loader');
+          if (el) el.classList.add('hide');
+        }, 600);
+      });
+    </script>
+  </body>
+</html>

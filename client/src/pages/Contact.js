@@ -6,23 +6,37 @@ import ContactForm from '../components/ContactForm';
 import WhatsApp from '../components/icons/WhatsAppIcon';
 import './Contact.css';
 
-const contactInfo = [
+const fallbackBusinessInfo = {
+  phone: '9034677123',
+  email: 'kundupunit927@gmail.com',
+  whatsapp: '919034677123',
+  address: 'Kundu Naturals, Village Kailram, District Kaithal, Haryana, India',
+};
+
+const formatPhoneNumber = (rawPhone) => {
+  if (!rawPhone) return fallbackBusinessInfo.phone;
+  const digits = String(rawPhone).replace(/\D/g, '');
+  if (!digits) return fallbackBusinessInfo.phone;
+  return digits.startsWith('91') ? `+${digits.slice(0, 2)}-${digits.slice(2)}` : `+91-${digits}`;
+};
+
+const getContactInfo = (businessInfo) => [
   {
     icon: MapPin,
     title: 'Our Address',
     titleHindi: 'हमारा पता',
     titleEn: 'Our Address',
-    details: [
+    details: businessInfo.address ? businessInfo.address.split(', ') : [
       'Kundu Naturals',
       'Village Kailram',
       'District Kaithal',
-      'Haryana, India'
+      'Haryana, India',
     ],
-    detailsEn: [
+    detailsEn: businessInfo.address ? businessInfo.address.split(', ') : [
       'Kundu Naturals',
       'Village Kailram',
       'District Kaithal',
-      'Haryana, India'
+      'Haryana, India',
     ],
     action: null,
     actionLabel: null,
@@ -32,9 +46,9 @@ const contactInfo = [
     title: 'Phone Number',
     titleHindi: 'फोन नंबर',
     titleEn: 'Phone Number',
-    details: ['9034677123', '9034677123 (WhatsApp)'],
-    detailsEn: ['9034677123', '9034677123 (WhatsApp)'],
-    action: 'tel:+919034677123',
+    details: [formatPhoneNumber(businessInfo.phone), formatPhoneNumber(businessInfo.phone) + ' (WhatsApp)'],
+    detailsEn: [formatPhoneNumber(businessInfo.phone), formatPhoneNumber(businessInfo.phone) + ' (WhatsApp)'],
+    action: `tel:+${String(businessInfo.phone || '919034677123').replace(/\D/g, '')}`,
     actionLabel: { language: 'hi', text: 'कॉल करें', en: 'Call' },
   },
   {
@@ -42,9 +56,9 @@ const contactInfo = [
     title: 'Email',
     titleHindi: 'ईमेल',
     titleEn: 'Email',
-    details: ['9034677123'],
-    detailsEn: ['9034677123'],
-    action: 'mailto:kundupunit927@gmail.com',
+    details: [businessInfo.email || fallbackBusinessInfo.email],
+    detailsEn: [businessInfo.email || fallbackBusinessInfo.email],
+    action: `mailto:${businessInfo.email || fallbackBusinessInfo.email}`,
     actionLabel: { language: 'hi', text: 'ईमेल करें', en: 'Email' },
   },
   {
@@ -52,9 +66,9 @@ const contactInfo = [
     title: 'WhatsApp',
     titleHindi: 'व्हाट्सऐप',
     titleEn: 'WhatsApp',
-    details: ['9034677123', 'सोम-शनि: 9 AM - 7 PM'],
-    detailsEn: ['9034677123', 'Mon-Sat: 9 AM - 7 PM'],
-    action: 'https://wa.me/919034677123',
+    details: [formatPhoneNumber(businessInfo.phone), 'सोम-शनि: 9 AM - 7 PM'],
+    detailsEn: [formatPhoneNumber(businessInfo.phone), 'Mon-Sat: 9 AM - 7 PM'],
+    action: `https://wa.me/${String(businessInfo.whatsapp || '919034677123').replace(/\D/g, '')}`,
     actionLabel: { language: 'hi', text: 'चैट करें', en: 'Chat' },
   },
 ];
@@ -67,6 +81,7 @@ const businessHours = [
 
 function Contact() {
   const [language, setLanguage] = useState('en');
+  const [businessInfo, setBusinessInfo] = useState(fallbackBusinessInfo);
 
   useEffect(() => {
     const syncLanguage = () => {
@@ -77,6 +92,37 @@ function Contact() {
     window.addEventListener('languagechange', syncLanguage);
     return () => window.removeEventListener('languagechange', syncLanguage);
   }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadBusinessInfo = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const response = await fetch(`${apiUrl}/api/contact`);
+        if (!response.ok) return;
+
+        const data = await response.json();
+        if (!data?.success || !data?.data || !isMounted) return;
+
+        setBusinessInfo({
+          phone: data.data.phone || fallbackBusinessInfo.phone,
+          email: data.data.email || fallbackBusinessInfo.email,
+          whatsapp: data.data.whatsapp || fallbackBusinessInfo.whatsapp,
+          address: data.data.address || fallbackBusinessInfo.address,
+        });
+      } catch (error) {
+        console.warn('Unable to load contact info', error);
+      }
+    };
+
+    loadBusinessInfo();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const contactInfo = getContactInfo(businessInfo);
 
   return (
     <>

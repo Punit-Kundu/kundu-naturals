@@ -1,0 +1,146 @@
+.floating-contact {
+  position: fixed;
+  top: auto;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  left: max(1rem, env(safe-area-inset-left));
+  z-index: 850;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.floating-contact-button {
+  position: relative;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  box-shadow: 0 5px 16px rgba(20, 32, 24, 0.2);
+  isolation: isolate;
+  animation: floatingContactEnter 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.floating-contact-button::before {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  content: '';
+  inset: -4px;
+  opacity: 0;
+  animation: floatingContactPulse 2.8s ease-out infinite;
+}
+
+.floating-contact-button:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.floating-contact-button:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.floating-contact-button:nth-child(2)::before {
+  animation-delay: 900ms;
+}
+
+.floating-contact-button:nth-child(3)::before {
+  animation-delay: 1.8s;
+}
+
+.floating-contact-button:hover,
+.floating-contact-button:focus-visible {
+  z-index: 1;
+  transform: translateX(4px) scale(1.08);
+  box-shadow: 0 9px 22px rgba(20, 32, 24, 0.28);
+  filter: saturate(1.1);
+}
+
+.floating-contact-button:active {
+  transform: translateX(2px) scale(0.96);
+}
+
+.floating-contact-button:focus-visible {
+  outline: 3px solid #f6e3b4;
+  outline-offset: 4px;
+}
+
+.floating-contact-button svg {
+  transition: transform 220ms ease;
+}
+
+.floating-contact-button:hover svg,
+.floating-contact-button:focus-visible svg {
+  transform: scale(1.1);
+}
+
+.floating-contact-facebook {
+  background: #1877f2;
+}
+
+.floating-contact-whatsapp {
+  background: #25d366;
+}
+
+.floating-contact-call {
+  background: #14532d;
+}
+
+@keyframes floatingContactEnter {
+  from {
+    opacity: 0;
+    transform: translateX(14px) scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes floatingContactPulse {
+  0% {
+    opacity: 0.32;
+    transform: scale(0.88);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-contact {
+    left: max(0.65rem, env(safe-area-inset-left));
+    gap: 0.65rem;
+  }
+
+  .floating-contact-button {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (max-width: 380px) {
+  .floating-contact {
+    left: max(0.5rem, env(safe-area-inset-left));
+    gap: 0.55rem;
+  }
+
+  .floating-contact-button {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-contact-button,
+  .floating-contact-button::before {
+    animation: none;
+    transition: none;
+  }
+}

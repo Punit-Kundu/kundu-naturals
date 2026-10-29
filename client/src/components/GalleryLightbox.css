@@ -123,11 +123,11 @@
   }
 
   .lightbox-prev {
-    left: -55px;
+    left: 8px;
   }
 
   .lightbox-next {
-    right: -55px;
+    right: 8px;
   }
 
   .lightbox-image {

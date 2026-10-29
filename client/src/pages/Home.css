@@ -537,7 +537,20 @@ html.hi .kn-hero-btn {
 }
 @media (max-width: 560px) {
   .kn-hero { min-height: 92vh; }
-  .kn-hero-stats { position: static; transform: none; margin: 1.5rem auto 0; width: calc(100% - 2rem); }
+  .kn-hero-stats {
+    position: static;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 0.5rem;
+    margin: 1.5rem auto 0;
+    width: 100%;
+    padding: 1rem;
+    white-space: normal;
+  }
+  .kn-hero-stat { min-width: 0; padding: 0 0.35rem; }
+  .kn-hero-stat-label { text-align: center; }
+  .kn-hero-stat-divider { display: none; }
   .kn-hero-ctas { flex-direction: column; }
   .kn-hero-cta-wrap { width: 100%; }
   .kn-hero-btn { width: 100%; justify-content: center; }

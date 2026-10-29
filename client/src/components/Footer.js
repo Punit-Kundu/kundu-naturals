@@ -164,14 +164,10 @@ function Footer() {
             >
               <Link to="/" className="footer-logo" aria-label="Kundu Naturals - Home">
                 <img
-                  src="/logo-placeholder.svg"
-                  alt=""
+                  src="/images/website-logo.png"
+                  alt="Kundu Naturals"
                   className="footer-logo-mark"
                 />
-                <span className="footer-logo-text">
-                  <span className="footer-logo-name">Kundu</span>
-                  <span className="footer-logo-sub">NATURALS</span>
-                </span>
               </Link>
 
               <p className="footer-tagline">

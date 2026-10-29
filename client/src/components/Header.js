@@ -1,40 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Leaf, Truck, Shield, RotateCcw, Globe } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Leaf,
+  Truck,
+  ShieldCheck,
+  Globe,
+  Home,
+  UserRound,
+  ChevronDown,
+  Images,
+  ShoppingCart,
+  Mail,
+  Search,
+  Phone,
+} from 'lucide-react';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Header.css';
 
 const navLinks = [
-  { path: '/', label: 'होम', labelEn: 'Home' },
-  { path: '/about', label: 'हमारे बारे में', labelEn: 'About Us' },
-  { path: '/products', label: 'प्रोडक्ट्स', labelEn: 'Products' },
-  { path: '/gallery', label: 'गैलरी', labelEn: 'Gallery' },
-  { path: '/our-brand', label: 'हमारा ब्रांड', labelEn: 'Our Brand' },
-  { path: '/contact', label: 'संपर्क करें', labelEn: 'Contact' },
+  { path: '/', label: 'होम', labelEn: 'Home', icon: Home },
+  { path: '/about', label: 'हमारे बारे में', labelEn: 'About', icon: UserRound },
+  { path: '/gallery', label: 'गैलरी', labelEn: 'Gallery', icon: Images },
+  { path: '/products', label: 'ऑर्डर करें', labelEn: 'Order Online', icon: ShoppingCart },
+  { path: '/contact', label: 'संपर्क करें', labelEn: 'Contact', icon: Mail },
 ];
 
 const trustBadges = [
-  { icon: Leaf, text: '100% प्राकृतिक', textEn: '100% Natural' },
-  { icon: Truck, text: 'मुफ्त शिपिंग', textEn: 'Free Shipping' },
-  { icon: Shield, text: 'गुणवत्ता की गारंटी', textEn: 'Quality Guaranteed' },
-  { icon: RotateCcw, text: 'आसान रिटर्न', textEn: 'Easy Returns' },
+  { icon: Truck, text: 'पूरे भारत में डिलीवरी', textEn: 'All India Delivery' },
+  { icon: ShieldCheck, text: 'सुरक्षित भुगतान', textEn: 'Secure Payments' },
 ];
 
 const formatPhoneNumber = (rawPhone) => {
-  if (!rawPhone) return '+91-9034677123';
   const digits = String(rawPhone).replace(/\D/g, '');
-  if (!digits) return '+91-9034677123';
-
-  const normalized = digits.startsWith('91') ? `+${digits.slice(0, 2)}-${digits.slice(2)}` : `+91-${digits}`;
-  return normalized;
+  const localNumber = digits.startsWith('91') ? digits.slice(2) : digits;
+  return localNumber || '9034677123';
 };
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
   const [language, setLanguage] = useState('en');
   const businessInfo = useBusinessInfo();
   const location = useLocation();
+  const whatsappDigits = String(businessInfo.whatsapp || '').replace(/\D/g, '');
+  const whatsappNumber = whatsappDigits.startsWith('91') ? whatsappDigits : `91${whatsappDigits}`;
+  const phoneDigits = String(businessInfo.phone || '').replace(/\D/g, '');
+  const phoneNumber = phoneDigits.startsWith('91') ? phoneDigits.slice(2) : phoneDigits;
+  const phoneHref = phoneDigits.startsWith('91') ? `+${phoneDigits}` : `+91${phoneDigits}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,31 +76,28 @@ function Header() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsProductsMenuOpen(false);
   }, [location]);
 
   return (
     <header className={`site-header ${isScrolled ? 'scrolled' : ''}`} role="banner">
       <div className="header-top-bar">
         <div className="container header-top-content">
-          <div className="header-contact">
-            <span className="header-phone">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              <span>{businessInfo.phone}</span>
-            </span>
-            <span className="header-email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-              <span>{businessInfo.email}</span>
-            </span>
+          <div className="header-announcement">
+            <Leaf size={17} aria-hidden="true" />
+            <span className="text-latin">Pure • Natural • Chemical Free</span>
+            <span className="header-announcement-divider" aria-hidden="true">|</span>
+            <span className="header-announcement-secondary text-latin">100% Organic Food for a Healthier Tomorrow</span>
+            <span className="text-hindi">शुद्ध • प्राकृतिक • रसायन-मुक्त भोजन</span>
           </div>
-          <div className="header-trust-badges" aria-label="Trust indicators">
+          <a className="header-email" href={`mailto:${businessInfo.email}`} aria-label={`Email ${businessInfo.email}`}>
+            <Mail size={14} aria-hidden="true" />
+            <span>{businessInfo.email}</span>
+          </a>
+          <div className="header-trust-badges" aria-label="Delivery and payment information">
             {trustBadges.map((badge, index) => (
               <span key={index} className="trust-badge">
-                <badge.icon width="14" height="14" aria-hidden="true" />
+                <badge.icon size={16} aria-hidden="true" />
                 <span>{language === 'hi' ? badge.text : badge.textEn}</span>
               </span>
             ))}
@@ -97,22 +109,14 @@ function Header() {
         <div className="container header-nav-content">
           <Link to="/" className="header-logo" aria-label="Kundu Naturals - Home">
             <img
-              src="/logo-placeholder.svg"
+              src="/images/website-logo.png"
               alt="Kundu Naturals Logo"
               className="logo-image"
             />
-            <div className="logo-text">
-              <span className={`logo-name ${language === 'hi' ? 'text-hindi' : 'text-latin'}`}>
-                {language === 'hi' ? 'कुंडू नेचुरल्स' : 'Kundu Naturals'}
-              </span>
-              <span className={`logo-tagline ${language === 'hi' ? 'text-hindi' : 'text-latin'}`}>
-                {language === 'hi' ? 'शुद्ध आहार, स्वस्थ जीवन' : 'Pure Food • Healthy Life'}
-              </span>
-            </div>
           </Link>
 
           <button
-            className="mobile-menu-toggle"
+            className={`mobile-menu-toggle ${isMobileMenuOpen ? 'is-open' : ''}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -121,55 +125,90 @@ function Header() {
             {isMobileMenuOpen ? <X width="24" height="24" /> : <Menu width="24" height="24" />}
           </button>
 
-          <ul id="mobile-menu" className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`} role="menubar">
-            {navLinks.map((link) => (
-              <li key={link.path} role="none">
+          <ul id="mobile-menu" className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+            <li>
+              <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+                <Home size={18} aria-hidden="true" />
+                <span className="nav-label"><span className="text-hindi">होम</span><span className="text-latin">Home</span></span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+                <UserRound size={18} aria-hidden="true" />
+                <span className="nav-label"><span className="text-hindi">हमारे बारे में</span><span className="text-latin">About</span></span>
+              </Link>
+            </li>
+            <li className={`nav-products ${isProductsMenuOpen ? 'open' : ''}`}>
+              <button
+                type="button"
+                className={`nav-link nav-products-toggle ${location.pathname.startsWith('/products') || location.pathname === '/our-brand' ? 'active' : ''}`}
+                aria-expanded={isProductsMenuOpen}
+                aria-haspopup="true"
+                onClick={() => setIsProductsMenuOpen((open) => !open)}
+              >
+                <Leaf size={19} aria-hidden="true" />
+                <span className="nav-label"><span className="text-hindi">प्रोडक्ट्स</span><span className="text-latin">Products</span></span>
+                <ChevronDown size={16} className="nav-chevron" aria-hidden="true" />
+              </button>
+              <ul className="products-dropdown">
+                <li><Link to="/products" onClick={() => { setIsMobileMenuOpen(false); setIsProductsMenuOpen(false); }}><span className="text-hindi">सभी प्रोडक्ट्स</span><span className="text-latin">All Products</span></Link></li>
+                <li><Link to="/our-brand" onClick={() => { setIsMobileMenuOpen(false); setIsProductsMenuOpen(false); }}><span className="text-hindi">हमारा ब्रांड</span><span className="text-latin">Our Brand</span></Link></li>
+              </ul>
+            </li>
+            {navLinks.slice(2).map((link) => (
+              <li key={link.path}>
                 <Link
                   to={link.path}
-                  className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
-                  role="menuitem"
+                  className={`nav-link ${location.pathname === link.path || (link.path === '/products' && location.pathname.startsWith('/products')) ? 'active' : ''}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <span className="nav-label">
-                    <span className="text-hindi">{link.label}</span>
-                    <span className="text-latin">{link.labelEn}</span>
-                  </span>
+                  <link.icon size={18} aria-hidden="true" />
+                  <span className="nav-label"><span className="text-hindi">{link.label}</span><span className="text-latin">{link.labelEn}</span></span>
                 </Link>
               </li>
             ))}
-            <li className="nav-cta-mobile" role="none">
-              <Link to="/contact" className="btn btn-primary btn-lg" role="menuitem">
-                <span className="text-hindi">हमसे संपर्क करें</span>
-                <span className="text-latin">Contact Us</span>
-              </Link>
-            </li>
           </ul>
 
           <div className="header-actions">
-            <Link to="/contact" className="btn btn-primary header-cta">
-              <span className="text-hindi">संपर्क करें</span>
-              <span className="text-latin">Contact Us</span>
+            <Link to="/products" className="header-search" aria-label={language === 'hi' ? 'प्रोडक्ट खोजें' : 'Search products'} title={language === 'hi' ? 'प्रोडक्ट खोजें' : 'Search products'}>
+              <Search size={21} aria-hidden="true" />
             </Link>
+            <div className="header-cta">
+              <a className="header-cta-icon" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <Phone size={20} aria-hidden="true" />
+              </a>
+              <span className="header-cta-copy">
+                <span>{language === 'hi' ? 'कॉल / व्हाट्सऐप' : 'Call / WhatsApp'}</span>
+                <a href={`tel:${phoneHref}`}><strong>{formatPhoneNumber(phoneNumber)}</strong></a>
+              </span>
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* Language Toggle - Below Nav, on Page */}
       <div className="language-toggle-wrapper" role="navigation" aria-label="Language selection">
         <div className="container">
           <button
+            type="button"
             className="lang-toggle"
-            onClick={() => {
-              setLanguage(language === 'hi' ? 'en' : 'hi');
-            }}
-            aria-label={language === 'hi' ? 'English' : 'हिन्दी'}
+            onClick={() => setLanguage(language === 'hi' ? 'en' : 'hi')}
+            aria-label={language === 'hi' ? 'Switch to English' : 'हिन्दी में बदलें'}
             title={language === 'hi' ? 'English' : 'हिन्दी'}
           >
-            {language === 'hi' ? <Leaf width="18" height="18" /> : <Globe width="18" height="18" />}
-            <span>{language === 'hi' ? 'हिन्दी' : 'English'}</span>
+            <Globe size={17} aria-hidden="true" />
+            <span>{language === 'hi' ? 'EN' : 'हिंदी'}</span>
           </button>
         </div>
       </div>
+
+      {isMobileMenuOpen && (
+        <button
+          type="button"
+          className="mobile-menu-backdrop"
+          aria-label={language === 'hi' ? 'मेनू बंद करें' : 'Close menu'}
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </header>
   );
 }

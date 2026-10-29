@@ -11,6 +11,7 @@ import Gallery from './pages/Gallery';
 import OurBrand from './pages/OurBrand';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
+import FloatingContactButtons from './components/FloatingContactButtons';
 import { BusinessInfoProvider } from './context/BusinessInfoContext';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           </Routes>
         </Layout>
         <Footer />
+        <FloatingContactButtons />
         <ScrollToTop />
       </>
     </BusinessInfoProvider>

@@ -131,10 +131,31 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+main,
+section,
+article,
+aside,
+.container {
+  min-width: 0;
+}
+
 img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+p,
+li,
+address,
+blockquote {
+  overflow-wrap: anywhere;
+}
+
+iframe,
+video,
+canvas {
+  max-width: 100%;
 }
 
 a {

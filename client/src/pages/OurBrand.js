@@ -211,31 +211,31 @@ function OurBrand() {
             >
               <div className="logo-showcase">
                 <img
-                  src="/logo-placeholder.svg"
+                  src="/images/website-logo.png"
                   alt="Kundu Naturals logo"
                   className="logo-main"
                 />
               </div>
               <div className="logo-variants">
-                <h4 className="story-section-title">{language === 'hi' ? 'लोगो विविधताएं' : 'Logo Variants'}</h4>
+                <h4 className="story-section-title">{language === 'hi' ? 'वेबसाइट पर लोगो का उपयोग' : 'Logo Across the Website'}</h4>
                 <div className="variant-row">
                   <div className="variant-item">
                     <div className="variant-preview primary">
-                      <img src="/logo-placeholder.svg" alt="" />
+                      <img src="/images/website-logo.png" alt="" />
                     </div>
-                    <span>{language === 'hi' ? 'प्राथमिक' : 'Primary'}</span>
+                    <span>{language === 'hi' ? 'हेडर' : 'Header'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview mono">
-                      <img src="/logo-placeholder.svg" alt="" />
+                      <img src="/images/website-logo.png" alt="" />
                     </div>
-                    <span>{language === 'hi' ? 'मोनोक्रोम' : 'Mono'}</span>
+                    <span>{language === 'hi' ? 'फूटर' : 'Footer'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview icon">
-                      <img src="/logo-placeholder.svg" alt="" />
+                      <img src="/images/website-logo.png" alt="" />
                     </div>
-                    <span>{language === 'hi' ? 'केवल आइकन' : 'Icon only'}</span>
+                    <span>{language === 'hi' ? 'ब्राउज़र टैब' : 'Browser tab'}</span>
                   </div>
                 </div>
               </div>

@@ -22,7 +22,7 @@ const featuredProducts = [
     nameHindi: 'जैविक गेहूं का आटा',
     description: 'Stone-ground whole wheat flour from our farms',
     descriptionHindi: 'हमारे खेतों से पत्थर-पिसा साबुत गेहूं का आटा',
-    image: '/images/products/organic-wheat.jpg',
+    image: '/images/Kundu-Naturals-All-Products/21-kundu-naturals-sarbati-atta.webp',
     category: 'Grains',
     categoryHindi: 'अनाज',
     packSizes: ['1 kg', '5 kg', '10 kg'],
@@ -38,7 +38,7 @@ const featuredProducts = [
     nameHindi: 'जैविक हल्दी पाउडर',
     description: 'Pure turmeric with high curcumin content',
     descriptionHindi: 'उच्च करक्यूमिन सामग्री वाली शुद्ध हल्दी',
-    image: '/images/products/organic-turmeric.jpg',
+    image: '/images/Kundu-Naturals-All-Products/19-kundu-naturals-haldi-powder.webp',
     category: 'Spices',
     categoryHindi: 'मसाले',
     packSizes: ['100g', '250g', '500g'],
@@ -54,7 +54,7 @@ const featuredProducts = [
     nameHindi: 'कच्चा वन शहद',
     description: 'Unprocessed honey from wild bees',
     descriptionHindi: 'जंगली मधुमक्खियों से असंसाधित शहद',
-    image: '/images/products/organic-honey.jpg',
+    image: '/images/Kundu-Naturals-All-Products/37-kundu-naturals-multifloral-honey.webp',
     category: 'Honey',
     categoryHindi: 'शहद',
     packSizes: ['250g', '500g', '1 kg'],
@@ -69,7 +69,7 @@ const featuredProducts = [
     nameHindi: 'कोल्ड प्रेस्ड सरसों तेल',
     description: 'Traditional kachi ghani mustard oil',
     descriptionHindi: 'पारंपरिक कच्ची घानी सरसों तेल',
-    image: '/images/products/mustard-oil.jpg',
+    image: '/images/Kundu-Naturals-All-Products/33-kundu-naturals-yellow-mustard-oil.webp',
     category: 'Oils',
     categoryHindi: 'तेल',
     packSizes: ['500ml', '1L', '2L'],
@@ -908,12 +908,12 @@ function Home() {
             aria-label="Gallery preview"
           >
             {[
-              { src: '/images/gallery/products-1.jpg', alt: 'Organic wheat flour', captionHindi: 'जैविक गेहूं का आटा', captionEn: 'Organic Wheat Flour' },
-              { src: '/images/gallery/products-2.jpg', alt: 'Organic basmati rice', captionHindi: 'जैविक बासमती चावल', captionEn: 'Organic Basmati Rice' },
-              { src: '/images/gallery/products-3.jpg', alt: 'Organic turmeric powder', captionHindi: 'जैविक हल्दी पाउडर', captionEn: 'Organic Turmeric Powder' },
-              { src: '/images/gallery/products-4.jpg', alt: 'Cold pressed mustard oil', captionHindi: 'कोल्ड प्रेस्ड सरसों तेल', captionEn: 'Cold Pressed Mustard Oil' },
-              { src: '/images/gallery/products-5.jpg', alt: 'Raw forest honey', captionHindi: 'कच्चा वन शहद', captionEn: 'Raw Forest Honey' },
-              { src: '/images/gallery/products-6.jpg', alt: 'Organic moong dal', captionHindi: 'जैविक मूंग दाल', captionEn: 'Organic Moong Dal' },
+              { src: '/images/Kundu-Naturals-All-Products/21-kundu-naturals-sarbati-atta.webp', alt: 'Organic wheat flour', captionHindi: 'जैविक गेहूं का आटा', captionEn: 'Organic Wheat Flour' },
+              { src: '/images/Kundu-Naturals-All-Products/02-kundu-naturals-basmati-rice.webp', alt: 'Organic basmati rice', captionHindi: 'जैविक बासमती चावल', captionEn: 'Organic Basmati Rice' },
+              { src: '/images/Kundu-Naturals-All-Products/19-kundu-naturals-haldi-powder.webp', alt: 'Organic turmeric powder', captionHindi: 'जैविक हल्दी पाउडर', captionEn: 'Organic Turmeric Powder' },
+              { src: '/images/Kundu-Naturals-All-Products/33-kundu-naturals-yellow-mustard-oil.webp', alt: 'Cold pressed mustard oil', captionHindi: 'कोल्ड प्रेस्ड सरसों तेल', captionEn: 'Cold Pressed Mustard Oil' },
+              { src: '/images/Kundu-Naturals-All-Products/37-kundu-naturals-multifloral-honey.webp', alt: 'Raw forest honey', captionHindi: 'कच्चा वन शहद', captionEn: 'Raw Forest Honey' },
+              { src: '/images/Kundu-Naturals-All-Products/11-kundu-naturals-moong-dhuli-dal.webp', alt: 'Organic moong dal', captionHindi: 'जैविक मूंग दाल', captionEn: 'Organic Moong Dal' },
             ].map((item, index) => (
               <motion.div
                 key={index}

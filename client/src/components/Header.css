@@ -218,7 +218,7 @@
   display: none;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .header-cta {
     display: inline-flex;
   }
@@ -237,7 +237,7 @@
   background: var(--color-soft-cream-card);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mobile-menu-toggle {
     display: flex;
   }
@@ -308,7 +308,7 @@
 }
 
 /* Mobile overlay positioning fix */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .site-header {
     position: sticky;
     top: 0;

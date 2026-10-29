@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Leaf, Truck, Shield, RotateCcw, Globe } from 'lucide-react';
+import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Header.css';
-
-const fallbackBusinessInfo = {
-  phone: '+91-9034677123',
-  email: 'kundupunit927@gmail.com',
-};
 
 const navLinks = [
   { path: '/', label: 'होम', labelEn: 'Home' },
@@ -25,9 +21,9 @@ const trustBadges = [
 ];
 
 const formatPhoneNumber = (rawPhone) => {
-  if (!rawPhone) return fallbackBusinessInfo.phone;
+  if (!rawPhone) return '+91-9034677123';
   const digits = String(rawPhone).replace(/\D/g, '');
-  if (!digits) return fallbackBusinessInfo.phone;
+  if (!digits) return '+91-9034677123';
 
   const normalized = digits.startsWith('91') ? `+${digits.slice(0, 2)}-${digits.slice(2)}` : `+91-${digits}`;
   return normalized;
@@ -37,7 +33,7 @@ function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState('en');
-  const [businessInfo, setBusinessInfo] = useState(fallbackBusinessInfo);
+  const businessInfo = useBusinessInfo();
   const location = useLocation();
 
   useEffect(() => {
@@ -57,37 +53,11 @@ function Header() {
 
   useEffect(() => {
     const htmlElem = document.documentElement;
+    htmlElem.lang = language;
     htmlElem.className = language === 'en' ? 'en' : 'hi';
     localStorage.setItem('kundu-language', language);
     window.dispatchEvent(new Event('languagechange'));
   }, [language]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const loadBusinessInfo = async () => {
-      try {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/api/contact`, { signal: controller.signal });
-        if (!response.ok) return;
-
-        const data = await response.json();
-        if (!data?.success || !data?.data) return;
-
-        setBusinessInfo({
-          phone: formatPhoneNumber(data.data.phone || fallbackBusinessInfo.phone),
-          email: data.data.email || fallbackBusinessInfo.email,
-        });
-      } catch (error) {
-        if (error.name !== 'AbortError') {
-          console.warn('Unable to load business info', error);
-        }
-      }
-    };
-
-    loadBusinessInfo();
-    return () => controller.abort();
-  }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -127,10 +97,9 @@ function Header() {
         <div className="container header-nav-content">
           <Link to="/" className="header-logo" aria-label="Kundu Naturals - Home">
             <img
-              src="/images/logo.png"
+              src="/logo-placeholder.svg"
               alt="Kundu Naturals Logo"
               className="logo-image"
-              onError={(e) => { e.target.src = '/images/logo-placeholder.svg'; }}
             />
             <div className="logo-text">
               <span className={`logo-name ${language === 'hi' ? 'text-hindi' : 'text-latin'}`}>

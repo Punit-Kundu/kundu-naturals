@@ -19,6 +19,17 @@
   }
 }
 
+@media (max-width: 480px) {
+  .contact-form {
+    padding: var(--space-lg);
+  }
+
+  .form-submit {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 .form-group {
   margin-bottom: 0;
 }

@@ -6,7 +6,7 @@ Authentic Indian organic food website built with React, Node.js, and traditional
 
 ## 🌿 Features
 
-- **6 Pages**: Home, About, Products, Gallery, Our Brand, Contact
+- **7 Page types**: Home, About, Product Listing, Product Details, Gallery, Our Brand, Contact
 - **Authentic Indian Desi Design**: Earth tones, traditional patterns, cultural aesthetics
 - **Real Images**: Uses your actual logo, founder photos, and product images
 - **Bilingual**: Hindi (primary) + English support
@@ -78,6 +78,7 @@ kundunaturals/
 │   │   │   ├── Home.js
 │   │   │   ├── About.js
 │   │   │   ├── Products.js
+│   │   ├── ProductDetails.js
 │   │   │   ├── Gallery.js
 │   │   │   ├── OurBrand.js
 │   │   │   └── Contact.js
@@ -168,16 +169,14 @@ SMTP_SECURE=false
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-gmail-app-password
 
-# Google Maps (optional)
-GOOGLE_MAPS_API_KEY=your-api-key
-BUSINESS_LATITUDE=28.6139
-BUSINESS_LONGITUDE=77.2090
 ```
 
 ### Gmail SMTP Setup
 1. Enable 2-Factor Authentication on your Google account
 2. Generate an App Password: Google Account → Security → App Passwords
 3. Use the App Password as `SMTP_PASS`
+
+The contact form only reports success after the email is delivered. Configure valid SMTP credentials on the backend; without them, the form displays an error and asks visitors to use the listed phone or WhatsApp contacts. For a separately hosted frontend, set `VITE_API_URL` in the frontend build environment to the backend's public URL.
 
 ### Product Data
 Edit product data in `client/src/pages/Products.js` and `client/src/pages/Home.js` (featuredProducts array).
@@ -245,7 +244,7 @@ All Hindi/English text is in the page components. Edit directly in the JSX.
 1. Connect repository
 2. Build command: `cd client && npm run build`
 3. Publish directory: `client/build`
-4. Add environment variables
+4. Set `VITE_API_URL` to the deployed backend URL
 
 ### Backend (Railway/Render/Heroku)
 1. Connect repository
@@ -268,7 +267,7 @@ cd ../server && npm start
 - **Frontend**: React 18, React Router 6, Framer Motion, Lucide React
 - **Styling**: Custom CSS with CSS Variables (Design System)
 - **Backend**: Node.js, Express, Nodemailer
-- **Development**: Concurrently, Nodemon, React Scripts
+- **Development**: Vite, Concurrently, Nodemon
 
 ## 📝 License
 

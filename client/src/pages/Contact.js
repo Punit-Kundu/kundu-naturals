@@ -4,20 +4,24 @@ import { MapPin, Phone, Mail, Clock, Map, Send, CheckCircle } from 'lucide-react
 import SectionHeader from '../components/SectionHeader';
 import ContactForm from '../components/ContactForm';
 import WhatsApp from '../components/icons/WhatsAppIcon';
+import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Contact.css';
 
-const fallbackBusinessInfo = {
-  phone: '9034677123',
-  email: 'kundupunit927@gmail.com',
-  whatsapp: '919034677123',
-  address: 'Kundu Naturals, Village Kailram, District Kaithal, Haryana, India',
+const formatPhoneNumber = (rawPhone) => {
+  if (!rawPhone) return '9034677123';
+  const digits = String(rawPhone).replace(/\D/g, '');
+  if (!digits) return '9034677123';
+  return digits.startsWith('91') ? `+${digits.slice(0, 2)}-${digits.slice(2)}` : `+91-${digits}`;
 };
 
-const formatPhoneNumber = (rawPhone) => {
-  if (!rawPhone) return fallbackBusinessInfo.phone;
-  const digits = String(rawPhone).replace(/\D/g, '');
-  if (!digits) return fallbackBusinessInfo.phone;
-  return digits.startsWith('91') ? `+${digits.slice(0, 2)}-${digits.slice(2)}` : `+91-${digits}`;
+const getInternationalPhone = (rawPhone) => {
+  const digits = String(rawPhone || '').replace(/\D/g, '');
+  return digits.startsWith('91') ? `+${digits}` : `+91${digits}`;
+};
+
+const getWhatsAppNumber = (rawPhone) => {
+  const digits = String(rawPhone || '').replace(/\D/g, '');
+  return digits.startsWith('91') ? digits : `91${digits}`;
 };
 
 const getContactInfo = (businessInfo) => [
@@ -46,30 +50,31 @@ const getContactInfo = (businessInfo) => [
     title: 'Phone Number',
     titleHindi: 'फोन नंबर',
     titleEn: 'Phone Number',
-    details: [formatPhoneNumber(businessInfo.phone), formatPhoneNumber(businessInfo.phone) + ' (WhatsApp)'],
-    detailsEn: [formatPhoneNumber(businessInfo.phone), formatPhoneNumber(businessInfo.phone) + ' (WhatsApp)'],
-    action: `tel:+${String(businessInfo.phone || '919034677123').replace(/\D/g, '')}`,
-    actionLabel: { language: 'hi', text: 'कॉल करें', en: 'Call' },
+    details: [formatPhoneNumber(businessInfo.phone)],
+    detailsEn: [formatPhoneNumber(businessInfo.phone)],
+    action: `tel:${getInternationalPhone(businessInfo.phone)}`,
+    actionLabel: { hi: 'कॉल करें', en: 'Call' },
   },
   {
     icon: Mail,
     title: 'Email',
     titleHindi: 'ईमेल',
     titleEn: 'Email',
-    details: [businessInfo.email || fallbackBusinessInfo.email],
-    detailsEn: [businessInfo.email || fallbackBusinessInfo.email],
-    action: `mailto:${businessInfo.email || fallbackBusinessInfo.email}`,
-    actionLabel: { language: 'hi', text: 'ईमेल करें', en: 'Email' },
+    details: [businessInfo.email],
+    detailsEn: [businessInfo.email],
+    action: `mailto:${businessInfo.email}`,
+    actionLabel: { hi: 'ईमेल करें', en: 'Email' },
   },
   {
     icon: WhatsApp,
     title: 'WhatsApp',
     titleHindi: 'व्हाट्सऐप',
     titleEn: 'WhatsApp',
-    details: [formatPhoneNumber(businessInfo.phone), 'सोम-शनि: 9 AM - 7 PM'],
-    detailsEn: [formatPhoneNumber(businessInfo.phone), 'Mon-Sat: 9 AM - 7 PM'],
-    action: `https://wa.me/${String(businessInfo.whatsapp || '919034677123').replace(/\D/g, '')}`,
-    actionLabel: { language: 'hi', text: 'चैट करें', en: 'Chat' },
+    details: [formatPhoneNumber(businessInfo.whatsapp)],
+    detailsEn: [formatPhoneNumber(businessInfo.whatsapp)],
+    action: `https://wa.me/${getWhatsAppNumber(businessInfo.whatsapp)}`,
+    actionLabel: { hi: 'चैट करें', en: 'Chat' },
+    target: '_blank',
   },
 ];
 
@@ -81,7 +86,7 @@ const businessHours = [
 
 function Contact() {
   const [language, setLanguage] = useState('en');
-  const [businessInfo, setBusinessInfo] = useState(fallbackBusinessInfo);
+  const businessInfo = useBusinessInfo();
 
   useEffect(() => {
     const syncLanguage = () => {
@@ -91,35 +96,6 @@ function Contact() {
     syncLanguage();
     window.addEventListener('languagechange', syncLanguage);
     return () => window.removeEventListener('languagechange', syncLanguage);
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const loadBusinessInfo = async () => {
-      try {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/api/contact`);
-        if (!response.ok) return;
-
-        const data = await response.json();
-        if (!data?.success || !data?.data || !isMounted) return;
-
-        setBusinessInfo({
-          phone: data.data.phone || fallbackBusinessInfo.phone,
-          email: data.data.email || fallbackBusinessInfo.email,
-          whatsapp: data.data.whatsapp || fallbackBusinessInfo.whatsapp,
-          address: data.data.address || fallbackBusinessInfo.address,
-        });
-      } catch (error) {
-        console.warn('Unable to load contact info', error);
-      }
-    };
-
-    loadBusinessInfo();
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   const contactInfo = getContactInfo(businessInfo);
@@ -199,11 +175,10 @@ function Contact() {
                   <a
                     href={item.action}
                     className="btn btn-primary contact-action"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={item.target}
+                    rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
                   >
-                    <span>{language === 'hi' ? 'कॉल करें' : 'Call'}</span>
-                    {item.actionLabel && item.actionLabel.language === 'hi' ? 'कॉल करें' : 'Call'}
+                    <span>{language === 'hi' ? item.actionLabel.hi : item.actionLabel.en}</span>
                     {item.icon === WhatsApp && <Send width="18" height="18" />}
                     {item.icon === Phone && <Phone width="18" height="18" />}
                     {item.icon === Mail && <Mail width="18" height="18" />}
@@ -238,15 +213,13 @@ function Contact() {
                       <span className="text-hindi">{language === 'hi' ? hour.dayHindi : hour.dayEn}</span>
                       <span className="text-latin">{language === 'en' ? hour.dayEn : hour.dayHindi}</span>
                     </span>
-                    <span className="hour-time">
-                      {language === 'hi' ? hour.time.split(' - ')[0].split(' AM')[0] + (hour.time.includes('PM') ? ' PM' : '') : hour.time}
-                    </span>
+                    <span className="hour-time">{hour.time}</span>
                   </div>
                 ))}
               </div>
               <div className="hours-note">
-                <span className="text-hindi">{language === 'hi' ? 'Monday to Sunday closed. Online orders accepted 24/7.' : 'सोमवार से रविवार बंद। ऑनलाइन ऑर्डर 24/7 स्वीकार किए जाते हैं.'}</span>
-                <span className="text-latin">{language === 'en' ? 'Monday to Sunday closed. Online orders accepted 24/7.' : 'सोमवार से रविवार बंद। ऑनलाइन ऑर्डर 24/7 स्वीकार किए जाते हैं.'}</span>
+                <span className="text-hindi">{language === 'hi' ? 'उत्पाद और ऑर्डर संबंधी पूछताछ के लिए कार्य समय में संपर्क करें।' : 'Contact us during business hours for product and order enquiries.'}</span>
+                <span className="text-latin">{language === 'en' ? 'Contact us during business hours for product and order enquiries.' : 'उत्पाद और ऑर्डर संबंधी पूछताछ के लिए कार्य समय में संपर्क करें।'}</span>
               </div>
             </motion.div>
 
@@ -258,28 +231,28 @@ function Contact() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h2 className="section-title-inline">
-                <span className="text-hindi">{language === 'hi' ? 'Our Location' : 'हमारा स्थान'}</span>
+                <span className="text-hindi">{language === 'hi' ? 'हमारा स्थान' : 'Our Location'}</span>
                 <span className="text-latin">{language === 'en' ? 'Our Location' : 'हमारा स्थान'}</span>
               </h2>
-              <div className="map-placeholder" role="img" aria-label="Google Map - Kundu Naturals location">
+              <div className="map-placeholder" role="group" aria-label={language === 'hi' ? 'कुंडू नेचुरल्स का पता' : 'Kundu Naturals address'}>
                 <div className="map-placeholder-content">
                   <MapPin width="48" height="48" aria-hidden="true" />
-                  <h3>{language === 'hi' ? 'Kundu Naturals Location' : 'Kundu Naturals Location'}</h3>
-                  <p>{language === 'hi' ? 'Real location will appear with GOOGLE_MAPS_API_KEY and business coordinates configured in .env file.' : 'Real location will appear with GOOGLE_MAPS_API_KEY and business coordinates configured in .env file.'}</p>
+                  <h3>{language === 'hi' ? 'कुंडू नेचुरल्स का पता' : 'Kundu Naturals address'}</h3>
+                  <p>{language === 'hi' ? 'हमारा पता:' : 'Visit or find us at:'}</p>
                   <div className="map-address">
-                    <span className="text-hindi">Kundu Naturals, Village - [Your Village], District - [Your District], [Your State] - [PIN Code], India</span>
-                    <span className="text-latin">Kundu Naturals, Village - [Your Village], District - [Your District], [Your State] - [PIN Code], India</span>
+                    <span className="text-hindi">{businessInfo.address}</span>
+                    <span className="text-latin">{businessInfo.address}</span>
                   </div>
                 </div>
               </div>
               <a
-                href="https://maps.google.com/?q=Kundu+Naturals"
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessInfo.address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline map-link"
               >
                 <Map width="18" height="18" aria-hidden="true" />
-                <span>{language === 'hi' ? 'Open in Google Maps' : 'Open in Google Maps'}</span>
+                <span>{language === 'hi' ? 'Google Maps में देखें' : 'Open in Google Maps'}</span>
               </a>
             </motion.div>
           </div>
@@ -329,25 +302,25 @@ function Contact() {
                 q: 'How to place an order?',
                 qHindi: 'ऑर्डर कैसे दें?',
                 qEn: 'How to place an order?',
-                a: 'You can order directly from our website, send a WhatsApp message, or call us. Our team will contact you to confirm the order.',
-                aHindi: 'आप हमारी वेबसाइट से सीधे ऑर्डर कर सकते हैं, व्हाट्सऐप पर संदेश भेज सकते हैं, या हमें कॉल कर सकते हैं। हमारी टीम आपसे संपर्क करके ऑर्डर की पुष्टि करेगी।',
-                aEn: 'You can order directly from our website, send a WhatsApp message, or call us. Our team will contact you to confirm the order.',
+                a: 'Browse the products and contact us on WhatsApp or by phone. Our team will confirm availability and price; checkout is not available on the website.',
+                aHindi: 'उत्पाद देखें और WhatsApp या फोन पर संपर्क करें। हमारी टीम उपलब्धता और कीमत की पुष्टि करेगी; वेबसाइट पर चेकआउट की सुविधा नहीं है।',
+                aEn: 'Browse the products and contact us on WhatsApp or by phone. Our team will confirm availability and price; checkout is not available on the website.',
               },
               {
                 q: 'How long does delivery take?',
                 qHindi: 'डिलीवरी में कितना समय लगता है?',
                 qEn: 'How long does delivery take?',
-                a: 'Usually 3-7 business days, depending on your location. Metro cities 2-3 days, remote areas 5-7 days.',
-                aHindi: 'आमतौर पर 3-7 कार्य दिवस, आपके स्थान पर निर्भर करता है। मेट्रो शहरों में 2-3 दिन, दूरदराज के क्षेत्रों में 5-7 दिन।',
-                aEn: 'Usually 3-7 business days depending on your location. Metro cities 2-3 days, remote areas 5-7 days.',
+                a: 'Delivery availability and estimated timing depend on your address. Our team will confirm the details before accepting the order.',
+                aHindi: 'डिलीवरी की उपलब्धता और अनुमानित समय आपके पते पर निर्भर करता है। ऑर्डर स्वीकार करने से पहले हमारी टीम विवरण की पुष्टि करेगी।',
+                aEn: 'Delivery availability and estimated timing depend on your address. Our team will confirm the details before accepting the order.',
               },
               {
                 q: 'What payment methods?',
                 qHindi: 'भुगतान के तरीके क्या हैं?',
                 qEn: 'What payment methods?',
-                a: 'Cash on Delivery (COD), UPI, Net Banking, Card, and WhatsApp payment link. Bulk orders also have bank transfer available.',
-                aHindi: 'नकद पर डिलीवरी (COD), UPI, नेट बैंकिंग, कार्ड, और व्हाट्सऐप पर भुगतान लिंक। थोक ऑर्डर के लिए बैंक ट्रांसफर भी उपलब्ध।',
-                aEn: 'Cash on Delivery (COD), UPI, Net Banking, Card, and WhatsApp payment link. Bank transfer available for bulk orders.',
+                a: 'Please ask our team about the payment options available for your order before confirming it.',
+                aHindi: 'ऑर्डर की पुष्टि से पहले उपलब्ध भुगतान विकल्पों के लिए हमारी टीम से पूछें।',
+                aEn: 'Please ask our team about the payment options available for your order before confirming it.',
               },
               {
                 q: 'Are products organically certified?',
@@ -361,17 +334,17 @@ function Contact() {
                 q: 'Discount for bulk orders?',
                 qHindi: 'थोक ऑर्डर पर छूट?',
                 qEn: 'Discount for bulk orders?',
-                a: 'Yes, special bulk pricing for orders above 25 kg / 25 L. Contact via WhatsApp or email for details.',
-                aHindi: 'हां, 25 kg / 25 L से अधिक के ऑर्डर पर विशेष थोक मूल्य। विवरण के लिए व्हाट्सऐप या ईमेल पर संपर्क करें।',
-                aEn: 'Yes, special bulk pricing for orders above 25 kg / 25 L. Contact via WhatsApp or email for details.',
+                a: 'Contact us on WhatsApp or by email to check bulk-order availability and request a quote.',
+                aHindi: 'थोक ऑर्डर की उपलब्धता और कीमत जानने के लिए WhatsApp या ईमेल पर संपर्क करें।',
+                aEn: 'Contact us on WhatsApp or by email to check bulk-order availability and request a quote.',
               },
               {
                 q: 'Return/Refund policy?',
                 qHindi: 'रिटर्न/रिफंड नीति?',
                 qEn: 'Return/Refund policy?',
-                a: 'Within 7 days for quality complaints on replacement or refund. Product must be unused and in original packaging.',
-                aHindi: 'गुणवत्ता संबंधी शिकायत पर 7 दिन के भीतर रिप्लेसमेंट या रिफंड। उत्पाद अप्रयुक्त और मूल पैकिंग में होना चाहिए।',
-                aEn: 'Within 7 days for quality complaints on replacement or refund. Product must be unused and in original packaging.',
+                a: 'Contact us with your order details. Our team will explain the applicable return or refund policy.',
+                aHindi: 'अपने ऑर्डर के विवरण के साथ संपर्क करें। हमारी टीम लागू रिटर्न या रिफंड नीति बताएगी।',
+                aEn: 'Contact us with your order details. Our team will explain the applicable return or refund policy.',
               },
             ].map((faq, index) => (
               <motion.details
@@ -420,12 +393,12 @@ function Contact() {
               <span className="text-latin">{language === 'en' ? 'Whether you are a customer, farmer, or well-wisher — you are welcome. Be part of this pure food journey with us.' : 'क्या आप ग्राहक, किसान, या शुभचिंतक हैं — आपका स्वागत है। इस शुद्ध भोजन यात्रा का हिस्सा बनें.'}</span>
             </p>
             <div className="final-cta-actions">
-              <a href="https://wa.me/919034677123" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-lg">
+              <a href={`https://wa.me/${getWhatsAppNumber(businessInfo.whatsapp)}`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-lg">
                 <span className="text-hindi">{language === 'hi' ? 'WhatsApp Connect' : 'व्हाट्सऐप पर जुड़ें'}</span>
                 <span className="text-latin">{language === 'en' ? 'WhatsApp Connect' : 'WhatsApp Connect'}</span>
                 <WhatsApp width="20" height="20" aria-hidden="true" />
               </a>
-              <a href="tel:+919034677123" className="btn btn-outline btn-lg">
+              <a href={`tel:${getInternationalPhone(businessInfo.phone)}`} className="btn btn-outline btn-lg">
                 <span className="text-hindi">{language === 'hi' ? 'Call Now' : 'अभी कॉल करें'}</span>
                 <span className="text-latin">{language === 'en' ? 'Call Now' : 'अभी कॉल करें'}</span>
                 <Phone width="20" height="20" aria-hidden="true" />

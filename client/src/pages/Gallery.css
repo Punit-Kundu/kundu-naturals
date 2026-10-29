@@ -275,6 +275,13 @@
   min-width: 280px;
 }
 
+@media (max-width: 480px) {
+  .load-more-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 /* ========================================
    GALLERY STATS
    ======================================== */

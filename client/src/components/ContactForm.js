@@ -21,21 +21,30 @@ function ContactForm() {
       case 'name':
         if (!value.trim()) return 'नाम आवश्यक है';
         if (value.trim().length < 2) return 'नाम कम से कम 2 अक्षर का होना चाहिए';
+        if (value.trim().length > 100) return 'नाम 100 अक्षरों से अधिक नहीं होना चाहिए';
         return '';
-      case 'phone':
+      case 'phone': {
         if (!value.trim()) return 'फोन नंबर आवश्यक है';
-        if (!/^[\d\s\-\+\(\)]{10,}$/.test(value)) return 'मान्य फोन नंबर दर्ज करें';
+        const digits = value.replace(/\D/g, '');
+        if (!/^[\d\s\-+()]+$/.test(value) || digits.length < 10 || digits.length > 15) {
+          return 'मान्य फोन नंबर दर्ज करें';
+        }
         return '';
+      }
       case 'email':
         if (!value.trim()) return 'ईमेल आवश्यक है';
+        if (value.length > 254) return 'ईमेल 254 अक्षरों से अधिक नहीं होना चाहिए';
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'मान्य ईमेल दर्ज करें';
         return '';
       case 'subject':
         if (!value.trim()) return 'विषय आवश्यक है';
+        if (value.trim().length < 3) return 'विषय कम से कम 3 अक्षर का होना चाहिए';
+        if (value.trim().length > 150) return 'विषय 150 अक्षरों से अधिक नहीं होना चाहिए';
         return '';
       case 'message':
         if (!value.trim()) return 'संदेश आवश्यक है';
         if (value.trim().length < 10) return 'संदेश कम से कम 10 अक्षर का होना चाहिए';
+        if (value.trim().length > 5000) return 'संदेश 5000 अक्षरों से अधिक नहीं होना चाहिए';
         return '';
       default:
         return '';
@@ -45,6 +54,10 @@ function ContactForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (status === 'error') {
+      setStatus('idle');
+      setSubmitMessage('');
+    }
     if (touched[name]) {
       setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
     }
@@ -94,12 +107,20 @@ function ContactForm() {
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
         setTouched({});
       } else {
+        if (data.errors) {
+          setErrors((previous) => ({ ...previous, ...data.errors }));
+          setTouched((previous) => ({
+            ...previous,
+            ...Object.keys(data.errors).reduce((fields, field) => ({ ...fields, [field]: true }), {}),
+          }));
+        }
         setStatus('error');
         setSubmitMessage(data.message || 'कुछ गलत हो गया। कृपया पुनः प्रयास करें।');
       }
     } catch (error) {
       setStatus('error');
       setSubmitMessage('नेटवर्क त्रुटि। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।');
+      console.error('Contact form submission failed:', error);
     }
   };
 
@@ -109,10 +130,10 @@ function ContactForm() {
   };
 
   const fields = [
-    { name: 'name', label: 'पूरा नाम', type: 'text', placeholder: 'आपका पूरा नाम', icon: 'user' },
-    { name: 'phone', label: 'फोन नंबर', type: 'tel', placeholder: '+91 98765 43210', icon: 'phone' },
-    { name: 'email', label: 'ईमेल', type: 'email', placeholder: 'आपका@ईमेल.com', icon: 'mail' },
-    { name: 'subject', label: 'विषय', type: 'text', placeholder: 'आपकी पूछताछ का विषय', icon: 'tag' },
+    { name: 'name', label: 'पूरा नाम', type: 'text', placeholder: 'आपका पूरा नाम', icon: 'user', maxLength: 100, autoComplete: 'name' },
+    { name: 'phone', label: 'फोन नंबर', type: 'tel', placeholder: '+91 98765 43210', icon: 'phone', maxLength: 25, autoComplete: 'tel' },
+    { name: 'email', label: 'ईमेल', type: 'email', placeholder: 'आपका@ईमेल.com', icon: 'mail', maxLength: 254, autoComplete: 'email' },
+    { name: 'subject', label: 'विषय', type: 'text', placeholder: 'आपकी पूछताछ का विषय', icon: 'tag', maxLength: 150 },
   ];
 
   return (
@@ -132,6 +153,8 @@ function ContactForm() {
               </span>
               <input
                 type={field.type}
+                maxLength={field.maxLength}
+                autoComplete={field.autoComplete}
                 id={field.name}
                 name={field.name}
                 className={`form-input ${errors[field.name] && touched[field.name] ? 'error' : ''}`}
@@ -174,6 +197,7 @@ function ContactForm() {
             aria-describedby={errors.message && touched.message ? 'message-error' : undefined}
             disabled={status === 'submitting'}
             rows={5}
+            maxLength={5000}
           />
         </div>
         {errors.message && touched.message && (

@@ -11,7 +11,8 @@ import {
   Mail,
   MapPin,
 } from 'lucide-react';
-import { FacebookIcon, InstagramIcon, YouTubeIcon, WhatsAppBrandIcon } from './icons/BrandIcons';
+import { WhatsAppBrandIcon } from './icons/BrandIcons';
+import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Footer.css';
 
 /* ============================================================
@@ -24,46 +25,6 @@ import './Footer.css';
    and index.css toggles them with html.hi / html.en, so the
    footer works in both languages.
    ============================================================ */
-
-const PHONE = '9034677123';
-const PHONE_TEL = '+919034677123';
-const PHONE_WA = '919034677123';
-const EMAIL = 'kundupunit927@gmail.com';
-
-/* Contact block 1 — Mobile & WhatsApp */
-const contactMobile = [
-  {
-    icon: Phone,
-    labelEn: 'Mobile',
-    labelHi: 'मोबाइल',
-    valueEn: PHONE,
-    valueHi: PHONE,
-    href: `tel:${PHONE_TEL}`,
-  },
-  {
-    icon: WhatsAppBrandIcon,
-    labelEn: 'WhatsApp',
-    labelHi: 'व्हाट्सऐप',
-    valueEn: PHONE,
-    valueHi: PHONE,
-    href: `https://wa.me/${PHONE_WA}`,
-    external: true,
-  },
-];
-
-/* Contact block 2 — Email & Address */
-const contactInfo = [
-  { icon: Mail, labelEn: 'Email', labelHi: 'ईमेल', valueEn: EMAIL, valueHi: EMAIL, href: `mailto:${EMAIL}` },
-  {
-    icon: MapPin,
-    labelEn: 'Address',
-    labelHi: 'पता',
-    valueEn: 'Village Kailram, District Kaithal, Haryana, India',
-    valueHi: 'ग्राम कैलराम, जिला कैथल, हरियाणा, भारत',
-    href: 'https://www.google.com/maps/search/?api=1&query=Village+Kailram%2C+District+Kaithal%2C+Haryana%2C+India',
-    external: true,
-  },
-];
 
 /* USP strip */
 const features = [
@@ -95,15 +56,6 @@ const features = [
     line2En: 'UPI & Cash',
     line2Hi: 'UPI और नकद',
   },
-];
-
-/* Social + contact shortcuts (real brand icons) */
-const socials = [
-  { Icon: FacebookIcon, label: 'Facebook', href: '#', tint: '#1877F2' },
-  { Icon: InstagramIcon, label: 'Instagram', href: '#', tint: '#E4405F' },
-  { Icon: YouTubeIcon, label: 'YouTube', href: '#', tint: '#FF0000' },
-  { Icon: WhatsAppBrandIcon, label: 'WhatsApp', href: `https://wa.me/${PHONE_WA}`, tint: '#25D366', external: true },
-  { Icon: PhoneCall, label: 'Call us', href: `tel:${PHONE_TEL}`, tint: '#E3A82B' },
 ];
 
 /* --- entrance animation variants (transform + opacity only) --- */
@@ -138,6 +90,57 @@ const growX = {
 };
 
 function Footer() {
+  const businessInfo = useBusinessInfo();
+  const phoneDigits = String(businessInfo.phone).replace(/\D/g, '');
+  const whatsappDigits = String(businessInfo.whatsapp).replace(/\D/g, '');
+  const whatsappNumber = whatsappDigits.startsWith('91') ? whatsappDigits : `91${whatsappDigits}`;
+  const whatsappPhone = whatsappDigits.startsWith('91') ? whatsappDigits.slice(2) : whatsappDigits;
+  const phoneNumber = phoneDigits.startsWith('91') ? phoneDigits.slice(2) : phoneDigits;
+  const phoneHref = phoneDigits.startsWith('91') ? `+${phoneDigits}` : `+91${phoneDigits}`;
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessInfo.address)}`;
+  const contactMobile = [
+    {
+      icon: Phone,
+      labelEn: 'Mobile',
+      labelHi: 'मोबाइल',
+      valueEn: phoneNumber,
+      valueHi: phoneNumber,
+      href: `tel:${phoneHref}`,
+    },
+    {
+      icon: WhatsAppBrandIcon,
+      labelEn: 'WhatsApp',
+      labelHi: 'व्हाट्सऐप',
+      valueEn: whatsappPhone,
+      valueHi: whatsappPhone,
+      href: `https://wa.me/${whatsappNumber}`,
+      external: true,
+    },
+  ];
+  const contactInfo = [
+    {
+      icon: Mail,
+      labelEn: 'Email',
+      labelHi: 'ईमेल',
+      valueEn: businessInfo.email,
+      valueHi: businessInfo.email,
+      href: `mailto:${businessInfo.email}`,
+    },
+    {
+      icon: MapPin,
+      labelEn: 'Address',
+      labelHi: 'पता',
+      valueEn: businessInfo.address,
+      valueHi: businessInfo.address,
+      href: mapUrl,
+      external: true,
+    },
+  ];
+  const socials = [
+    { Icon: WhatsAppBrandIcon, label: 'WhatsApp', href: `https://wa.me/${whatsappNumber}`, tint: '#25D366', external: true },
+    { Icon: PhoneCall, label: 'Call us', href: `tel:${phoneHref}`, tint: '#E3A82B' },
+  ];
+
   return (
     <MotionConfig reducedMotion="user">
       <footer className="site-footer" role="contentinfo">
@@ -160,10 +163,11 @@ function Footer() {
               viewport={{ once: true, margin: '-60px' }}
             >
               <Link to="/" className="footer-logo" aria-label="Kundu Naturals - Home">
-                {/* Crisp inline logo mark — pure vector, sharp at every size */}
-                <span className="footer-logo-mark" aria-hidden="true">
-                  <Leaf size={26} strokeWidth={2} />
-                </span>
+                <img
+                  src="/logo-placeholder.svg"
+                  alt=""
+                  className="footer-logo-mark"
+                />
                 <span className="footer-logo-text">
                   <span className="footer-logo-name">Kundu</span>
                   <span className="footer-logo-sub">NATURALS</span>
@@ -277,7 +281,7 @@ function Footer() {
                 <span className="text-latin">Follow Us</span>
               </motion.span>
 
-              <div className="footer-social" role="list" aria-label="Social media links">
+              <div className="footer-social" role="list" aria-label="Quick contact links">
                 {socials.map((social, i) => (
                   <motion.a
                     key={social.label}

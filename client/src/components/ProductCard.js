@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Eye, MessageCircle, Tag, Package } from 'lucide-react';
+import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './ProductCard.css';
 
 function ProductCard({ product, variant = 'default' }) {
+  const businessInfo = useBusinessInfo();
   const {
     id,
     name,
@@ -30,7 +32,8 @@ function ProductCard({ product, variant = 'default' }) {
   const handleWhatsAppOrder = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const phoneNumber = '919034677123'; // WhatsApp number
+    const digits = String(businessInfo.whatsapp || '').replace(/\D/g, '');
+    const phoneNumber = digits.startsWith('91') ? digits : `91${digits}`;
     const message = encodeURIComponent(
       `नमस्ते! मुझे "${displayName}" में दिलचस्पी है। कृपया कीमत और उपलब्धता की जानकारी दें।`
     );

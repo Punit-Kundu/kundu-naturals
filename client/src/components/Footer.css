@@ -100,20 +100,14 @@
 }
 
 .footer-logo-mark {
-  display: grid;
-  place-items: center;
   width: 54px;
   height: 54px;
   flex-shrink: 0;
-  border-radius: 50%;
-  color: #14532D;
-  background: linear-gradient(135deg, #F6E3B4 0%, #E3A82B 55%, #F6E3B4 100%);
-  box-shadow: 0 10px 22px rgba(107, 78, 14, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 .footer-logo:hover .footer-logo-mark {
   transform: rotate(-8deg) scale(1.06);
-  box-shadow: 0 14px 28px rgba(107, 78, 14, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .footer-logo-text {

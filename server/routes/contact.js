@@ -3,29 +3,38 @@ import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
+const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+})[character]);
+
 // Validation middleware
 const validateContactForm = (req, res, next) => {
   const { name, phone, email, subject, message } = req.body;
   const errors = {};
+  const phoneDigits = typeof phone === 'string' ? phone.replace(/\D/g, '') : '';
 
-  if (!name || name.trim().length < 2) {
-    errors.name = 'Name must be at least 2 characters';
+  if (typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 100) {
+    errors.name = 'Name must be between 2 and 100 characters';
   }
 
-  if (!phone || !/^[\d\s\-\+\(\)]{10,}$/.test(phone)) {
+  if (typeof phone !== 'string' || phone.length > 25 || !/^[\d\s\-+()]+$/.test(phone) || phoneDigits.length < 10 || phoneDigits.length > 15) {
     errors.phone = 'Valid phone number is required';
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.email = 'Valid email is required';
   }
 
-  if (!subject || subject.trim().length < 3) {
-    errors.subject = 'Subject is required';
+  if (typeof subject !== 'string' || subject.trim().length < 3 || subject.trim().length > 150) {
+    errors.subject = 'Subject must be between 3 and 150 characters';
   }
 
-  if (!message || message.trim().length < 10) {
-    errors.message = 'Message must be at least 10 characters';
+  if (typeof message !== 'string' || message.trim().length < 10 || message.trim().length > 5000) {
+    errors.message = 'Message must be between 10 and 5000 characters';
   }
 
   if (Object.keys(errors).length > 0) {
@@ -44,7 +53,7 @@ const createTransporter = () => {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE } = process.env;
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.warn('⚠️ SMTP credentials not configured. Email sending will be simulated.');
+    console.warn('SMTP credentials not configured. Contact form email cannot be delivered.');
     return null;
   }
 
@@ -73,24 +82,20 @@ router.post('/', validateContactForm, async (req, res) => {
       message: message.trim(),
     };
 
-    console.log('📩 New contact enquiry:', {
-      name: sanitizedData.name,
-      email: sanitizedData.email,
-      subject: sanitizedData.subject,
-    });
-
-    // Try to send email
     const transporter = createTransporter();
-    let emailSent = false;
+    if (!transporter) {
+      return res.status(503).json({
+        success: false,
+        message: 'संपर्क फ़ॉर्म अभी ईमेल सेवा से जुड़ा नहीं है। कृपया दिए गए फोन या WhatsApp नंबर पर संपर्क करें।',
+      });
+    }
 
-    if (transporter) {
-      try {
-        const mailOptions = {
-          from: `"Kundu Naturals Contact" <${process.env.SMTP_USER}>`,
-          to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
-          replyTo: sanitizedData.email,
-          subject: `[Kundu Naturals] ${sanitizedData.subject}`,
-          html: `
+    const mailOptions = {
+      from: `"Kundu Naturals Contact" <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+      replyTo: sanitizedData.email,
+      subject: `[Kundu Naturals] ${sanitizedData.subject}`,
+      html: `
             <!DOCTYPE html>
             <html>
             <head>
@@ -115,23 +120,23 @@ router.post('/', validateContactForm, async (req, res) => {
                 <div class="content">
                   <div class="field">
                     <div class="label">नाम:</div>
-                    <div class="value">${sanitizedData.name}</div>
+                    <div class="value">${escapeHtml(sanitizedData.name)}</div>
                   </div>
                   <div class="field">
                     <div class="label">फोन:</div>
-                    <div class="value">${sanitizedData.phone}</div>
+                    <div class="value">${escapeHtml(sanitizedData.phone)}</div>
                   </div>
                   <div class="field">
                     <div class="label">ईमेल:</div>
-                    <div class="value">${sanitizedData.email}</div>
+                    <div class="value">${escapeHtml(sanitizedData.email)}</div>
                   </div>
                   <div class="field">
                     <div class="label">विषय:</div>
-                    <div class="value">${sanitizedData.subject}</div>
+                    <div class="value">${escapeHtml(sanitizedData.subject)}</div>
                   </div>
                   <div class="field">
                     <div class="label">संदेश:</div>
-                    <div class="value">${sanitizedData.message.replace(/\n/g, '<br>')}</div>
+                    <div class="value">${escapeHtml(sanitizedData.message).replace(/\n/g, '<br>')}</div>
                   </div>
                 </div>
                 <div class="footer">
@@ -142,35 +147,21 @@ router.post('/', validateContactForm, async (req, res) => {
             </body>
             </html>
           `,
-        };
+    };
 
-        await transporter.sendMail(mailOptions);
-        emailSent = true;
-        console.log('✅ Email sent successfully');
-      } catch (emailError) {
-        console.error('❌ Email sending failed:', emailError.message);
-      }
-    } else {
-      // Simulate email sending for development
-      console.log('📧 [DEV MODE] Email would be sent to:', process.env.CONTACT_EMAIL || 'configured email');
-      console.log('📧 [DEV MODE] Enquiry details:', sanitizedData);
-      emailSent = true; // Simulate success in dev
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (emailError) {
+      console.error('Contact email delivery failed:', emailError);
+      return res.status(502).json({
+        success: false,
+        message: 'आपका संदेश ईमेल से नहीं भेजा जा सका। कृपया दिए गए फोन या WhatsApp नंबर पर संपर्क करें।',
+      });
     }
 
-    // Log enquiry (in production, save to database)
-    const enquiryRecord = {
-      ...sanitizedData,
-      timestamp: new Date().toISOString(),
-      emailSent,
-      ip: req.ip,
-    };
-    console.log('📋 Enquiry recorded:', JSON.stringify(enquiryRecord, null, 2));
-
-    res.json({
+    return res.json({
       success: true,
-      message: emailSent
-        ? 'आपका संदेश सफलतापूर्वक भेज दिया गया है। हम जल्द ही आपसे संपर्क करेंगे।'
-        : 'आपका संदेश प्राप्त हो गया है। ईमेल भेजने में समस्या हुई, लेकिन हमारी टीम आपसे संपर्क करेगी।',
+      message: 'आपका संदेश सफलतापूर्वक भेज दिया गया है। हम जल्द ही आपसे संपर्क करेंगे।',
     });
   } catch (error) {
     console.error('Contact form error:', error);

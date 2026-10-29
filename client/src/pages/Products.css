@@ -278,15 +278,20 @@
   }
 
   .filters-wrapper {
+    flex-direction: column;
+    align-items: stretch;
     justify-content: stretch;
     min-width: 0;
+    width: 100%;
   }
 
   .category-filters {
-    flex-wrap: wrap;
+    width: 100%;
+    flex-wrap: nowrap;
   }
 
   .view-sort-controls {
+    width: 100%;
     justify-content: space-between;
   }
 
@@ -296,6 +301,11 @@
 }
 
 @media (max-width: 640px) {
+  .search-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
   .products-grid {
     grid-template-columns: 1fr;
   }

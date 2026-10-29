@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Filter, ChevronDown, LayoutGrid, List, Tag, Package, ArrowLeft, Wheat, Shield } from 'lucide-react';
+import { Search, Filter, ChevronDown, ChevronLeft, ChevronRight, LayoutGrid, List, Tag, Package, Wheat, Shield, Leaf } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import ProductCard from '../components/ProductCard';
 import { fadeInUp, fadeInLeft, fadeInRight, scaleIn, staggerContainer, staggerItem, scrollReveal, scrollRevealLeft, scrollRevealRight, sectionHeaderVariants, gridStagger, cardHover, imageReveal, buttonHover, buttonHoverGold } from '../utils/animations';
 import './Products.css';
-
-
 // Sample product data - replace with actual data
-const allProducts = [
+const PRODUCTS_PER_PAGE = 12;
+
+export const allProducts = [
   {
     id: 'organic-wheat',
     name: 'Organic Wheat Flour',
@@ -159,16 +159,14 @@ const allProducts = [
 ];
 
 const categories = [
-  { id: 'all', name: 'All', nameEn: 'All', icon: LayoutGrid },
-  { id: 'grains', name: 'Grains', nameEn: 'Grains', icon: Wheat },
-  { id: 'pulses', name: 'Pulses', nameEn: 'Pulses', icon: Package },
-  { id: 'spices', name: 'Spices', nameEn: 'Spices', icon: Leaf },
-  { id: 'oils', name: 'Oils', nameEn: 'Oils', icon: Package },
-  { id: 'honey', name: 'Honey', nameEn: 'Honey', icon: Leaf },
-  { id: 'others', name: 'Others', nameEn: 'Others', icon: Tag },
+  { id: 'all', name: 'All', nameHindi: 'सभी', icon: LayoutGrid },
+  { id: 'grains', name: 'Grains', nameHindi: 'अनाज', icon: Wheat },
+  { id: 'pulses', name: 'Pulses', nameHindi: 'दालें', icon: Package },
+  { id: 'spices', name: 'Spices', nameHindi: 'मसाले', icon: Leaf },
+  { id: 'oils', name: 'Oils', nameHindi: 'तेल', icon: Package },
+  { id: 'honey', name: 'Honey', nameHindi: 'शहद', icon: Leaf },
+  { id: 'others', name: 'Others', nameHindi: 'अन्य', icon: Tag },
 ];
-
-import { Leaf } from 'lucide-react';
 
 function Products() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -176,6 +174,7 @@ function Products() {
   const [viewMode, setViewMode] = useState('grid');
   const [sortBy, setSortBy] = useState('name');
   const [language, setLanguage] = useState('en'); // Default to English
+  const [currentPage, setCurrentPage] = useState(1);
   
   // Set language from localStorage
   useEffect(() => {
@@ -195,18 +194,25 @@ function Products() {
     localStorage.setItem('kundu-language', language);
   }, [language]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchQuery, sortBy, language]);
+
   // Filter products based on category and search
   const filteredProducts = useMemo(() => {
+    const query = searchQuery.trim().toLocaleLowerCase();
     return allProducts.filter((product) => {
       const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
-      const matchesSearch = product.nameHindi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           product.categoryHindi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           product.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = product.nameHindi.toLocaleLowerCase().includes(query) ||
+                           product.name.toLocaleLowerCase().includes(query) ||
+                           product.categoryHindi.toLocaleLowerCase().includes(query) ||
+                           product.category.toLocaleLowerCase().includes(query);
       return matchesCategory && matchesSearch;
     }).sort((a, b) => {
       if (sortBy === 'name') {
-        return (a.nameHindi || a.name).localeCompare(b.nameHindi || b.name);
+        const nameA = language === 'hi' ? a.nameHindi : a.name;
+        const nameB = language === 'hi' ? b.nameHindi : b.name;
+        return nameA.localeCompare(nameB);
       }
       if (sortBy === 'price-low') {
         return (a.price || 0) - (b.price || 0);
@@ -219,7 +225,14 @@ function Products() {
       }
       return 0;
     });
-  }, [allProducts, activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, searchQuery, sortBy, language]);
+
+  const pageCount = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const visibleProducts = filteredProducts.slice(
+    (currentPage - 1) * PRODUCTS_PER_PAGE,
+    currentPage * PRODUCTS_PER_PAGE,
+  );
+  const selectedCategory = categories.find((category) => category.id === activeCategory);
 
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
@@ -290,18 +303,16 @@ function Products() {
             </div>
 
             <div className="filters-wrapper">
-              <div className="category-filters" role="tablist" aria-label="Product categories">
+              <div className="category-filters" role="group" aria-label={language === 'hi' ? 'उत्पाद श्रेणियाँ' : 'Product categories'}>
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
-                    role="tab"
-                    aria-selected={activeCategory === cat.id}
-                    aria-controls={`${cat.id}-panel`}
-                    id={`${cat.id}-tab`}
+                    type="button"
+                    aria-pressed={activeCategory === cat.id}
                     className={`category-tab ${activeCategory === cat.id ? 'active' : ''}`}
                     onClick={() => handleCategoryChange(cat.id)}
                   >
-                    <span>{language === 'hi' ? cat.nameHindi || cat.name : cat.nameHindi || cat.name}</span>
+                    <span>{language === 'hi' ? cat.nameHindi : cat.name}</span>
                     <span className="filter-count">
                       {allProducts.filter(p => cat.id === 'all' || p.category === cat.id).length}
                     </span>
@@ -357,8 +368,9 @@ function Products() {
               animate={{ opacity: 1, x: 0 }}
             >
               <Tag width="16" height="16" aria-hidden="true" />
-              <span>{language === 'hi' ? 'फ़िल्टर: ' + categories.find(c => c.id === activeCategory)?.nameHindi || categories.find(c => c.id === activeCategory)?.name : 'Filter: ' + (categories.find(c => c.id === activeCategory)?.nameHindi || categories.find(c => c.id === activeCategory)?.name)}</span>
+              <span>{language === 'hi' ? 'फ़िल्टर: ' : 'Filter: '}{language === 'hi' ? selectedCategory?.nameHindi : selectedCategory?.name}</span>
               <button
+                type="button"
                 className="clear-filter"
                 onClick={() => handleCategoryChange('all')}
                 aria-label={language === 'hi' ? 'फ़िल्टर हटाएं' : 'Clear filter'}
@@ -389,8 +401,8 @@ function Products() {
               transition={{ duration: 0.5 }}
             >
               {activeCategory !== 'all'
-                ? language === 'hi' ? `${categories.find(c => c.id === activeCategory)?.nameHindi || categories.find(c => c.id === activeCategory)?.name} (${filteredProducts.length})`
-                : `${categories.find(c => c.id === activeCategory)?.nameEn || categories.find(c => c.id === activeCategory)?.name} (${filteredProducts.length})`
+                ? language === 'hi' ? `${selectedCategory?.nameHindi} (${filteredProducts.length})`
+                : `${selectedCategory?.name} (${filteredProducts.length})`
                 : language === 'hi' ? `सभी उत्पाद (${filteredProducts.length})` : `All products (${filteredProducts.length})`}
             </motion.h2>
           </motion.div>
@@ -426,7 +438,7 @@ function Products() {
               }
               variants={gridStagger(0.06)}
             >
-              {filteredProducts.map((product, index) => (
+              {visibleProducts.map((product) => (
                 <motion.div
                   key={product.id}
                   role="listitem"
@@ -441,21 +453,39 @@ function Products() {
             </motion.div>
           )}
 
-          {/* Pagination placeholder */}
-          {filteredProducts.length > 12 && (
-            <div className="pagination">
-              <button className="page-btn" aria-label={language === 'hi' ? 'पिछला पृष्ठ' : 'Previous page'} disabled>
-                <ArrowLeft width="18" height="18" />
+          {pageCount > 1 && (
+            <nav className="pagination" aria-label={language === 'hi' ? 'उत्पाद पृष्ठ' : 'Product pages'}>
+              <button
+                type="button"
+                className="page-btn"
+                aria-label={language === 'hi' ? 'पिछला पृष्ठ' : 'Previous page'}
+                onClick={() => setCurrentPage((page) => page - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft width="18" height="18" aria-hidden="true" />
               </button>
-              <button className="page-btn active" aria-label={language === 'hi' ? 'पृष्ठ 1' : 'Page 1'}>{language === 'hi' ? '1' : '1'}</button>
-              <button className="page-btn" aria-label={language === 'hi' ? 'पृष्ठ 2' : 'Page 2'}>{language === 'hi' ? '2' : '2'}</button>
-              <button className="page-btn" aria-label={language === 'hi' ? 'अगला पृष्ठ' : 'Next page'}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="6" y1="18" x2="18" y2="6"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+              {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
+                <button
+                  type="button"
+                  key={page}
+                  className={`page-btn ${currentPage === page ? 'active' : ''}`}
+                  aria-label={language === 'hi' ? `पृष्ठ ${page}` : `Page ${page}`}
+                  aria-current={currentPage === page ? 'page' : undefined}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                type="button"
+                className="page-btn"
+                aria-label={language === 'hi' ? 'अगला पृष्ठ' : 'Next page'}
+                onClick={() => setCurrentPage((page) => page + 1)}
+                disabled={currentPage === pageCount}
+              >
+                <ChevronRight width="18" height="18" aria-hidden="true" />
               </button>
-            </div>
+            </nav>
           )}
         </div>
       </section>
@@ -499,7 +529,7 @@ function Products() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.08 + 0.1 }}
                 >
-                  {language === 'hi' ? cat.nameHindi || cat.name : cat.nameHindi || cat.name}
+                  {language === 'hi' ? cat.nameHindi : cat.name}
                 </motion.h3>
                 <motion.p 
                   className="category-info-count text-hindi"

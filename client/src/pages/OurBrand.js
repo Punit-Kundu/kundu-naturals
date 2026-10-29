@@ -211,25 +211,30 @@ function OurBrand() {
             >
               <div className="logo-showcase">
                 <img
-                  src="/images/logo.png"
+                  src="/logo-placeholder.svg"
                   alt="Kundu Naturals logo"
                   className="logo-main"
-                  onError={(e) => { e.target.src = '/images/logo-placeholder.svg'; }}
                 />
               </div>
               <div className="logo-variants">
                 <h4 className="story-section-title">{language === 'hi' ? 'लोगो विविधताएं' : 'Logo Variants'}</h4>
                 <div className="variant-row">
                   <div className="variant-item">
-                    <div className="variant-preview primary" />
+                    <div className="variant-preview primary">
+                      <img src="/logo-placeholder.svg" alt="" />
+                    </div>
                     <span>{language === 'hi' ? 'प्राथमिक' : 'Primary'}</span>
                   </div>
                   <div className="variant-item">
-                    <div className="variant-preview mono" />
+                    <div className="variant-preview mono">
+                      <img src="/logo-placeholder.svg" alt="" />
+                    </div>
                     <span>{language === 'hi' ? 'मोनोक्रोम' : 'Mono'}</span>
                   </div>
                   <div className="variant-item">
-                    <div className="variant-preview icon" />
+                    <div className="variant-preview icon">
+                      <img src="/logo-placeholder.svg" alt="" />
+                    </div>
                     <span>{language === 'hi' ? 'केवल आइकन' : 'Icon only'}</span>
                   </div>
                 </div>

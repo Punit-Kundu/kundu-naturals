@@ -248,7 +248,7 @@ function Home() {
         {/* Background */}
         <div className="kn-hero-bg" aria-hidden="true">
           <motion.img
-            src="/homepage hero section image.png"
+            src="/homepage%20hero%20section%20image.png"
             alt=""
             className="kn-hero-bg-img"
             loading="eager"

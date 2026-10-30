@@ -226,7 +226,7 @@ html.hi .footer-tagline { line-height: 1.75; letter-spacing: 0; }
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  color: var(--panel-ink);
+  color: var(--brand-tint);
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(20, 83, 45, 0.16);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),

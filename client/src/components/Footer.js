@@ -11,7 +11,12 @@ import {
   Mail,
   MapPin,
 } from 'lucide-react';
-import { WhatsAppBrandIcon } from './icons/BrandIcons';
+import {
+  FacebookIcon,
+  InstagramIcon,
+  WhatsAppBrandIcon,
+  YouTubeIcon,
+} from './icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import { businessMapsUrl } from '../utils/businessLocation';
 import './Footer.css';
@@ -139,6 +144,9 @@ function Footer() {
   const socials = [
     { Icon: WhatsAppBrandIcon, label: 'WhatsApp', href: `https://wa.me/${whatsappNumber}`, tint: '#25D366', external: true },
     { Icon: PhoneCall, label: 'Call us', href: `tel:${phoneHref}`, tint: '#E3A82B' },
+    { Icon: YouTubeIcon, label: 'YouTube', href: 'https://www.youtube.com/', tint: '#FF0000', external: true },
+    { Icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/', tint: '#C13584', external: true },
+    { Icon: FacebookIcon, label: 'Facebook', href: 'https://www.facebook.com/', tint: '#1877F2', external: true },
   ];
 
   return (

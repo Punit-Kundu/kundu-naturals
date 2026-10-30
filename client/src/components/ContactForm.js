@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, Clock3, ShieldCheck } from 'lucide-react';
 import './ContactForm.css';
 
 function ContactForm() {
@@ -130,19 +130,57 @@ function ContactForm() {
   };
 
   const fields = [
-    { name: 'name', label: 'पूरा नाम', type: 'text', placeholder: 'आपका पूरा नाम', icon: 'user', maxLength: 100, autoComplete: 'name' },
-    { name: 'phone', label: 'फोन नंबर', type: 'tel', placeholder: '+91 98765 43210', icon: 'phone', maxLength: 25, autoComplete: 'tel' },
-    { name: 'email', label: 'ईमेल', type: 'email', placeholder: 'आपका@ईमेल.com', icon: 'mail', maxLength: 254, autoComplete: 'email' },
-    { name: 'subject', label: 'विषय', type: 'text', placeholder: 'आपकी पूछताछ का विषय', icon: 'tag', maxLength: 150 },
+    { name: 'name', label: 'पूरा नाम', labelEn: 'Full name', type: 'text', placeholder: 'आपका पूरा नाम', icon: 'user', maxLength: 100, autoComplete: 'name' },
+    { name: 'phone', label: 'फोन नंबर', labelEn: 'Phone number', type: 'tel', placeholder: '+91 98765 43210', icon: 'phone', maxLength: 25, autoComplete: 'tel' },
+    { name: 'email', label: 'ईमेल', labelEn: 'Email address', type: 'email', placeholder: 'आपका@ईमेल.com', icon: 'mail', maxLength: 254, autoComplete: 'email' },
+    { name: 'subject', label: 'विषय', labelEn: 'Subject', type: 'text', placeholder: 'आपकी पूछताछ का विषय', icon: 'tag', maxLength: 150 },
   ];
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} noValidate>
-      <div className="form-grid">
+    <div className="contact-form-layout">
+      <aside className="contact-form-aside">
+        <span className="contact-form-eyebrow">KUNDU NATURALS</span>
+        <h3 className="contact-form-aside-title">
+          <span className="text-hindi">हम आपकी कैसे मदद कर सकते हैं?</span>
+          <span className="text-latin">How can we help?</span>
+        </h3>
+        <p className="contact-form-aside-copy">
+          <span className="text-hindi">अपनी ज़रूरत बताएं—हमारी टीम सही जानकारी और सहायता के साथ आपसे संपर्क करेगी।</span>
+          <span className="text-latin">Tell us what you need. Our team will get back to you with the right information and support.</span>
+        </p>
+        <div className="contact-form-assurance">
+          <span className="contact-form-assurance-icon"><Clock3 size={19} aria-hidden="true" /></span>
+          <span>
+            <strong><span className="text-hindi">24 घंटे में जवाब</span><span className="text-latin">Reply within 24 hours</span></strong>
+            <small><span className="text-hindi">हम जल्द से जल्द जवाब देने की कोशिश करते हैं।</span><span className="text-latin">We aim to respond as quickly as possible.</span></small>
+          </span>
+        </div>
+        <div className="contact-form-assurance">
+          <span className="contact-form-assurance-icon"><ShieldCheck size={19} aria-hidden="true" /></span>
+          <span>
+            <strong><span className="text-hindi">आपकी जानकारी सुरक्षित</span><span className="text-latin">Your details are private</span></strong>
+            <small><span className="text-hindi">आपकी जानकारी केवल आपकी पूछताछ के लिए उपयोग होगी।</span><span className="text-latin">Your details are only used to respond to your enquiry.</span></small>
+          </span>
+        </div>
+      </aside>
+
+      <form className="contact-form" onSubmit={handleSubmit} noValidate>
+        <div className="contact-form-fields-heading">
+          <span className="text-hindi">संपर्क विवरण</span>
+          <span className="text-latin">Your details</span>
+          <span className="contact-form-required-note">
+            <span className="required" aria-hidden="true">*</span>
+            <span className="text-hindi">ज़रूरी जानकारी</span>
+            <span className="text-latin">Required fields</span>
+          </span>
+        </div>
+        <div className="form-grid">
         {fields.map((field) => (
           <div key={field.name} className="form-group">
             <label htmlFor={field.name} className="form-label text-hindi">
-              {field.label} <span className="required" aria-hidden="true">*</span>
+              <span className="text-hindi">{field.label}</span>
+              <span className="text-latin">{field.labelEn}</span>
+              <span className="required" aria-hidden="true">*</span>
             </label>
             <div className="input-wrapper">
               <span className="input-icon" aria-hidden="true">
@@ -179,7 +217,9 @@ function ContactForm() {
 
       <div className="form-group">
         <label htmlFor="message" className="form-label text-hindi">
-          संदेश <span className="required" aria-hidden="true">*</span>
+          <span className="text-hindi">संदेश</span>
+          <span className="text-latin">Message</span>
+          <span className="required" aria-hidden="true">*</span>
         </label>
         <div className="input-wrapper">
           <span className="input-icon input-icon-top" aria-hidden="true">
@@ -217,19 +257,22 @@ function ContactForm() {
           {status === 'submitting' ? (
             <>
               <Loader2 width="20" height="20" className="spinning" aria-hidden="true" />
-              <span>भेजा जा रहा है...</span>
+              <span className="text-hindi">भेजा जा रहा है...</span>
+              <span className="text-latin">Sending...</span>
             </>
           ) : (
             <>
               <Send width="20" height="20" aria-hidden="true" />
-              <span>संदेश भेजें</span>
+              <span className="text-hindi">संदेश भेजें</span>
+              <span className="text-latin">Send message</span>
             </>
           )}
         </button>
 
         {status === 'success' && (
           <button type="button" className="btn btn-outline btn-lg" onClick={resetForm}>
-            <span>नया संदेश लिखें</span>
+            <span className="text-hindi">नया संदेश लिखें</span>
+            <span className="text-latin">Send another message</span>
           </button>
         )}
       </div>
@@ -252,7 +295,8 @@ function ContactForm() {
           </div>
         </motion.div>
       )}
-    </form>
+      </form>
+    </div>
   );
 }
 

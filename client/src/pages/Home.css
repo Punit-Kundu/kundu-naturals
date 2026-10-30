@@ -5,14 +5,12 @@
 
 .kn-hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: min(100svh, 900px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   isolation: isolate;
-  padding-top: var(--header-total-height);
   background: var(--color-dark-section);
   color: var(--color-white);
 }
@@ -536,7 +534,12 @@ html.hi .kn-hero-btn {
   }
 }
 @media (max-width: 560px) {
-  .kn-hero { min-height: 92vh; }
+  .kn-hero {
+    min-height: 0;
+    flex-direction: column;
+    padding: 1rem 0 1.5rem;
+  }
+  .kn-hero-container { padding: 1.5rem var(--container-padding); }
   .kn-hero-stats {
     position: static;
     transform: none;
@@ -580,6 +583,15 @@ html.hi .kn-hero-btn {
 /* Navbar overlap safety */
 .kn-hero { scroll-margin-top: calc(var(--header-total-height) + 1rem); }
 
+/* Keep homepage sections visually connected without changing spacing site-wide. */
+.values-section.section,
+.about-preview.section,
+.featured-products.section,
+.gallery-preview.section,
+.founders.section,
+.cta-section.section {
+  padding-block: clamp(2.5rem, 4vw, 3.75rem);
+}
 
 .values-section {
   background: var(--color-white);

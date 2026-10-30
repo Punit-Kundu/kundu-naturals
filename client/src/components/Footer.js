@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { WhatsAppBrandIcon } from './icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
+import { businessMapsUrl } from '../utils/businessLocation';
 import './Footer.css';
 
 /* ============================================================
@@ -97,7 +98,6 @@ function Footer() {
   const whatsappPhone = whatsappDigits.startsWith('91') ? whatsappDigits.slice(2) : whatsappDigits;
   const phoneNumber = phoneDigits.startsWith('91') ? phoneDigits.slice(2) : phoneDigits;
   const phoneHref = phoneDigits.startsWith('91') ? `+${phoneDigits}` : `+91${phoneDigits}`;
-  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessInfo.address)}`;
   const contactMobile = [
     {
       icon: Phone,
@@ -132,7 +132,7 @@ function Footer() {
       labelHi: 'पता',
       valueEn: businessInfo.address,
       valueHi: businessInfo.address,
-      href: mapUrl,
+      href: businessMapsUrl,
       external: true,
     },
   ];

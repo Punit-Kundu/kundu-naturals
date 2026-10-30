@@ -5,6 +5,7 @@ import SectionHeader from '../components/SectionHeader';
 import ContactForm from '../components/ContactForm';
 import WhatsApp from '../components/icons/WhatsAppIcon';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
+import { businessMapEmbedUrl, businessMapsUrl } from '../utils/businessLocation';
 import './Contact.css';
 
 const formatPhoneNumber = (rawPhone) => {
@@ -42,8 +43,9 @@ const getContactInfo = (businessInfo) => [
       'District Kaithal',
       'Haryana, India',
     ],
-    action: null,
-    actionLabel: null,
+    action: businessMapsUrl,
+    actionLabel: { hi: 'Google Maps में देखें', en: 'Open in Google Maps' },
+    target: '_blank',
   },
   {
     icon: Phone,
@@ -234,19 +236,17 @@ function Contact() {
                 <span className="text-hindi">{language === 'hi' ? 'हमारा स्थान' : 'Our Location'}</span>
                 <span className="text-latin">{language === 'en' ? 'Our Location' : 'हमारा स्थान'}</span>
               </h2>
-              <div className="map-placeholder" role="group" aria-label={language === 'hi' ? 'कुंडू नेचुरल्स का पता' : 'Kundu Naturals address'}>
-                <div className="map-placeholder-content">
-                  <MapPin width="48" height="48" aria-hidden="true" />
-                  <h3>{language === 'hi' ? 'कुंडू नेचुरल्स का पता' : 'Kundu Naturals address'}</h3>
-                  <p>{language === 'hi' ? 'हमारा पता:' : 'Visit or find us at:'}</p>
-                  <div className="map-address">
-                    <span className="text-hindi">{businessInfo.address}</span>
-                    <span className="text-latin">{businessInfo.address}</span>
-                  </div>
-                </div>
+              <div className="map-placeholder">
+                <iframe
+                  src={businessMapEmbedUrl}
+                  title={language === 'hi' ? 'कुंडू नेचुरल्स की लाइव Google Maps लोकेशन' : 'Kundu Naturals live Google Maps location'}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessInfo.address)}`}
+                href={businessMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline map-link"

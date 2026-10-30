@@ -12,6 +12,7 @@ import OurBrand from './pages/OurBrand';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactButtons from './components/FloatingContactButtons';
+import WebsiteChatbot from './components/WebsiteChatbot';
 import { BusinessInfoProvider } from './context/BusinessInfoContext';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Footer />
         <FloatingContactButtons />
         <ScrollToTop />
+        <WebsiteChatbot />
       </>
     </BusinessInfoProvider>
   );

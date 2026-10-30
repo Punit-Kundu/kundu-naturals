@@ -1,0 +1,20 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punit Kundu, Co-founder and Managing Director">
+  <defs>
+    <linearGradient id="pk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f5df"/>
+      <stop offset="100%" stop-color="#e8dcc8"/>
+    </linearGradient>
+    <linearGradient id="pk-circle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#452a1d"/>
+      <stop offset="100%" stop-color="#302018"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#pk-bg)"/>
+  <circle cx="200" cy="200" r="150" fill="url(#pk-circle)"/>
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#e6bd52" stroke-width="4"/>
+  <circle cx="200" cy="200" r="134" fill="none" stroke="#e6bd52" stroke-width="1" opacity="0.55"/>
+  <path d="M148 286c0-46 23-82 52-82s52 36 52 82z" fill="#f7f5df" opacity="0.16"/>
+  <circle cx="200" cy="166" r="46" fill="#f7f5df" opacity="0.22"/>
+  <text x="200" y="226" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="700" fill="#f7f5df" text-anchor="middle" letter-spacing="2">PK</text>
+  <path d="M200 296c-14-12-24-24-24-36 0-10 8-18 18-18 3 0 6 1 9 3 3-2 6-3 9-3 10 0 18 8 18 18 0 12-10 24-24 36z" fill="#e6bd52" opacity="0.85"/>
+</svg>

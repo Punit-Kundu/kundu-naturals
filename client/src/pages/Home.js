@@ -685,17 +685,15 @@ function Home() {
             >
               <div className="image-stack">
                 <motion.img
-                  src="/images/ramesh-kundu.jpg"
-                  alt="रमेश कुंडू - संस्थापक, कुंडू नेचुरल्स"
+                  src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
+                  alt="रमेश कुंडू - कुंडू नेचुरल्स के ब्रांड ओनर"
                   className="main-image"
-                  onError={(e) => { e.target.src = '/images/placeholder-person.jpg'; }}
                   variants={imageReveal}
                 />
                 <motion.img
-                  src="/images/punit-kundu.jpg"
-                  alt="पुनीत कुंडू - सह-संस्थापक, कुंडू नेचुरल्स"
+                  src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
+                  alt="पुनीत कुंडू - कुंडू नेचुरल्स के बिज़नेस मैनेजर"
                   className="overlay-image"
-                  onError={(e) => { e.target.src = '/images/placeholder-person.jpg'; }}
                   initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ duration: 0.6, delay: 0.3, type: 'spring', stiffness: 100 }}
@@ -987,8 +985,8 @@ function Home() {
             variants={sectionHeaderVariants}
           >
             <h2 id="founders-title" className="heading-2">
-              <span className="text-hindi">हमारे संस्थापक</span>
-              <span className="text-latin">Our Founders</span>
+              <span className="text-hindi">हमारी टीम</span>
+              <span className="text-latin">Our Team</span>
             </h2>
           </motion.div>
           <motion.article
@@ -997,10 +995,9 @@ function Home() {
           >
             <div className="founder-image-wrapper">
               <motion.img
-                src="/images/ramesh-kundu.jpg"
-                alt="रमेश कुंडू - संस्थापक"
+                src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
+                alt="रमेश कुंडू - ब्रांड ओनर"
                 className="founder-image"
-                onError={(e) => { e.target.src = '/images/placeholder-person.jpg'; }}
                 variants={imageReveal}
               />
             </div>
@@ -1025,8 +1022,8 @@ function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <span className="text-hindi">संस्थापक और निदेशक</span>
-                <span className="text-latin">Founder & Director</span>
+                <span className="text-hindi">ब्रांड ओनर</span>
+                <span className="text-latin">Brand Owner</span>
               </motion.span>
               <motion.p 
                 className="founder-bio"
@@ -1052,10 +1049,9 @@ function Home() {
           >
             <div className="founder-image-wrapper">
               <motion.img
-                src="/images/punit-kundu.jpg"
-                alt="पुनीत कुंडू - सह-संस्थापक"
+                src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
+                alt="पुनीत कुंडू - बिज़नेस मैनेजर"
                 className="founder-image"
-                onError={(e) => { e.target.src = '/images/placeholder-person.jpg'; }}
                 variants={imageReveal}
               />
             </div>
@@ -1080,8 +1076,8 @@ function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <span className="text-hindi">सह-संस्थापक और प्रबंध निदेशक</span>
-                <span className="text-latin">Co-founder & Managing Director</span>
+                <span className="text-hindi">बिज़नेस मैनेजर</span>
+                <span className="text-latin">Business Manager</span>
               </motion.span>
               <motion.p 
                 className="founder-bio"

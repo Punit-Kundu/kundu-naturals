@@ -2,7 +2,7 @@
   position: fixed;
   top: auto;
   bottom: max(1.25rem, env(safe-area-inset-bottom));
-  left: max(1rem, env(safe-area-inset-left));
+  right: max(1rem, env(safe-area-inset-right));
   z-index: 850;
   display: flex;
   flex-direction: column;
@@ -55,13 +55,13 @@
 .floating-contact-button:hover,
 .floating-contact-button:focus-visible {
   z-index: 1;
-  transform: translateX(4px) scale(1.08);
+  transform: translateX(-4px) scale(1.08);
   box-shadow: 0 9px 22px rgba(20, 32, 24, 0.28);
   filter: saturate(1.1);
 }
 
 .floating-contact-button:active {
-  transform: translateX(2px) scale(0.96);
+  transform: translateX(-2px) scale(0.96);
 }
 
 .floating-contact-button:focus-visible {
@@ -93,7 +93,7 @@
 @keyframes floatingContactEnter {
   from {
     opacity: 0;
-    transform: translateX(14px) scale(0.88);
+    transform: translateX(-14px) scale(0.88);
   }
   to {
     opacity: 1;
@@ -115,7 +115,7 @@
 
 @media (max-width: 768px) {
   .floating-contact {
-    left: max(0.65rem, env(safe-area-inset-left));
+    right: max(0.65rem, env(safe-area-inset-right));
     gap: 0.65rem;
   }
 
@@ -127,7 +127,7 @@
 
 @media (max-width: 380px) {
   .floating-contact {
-    left: max(0.5rem, env(safe-area-inset-left));
+    right: max(0.5rem, env(safe-area-inset-right));
     gap: 0.55rem;
   }
 

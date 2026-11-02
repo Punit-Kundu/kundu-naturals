@@ -33,3 +33,4 @@ dist/
 
 # stray temp files
 temp.ps1
+.vercel

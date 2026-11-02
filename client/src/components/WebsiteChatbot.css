@@ -46,8 +46,8 @@
 }
 
 .website-chat-launcher-icon {
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   display: block;
 }
 
@@ -91,14 +91,15 @@
 
 .website-chat-avatar {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
   place-items: center;
-  background: rgba(255, 255, 255, 0.13);
-  border: 1px solid rgba(247, 231, 181, 0.5);
+  background: #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50%;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(20, 38, 27, 0.15);
 }
 
 .website-chat-avatar-img {

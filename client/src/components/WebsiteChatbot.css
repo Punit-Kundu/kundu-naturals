@@ -46,9 +46,10 @@
 }
 
 .website-chat-launcher-icon {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   display: block;
+  flex-shrink: 0;
 }
 
 .website-chat-panel {

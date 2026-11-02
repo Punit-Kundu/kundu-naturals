@@ -145,8 +145,19 @@ function WebsiteChatbot() {
         aria-label={isOpen ? 'Close Kundu Naturals chat' : 'Chat with Kundu Naturals'}
         aria-expanded={isOpen}
       >
-        {isOpen ? <X size={24} /> : <img src="/chatbot-icon-48.png" alt="Chat with Kundu Naturals" className="website-chat-launcher-icon" />}
-        {!isOpen && <span className="website-chat-launcher-label">Ask us</span>}
+        {isOpen ? (
+          <X size={24} />
+        ) : (
+          <>
+            <svg className="website-chat-launcher-icon" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x={4} y={4} width={24} height={24} rx={8} fill="#ffffff" />
+              <circle cx={12} cy={14} r={1.5} fill="#2b3a4f" />
+              <circle cx={20} cy={14} r={1.5} fill="#2b3a4f" />
+              <path d="M12 20 Q16 24 20 20" stroke="#2b3a4f" strokeWidth={2} strokeLinecap="round" fill="none" />
+            </svg>
+            {!isOpen && <span className="website-chat-launcher-label">Ask us</span>}
+          </>
+        )}
       </button>
     </div>
   );

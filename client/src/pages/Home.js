@@ -248,10 +248,13 @@ function Home() {
         {/* Background */}
         <div className="kn-hero-bg" aria-hidden="true">
           <motion.img
-            src="/homepage%20hero%20section%20image.png"
-            alt=""
+            src="/homepage-hero.webp"
+            alt="Natural food products from Kundu Naturals"
             className="kn-hero-bg-img"
+            width="1536"
+            height="639"
             loading="eager"
+            fetchPriority="high"
             decoding="async"
           />
           <div className="kn-hero-overlay" />
@@ -300,7 +303,7 @@ function Home() {
             {/* Headline — word by word */}
             <motion.h1 id="kn-hero-title" className="kn-hero-title">
               <span className="text-hindi">
-                <HeroWords text="प्रकृति का शुद्ध आशीर्वाद," base={0.3} step={0.06} />
+                <HeroWords text="भारत में ऑर्गेनिक फूड ऑनलाइन," base={0.3} step={0.06} />
                 <motion.span
                   className="kn-hero-title-gold"
                   custom={0.74}
@@ -312,7 +315,7 @@ function Home() {
                 </motion.span>
               </span>
               <span className="text-latin">
-                <HeroWords text="Pure Nature's Blessing," base={0.3} step={0.06} />
+                <HeroWords text="Organic Food Online in India," base={0.3} step={0.06} />
                 <motion.span
                   className="kn-hero-title-gold"
                   custom={0.74}
@@ -329,14 +332,14 @@ function Home() {
             <motion.p className="kn-hero-sub">
               <span className="text-hindi">
                 <HeroWords
-                  text="प्रीमियम देसी घी, कोल्ड-प्रेस तेल, चक्की आटा, शहद और मसाले — पारंपरिक तरीके से बने, बिल्कुल बिना रसायन।"
+                  text="भारत में ऑर्गेनिक फूड ऑनलाइन — देसी घी, चावल, दालें और मसाले। Kundu Naturals से संपर्क करें।"
                   base={0.95}
                   step={0.022}
                 />
               </span>
               <span className="text-latin">
                 <HeroWords
-                  text="Premium desi ghee, cold-pressed oils, chakki atta, honey and spices — made the traditional way, with zero chemicals."
+                  text="Order organic food online in India, including desi ghee, rice, dals and spices from Kundu Naturals."
                   base={0.95}
                   step={0.022}
                 />
@@ -688,15 +691,25 @@ function Home() {
                   src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
                   alt="रमेश कुंडू - कुंडू नेचुरल्स के ब्रांड ओनर"
                   className="main-image"
-                  variants={imageReveal}
+                  width="640"
+                  height="640"
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8 }}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
                 />
                 <motion.img
                   src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
                   alt="पुनीत कुंडू - कुंडू नेचुरल्स के बिज़नेस मैनेजर"
                   className="overlay-image"
-                  initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                  width="640"
+                  height="640"
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ duration: 0.6, delay: 0.3, type: 'spring', stiffness: 100 }}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
                 />
                 <motion.div 
                   className="experience-badge"
@@ -727,6 +740,7 @@ function Home() {
               >
                 <SectionHeader
                   alignment="left"
+                  id="about-preview-title"
                   title="Our Story"
                   titleHindi="हमारी कहानी"
                   subtitle="Traditional farming and pure food heritage"
@@ -846,6 +860,7 @@ function Home() {
             variants={sectionHeaderVariants}
           >
             <SectionHeader
+              id="featured-title"
               title="Our Special Products"
               titleHindi="हमारे विशेष उत्पाद"
               subtitle="Direct from farms, with love and care"
@@ -893,6 +908,7 @@ function Home() {
             variants={sectionHeaderVariants}
           >
             <SectionHeader
+              id="gallery-preview-title"
               title="A Glimpse from Our Gallery"
               titleHindi="हमारी गैलरी से झलक"
               subtitle="Photos of farms, products and our team"
@@ -925,8 +941,12 @@ function Home() {
                       src={item.src}
                       alt={item.alt}
                       className="gallery-preview-image"
+                      width="640"
+                      height="480"
                       loading="lazy"
-                      variants={imageReveal}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6 }}
+                      onError={(e) => { e.target.src = '/images/gallery-placeholder.svg'; }}
                     />
                   </div>
                   <motion.div 
@@ -998,7 +1018,13 @@ function Home() {
                 src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
                 alt="रमेश कुंडू - ब्रांड ओनर"
                 className="founder-image"
-                variants={imageReveal}
+                width="640"
+                height="640"
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
               />
             </div>
             <motion.div 
@@ -1052,7 +1078,13 @@ function Home() {
                 src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
                 alt="पुनीत कुंडू - बिज़नेस मैनेजर"
                 className="founder-image"
-                variants={imageReveal}
+                width="640"
+                height="640"
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
               />
             </div>
             <motion.div 

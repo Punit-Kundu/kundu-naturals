@@ -112,6 +112,8 @@ function Header() {
               src="/images/website-logo.png"
               alt="Kundu Naturals Logo"
               className="logo-image"
+              width="100"
+              height="100"
             />
           </Link>
 
@@ -179,7 +181,7 @@ function Header() {
               </a>
               <span className="header-cta-copy">
                 <span>{language === 'hi' ? 'कॉल / व्हाट्सऐप' : 'Call / WhatsApp'}</span>
-                <a href={`tel:${phoneHref}`}><strong>{formatPhoneNumber(phoneNumber)}</strong></a>
+                <a href={`tel:${phoneHref}`} aria-label={`Call Kundu Naturals at +91 ${phoneNumber}`}><strong>{formatPhoneNumber(phoneNumber)}</strong></a>
               </span>
             </div>
           </div>

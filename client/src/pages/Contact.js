@@ -2,10 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Map, Send, CheckCircle } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
 import ContactForm from '../components/ContactForm';
 import WhatsApp from '../components/icons/WhatsAppIcon';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import { businessMapEmbedUrl, businessMapsUrl } from '../utils/businessLocation';
+import { CONTACT_FAQS } from '../seo/seoConfig';
 import './Contact.css';
 
 const formatPhoneNumber = (rawPhone) => {
@@ -104,44 +106,28 @@ function Contact() {
 
   return (
     <>
-      {/* Page Header */}
-      <section className="page-header" aria-labelledby="contact-title">
-        <div className="page-header-bg" aria-hidden="true">
-          <img
-            src="/images/contact-header.jpg"
-            alt=""
-            className="page-header-image"
-            onError={(e) => { e.target.style.display = 'none'; }}
-          />
-          <div className="page-header-overlay" />
-        </div>
-        <div className="container page-header-content">
-          <motion.h1
-            id="contact-title"
-            className="page-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'संपर्क करें' : 'Contact Us'}</span>
-            <span className="text-latin">{language === 'en' ? 'Contact Us' : 'संपर्क करें'}</span>
-          </motion.h1>
-          <motion.p
-            className="page-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'We are here for your queries, suggestions and orders' : 'We are here for your queries, suggestions and orders'}</span>
-            <span className="text-latin">{language === 'en' ? 'We are here for your queries, suggestions and orders' : 'हम आपके प्रश्न, सुझाव और ऑर्डर के लिए यहां हैं'}</span>
-          </motion.p>
-        </div>
-      </section>
+      {/* Page Hero */}
+      <PageHero
+        title={language === 'hi' ? 'कैथल के प्राकृतिक खाद्य ब्रांड से संपर्क करें' : 'Contact Your Natural Food Brand in Kaithal'}
+        titleHindi="कैथल के प्राकृतिक खाद्य ब्रांड से संपर्क करें"
+        subtitle={language === 'hi' ? 'कैलराम, कैथल में उत्पादों और ऑर्डर के लिए संपर्क करें' : 'Contact us in Kailram, Kaithal for product details and orders'}
+        subtitleHindi="कैलराम, कैथल में उत्पादों और ऑर्डर के लिए संपर्क करें"
+        bgImage="/images/website-header.png"
+        ctaText="Shop Now"
+        ctaTextHindi="अभी खरीदें"
+        ctaHref="/products"
+        cta2Text="Our Story"
+        cta2TextHindi="हमारी कहानी"
+        cta2Href="/about"
+        showContact
+        language={language}
+      />
 
       {/* Quick Contact */}
       <section className="quick-contact section" aria-labelledby="quick-title">
         <div className="container">
           <SectionHeader
+            id="quick-title"
             title="Quick Contact"
             titleHindi="त्वरित संपर्क"
             titleEn="Quick Contact"
@@ -274,6 +260,7 @@ function Contact() {
               transition={{ duration: 0.6 }}
             >
               <SectionHeader
+                id="form-title"
                 title="Send us a message"
                 titleHindi="हमें संदेश भेजें"
                 titleEn="Send us a message"
@@ -290,6 +277,7 @@ function Contact() {
       <section className="contact-faq section section-alt" aria-labelledby="faq-title">
         <div className="container">
           <SectionHeader
+            id="faq-title"
             title="Frequently Asked Questions"
             titleHindi="अक्सर पूछे जाने वाले प्रश्न"
             titleEn="Frequently Asked Questions"
@@ -297,56 +285,7 @@ function Contact() {
             subtitleEn="Quick answers to common questions"
           />
           <div className="faq-grid">
-            {[
-              {
-                q: 'How to place an order?',
-                qHindi: 'ऑर्डर कैसे दें?',
-                qEn: 'How to place an order?',
-                a: 'Browse the products and contact us on WhatsApp or by phone. Our team will confirm availability and price; checkout is not available on the website.',
-                aHindi: 'उत्पाद देखें और WhatsApp या फोन पर संपर्क करें। हमारी टीम उपलब्धता और कीमत की पुष्टि करेगी; वेबसाइट पर चेकआउट की सुविधा नहीं है।',
-                aEn: 'Browse the products and contact us on WhatsApp or by phone. Our team will confirm availability and price; checkout is not available on the website.',
-              },
-              {
-                q: 'How long does delivery take?',
-                qHindi: 'डिलीवरी में कितना समय लगता है?',
-                qEn: 'How long does delivery take?',
-                a: 'Delivery availability and estimated timing depend on your address. Our team will confirm the details before accepting the order.',
-                aHindi: 'डिलीवरी की उपलब्धता और अनुमानित समय आपके पते पर निर्भर करता है। ऑर्डर स्वीकार करने से पहले हमारी टीम विवरण की पुष्टि करेगी।',
-                aEn: 'Delivery availability and estimated timing depend on your address. Our team will confirm the details before accepting the order.',
-              },
-              {
-                q: 'What payment methods?',
-                qHindi: 'भुगतान के तरीके क्या हैं?',
-                qEn: 'What payment methods?',
-                a: 'Please ask our team about the payment options available for your order before confirming it.',
-                aHindi: 'ऑर्डर की पुष्टि से पहले उपलब्ध भुगतान विकल्पों के लिए हमारी टीम से पूछें।',
-                aEn: 'Please ask our team about the payment options available for your order before confirming it.',
-              },
-              {
-                q: 'Are products organically certified?',
-                qHindi: 'उत्पाद जैविक प्रमाणित हैं?',
-                qEn: 'Are products organically certified?',
-                a: 'Our products are grown using traditional organic methods. Certification is in progress. Currently we rely on farmer declarations and internal quality checks.',
-                aHindi: 'हमारे उत्पाद पारंपरिक जैविक विधियों से उगाए जाते हैं। प्रमाणन प्रक्रिया जारी है। वर्तमान में हम किसानों की घोषणा और आंतरिक गुणवत्ता जांच पर भरोसा करते हैं।',
-                aEn: 'Our products are grown using traditional organic methods. Certification is in progress. Currently we rely on farmer declarations and internal quality checks.',
-              },
-              {
-                q: 'Discount for bulk orders?',
-                qHindi: 'थोक ऑर्डर पर छूट?',
-                qEn: 'Discount for bulk orders?',
-                a: 'Contact us on WhatsApp or by email to check bulk-order availability and request a quote.',
-                aHindi: 'थोक ऑर्डर की उपलब्धता और कीमत जानने के लिए WhatsApp या ईमेल पर संपर्क करें।',
-                aEn: 'Contact us on WhatsApp or by email to check bulk-order availability and request a quote.',
-              },
-              {
-                q: 'Return/Refund policy?',
-                qHindi: 'रिटर्न/रिफंड नीति?',
-                qEn: 'Return/Refund policy?',
-                a: 'Contact us with your order details. Our team will explain the applicable return or refund policy.',
-                aHindi: 'अपने ऑर्डर के विवरण के साथ संपर्क करें। हमारी टीम लागू रिटर्न या रिफंड नीति बताएगी।',
-                aEn: 'Contact us with your order details. Our team will explain the applicable return or refund policy.',
-              },
-            ].map((faq, index) => (
+            {CONTACT_FAQS.map((faq, index) => (
               <motion.details
                 key={index}
                 className="faq-item"
@@ -357,15 +296,15 @@ function Contact() {
               >
                 <summary className="faq-question">
                   <span className="faq-q">
-                    <span className="text-hindi">{faq.qHindi}</span>
-                    <span className="text-latin">{faq.qEn}</span>
+                    <span className="text-hindi">{faq.questionHindi}</span>
+                    <span className="text-latin">{faq.question}</span>
                   </span>
                   <CheckCircle width="20" height="20" aria-hidden="true" />
                 </summary>
                 <div className="faq-answer">
                   <p className="text-hindi">
-                    <span className="text-hindi">{faq.aHindi}</span>
-                    <span className="text-latin">{faq.aEn}</span>
+                    <span className="text-hindi">{faq.answerHindi}</span>
+                    <span className="text-latin">{faq.answer}</span>
                   </p>
                 </div>
               </motion.details>

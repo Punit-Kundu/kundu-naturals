@@ -1,8 +1,9 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PageSEO from './components/PageSEO';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
@@ -13,6 +14,7 @@ import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactButtons from './components/FloatingContactButtons';
 import WebsiteChatbot from './components/WebsiteChatbot';
+import NotFound from './pages/NotFound';
 import { BusinessInfoProvider } from './context/BusinessInfoContext';
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
     <BusinessInfoProvider>
       <>
         <a href="#main-content" className="skip-link">मुख्य सामग्री पर जाएं</a>
+        <PageSEO />
         <Header />
         <Layout>
           <Routes>
@@ -30,7 +33,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/our-brand" element={<OurBrand />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
         <Footer />

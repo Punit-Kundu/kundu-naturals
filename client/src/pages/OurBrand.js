@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Sun, Droplet, Sprout, Heart, Shield, Award, Truck, Wheat, Leaf as LeafIcon, Sparkles, Mountain, TreePine } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
 import './OurBrand.css';
 
 const brandColors = [
@@ -156,44 +157,28 @@ function OurBrand() {
 
   return (
     <>
-      {/* Page Header */}
-      <section className="page-header" aria-labelledby="brand-title">
-        <div className="page-header-bg" aria-hidden="true">
-          <img
-            src="/images/brand-header.jpg"
-            alt=""
-            className="page-header-image"
-            onError={(e) => { e.target.style.display = 'none'; }}
-          />
-          <div className="page-header-overlay" />
-        </div>
-        <div className="container page-header-content">
-          <motion.h1
-            id="brand-title"
-            className="page-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'हमारा ब्रांड' : 'Our Brand'}</span>
-            <span className="text-latin">{language === 'en' ? 'Our Brand' : 'हमारा ब्रांड'}</span>
-          </motion.h1>
-          <motion.p
-            className="page-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'Visual identity and philosophy' : 'Visual identity and philosophy'}</span>
-            <span className="text-latin">{language === 'en' ? 'Visual identity and philosophy' : 'हमारा ब्रांड'}</span>
-          </motion.p>
-        </div>
-      </section>
+      {/* Page Hero */}
+      <PageHero
+        title={language === 'hi' ? 'हरियाणा का प्राकृतिक खाद्य ब्रांड' : 'Natural Food Brand in Haryana'}
+        titleHindi="हरियाणा का प्राकृतिक खाद्य ब्रांड"
+        subtitle={language === 'hi' ? 'कैलराम, कैथल का प्राकृतिक भोजन' : 'Natural food from Kailram, Kaithal, Haryana'}
+        subtitleHindi="कैलराम, कैथल का प्राकृतिक भोजन"
+        bgImage="/images/website-header.png"
+        ctaText="View Products"
+        ctaTextHindi="उत्पाद देखें"
+        ctaHref="/products"
+        cta2Text="Read our story"
+        cta2TextHindi="हमारी कहानी पढ़ें"
+        cta2Href="/about"
+        showContact
+        language={language}
+      />
 
       {/* Logo Story */}
       <section className="logo-story section" aria-labelledby="logo-title">
         <div className="container">
           <SectionHeader
+            id="logo-title"
             title="Logo Story"
             titleHindi="Logo Story"
             titleEn="Logo Story"
@@ -214,26 +199,29 @@ function OurBrand() {
                   src="/images/website-logo.png"
                   alt="Kundu Naturals logo"
                   className="logo-main"
+                  width="400"
+                  height="400"
+                  loading="lazy"
                 />
               </div>
               <div className="logo-variants">
-                <h4 className="story-section-title">{language === 'hi' ? 'वेबसाइट पर लोगो का उपयोग' : 'Logo Across the Website'}</h4>
+                <h3 className="story-section-title">{language === 'hi' ? 'वेबसाइट पर लोगो का उपयोग' : 'Logo Across the Website'}</h3>
                 <div className="variant-row">
                   <div className="variant-item">
                     <div className="variant-preview primary">
-                      <img src="/images/website-logo.png" alt="" />
+                      <img src="/images/website-logo.png" alt="Kundu Naturals logo for the website header" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'हेडर' : 'Header'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview mono">
-                      <img src="/images/website-logo.png" alt="" />
+                      <img src="/images/website-logo.png" alt="Kundu Naturals logo for the website footer" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'फूटर' : 'Footer'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview icon">
-                      <img src="/images/website-logo.png" alt="" />
+                      <img src="/images/website-logo.png" alt="Kundu Naturals browser icon" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'ब्राउज़र टैब' : 'Browser tab'}</span>
                   </div>
@@ -271,6 +259,7 @@ function OurBrand() {
       {/* Color Palette */}
       <section className="color-palette section section-alt" aria-labelledby="colors-title">
         <div className="container">
+          <h2 id="colors-title" className="visually-hidden">Kundu Naturals brand color palette</h2>
           <motion.div
             className="colors-grid"
             aria-labelledby="colors-title"
@@ -293,10 +282,10 @@ function OurBrand() {
                   <span className="color-hex">{color.hex}</span>
                 </div>
                 <div className="color-info">
-                  <h4 className="color-name">
+                  <h3 className="color-name">
                     <span className="text-hindi">{color.nameHindi || color.name}</span>
                     <span className="text-latin">{color.nameEn || color.name}</span>
-                  </h4>
+                  </h3>
                   <span className="color-role">
                     <span className="text-hindi">{color.roleHindi || color.role}</span>
                     <span className="text-latin">{color.roleEn || color.role}</span>
@@ -354,6 +343,7 @@ function OurBrand() {
       <section className="brand-values section" aria-labelledby="values-title">
         <div className="container">
           <SectionHeader
+            id="values-title"
             title="Brand Values"
             titleHindi="Brand Values"
             titleEn="Brand Values"
@@ -376,10 +366,10 @@ function OurBrand() {
                 <div className="value-icon">
                   <value.icon width="28" height="28" aria-hidden="true" />
                 </div>
-                <h4 className="value-title">
+                <h3 className="value-title">
                   <span className="text-hindi">{value.titleHindi}</span>
                   <span className="text-latin">{value.titleEn}</span>
-                </h4>
+                </h3>
                 <p className="value-desc">
                   <span className="text-hindi">{value.descHindi}</span>
                   <span className="text-latin">{value.descEn}</span>
@@ -394,6 +384,7 @@ function OurBrand() {
       <section className="philosophy section section-alt" aria-labelledby="philosophy-title">
         <div className="container">
           <SectionHeader
+            id="philosophy-title"
             title="Our Philosophy"
             titleHindi="Our Philosophy"
             titleEn="Our Philosophy"
@@ -434,6 +425,7 @@ function OurBrand() {
       <section className="visual-practice section" aria-labelledby="visual-title">
         <div className="container">
           <SectionHeader
+            id="visual-title"
             title="Brand Identity in Practice"
             titleHindi="दैनिक जीवन में ब्रांड पहचान"
             titleEn="Brand Identity in Practice"
@@ -445,10 +437,10 @@ function OurBrand() {
             aria-labelledby="visual-title"
           >
             {[
-              { label: 'Product Packaging', labelEn: 'Product Packaging', image: '/images/brand/packaging-brand.jpg' },
-              { label: 'Farmer Handbook', labelEn: 'Farmer Handbook', image: '/images/brand/farmer-handbook.jpg' },
-              { label: 'Delivery Box', labelEn: 'Delivery Boxes', image: '/images/brand/delivery-box.jpg' },
-              { label: 'Shop Signage', labelEn: 'Shop Signage', image: '/images/brand/shop-signage.jpg' },
+              { label: 'Product Packaging', labelEn: 'Product Packaging', image: '/images/brand-placeholder.svg' },
+              { label: 'Farmer Handbook', labelEn: 'Farmer Handbook', image: '/images/brand-placeholder.svg' },
+              { label: 'Delivery Box', labelEn: 'Delivery Boxes', image: '/images/brand-placeholder.svg' },
+              { label: 'Shop Signage', labelEn: 'Shop Signage', image: '/images/brand-placeholder.svg' },
             ].map((item, index) => (
               <motion.div
                 key={item.label}
@@ -461,14 +453,16 @@ function OurBrand() {
                 <div className="practice-image-wrapper">
                   <img
                     src={item.image}
-                    alt={`${item.label} brand identity`}
+                    alt={`Illustration for Kundu Naturals ${item.label.toLowerCase()}`}
                     className="practice-image"
+                    width="640"
+                    height="480"
                     loading="lazy"
                     onError={(e) => { e.target.src = '/images/brand-placeholder.svg'; }}
                   />
                 </div>
                 <div className="practice-info">
-                  <h4>{language === 'hi' ? item.label : item.labelEn}</h4>
+                  <h3>{language === 'hi' ? item.label : item.labelEn}</h3>
                   <p>{language === 'hi' ? 'Consistent use of brand colors, logo and typography' : 'Consistent use of brand colors, logo and typography'}</p>
                 </div>
               </motion.div>

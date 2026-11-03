@@ -1,8 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { SITE_URL } from './src/seo/seoConfig.js';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'kundu-site-url',
+      transformIndexHtml(html) {
+        return html.replaceAll('__SITE_URL__', SITE_URL.replace(/\/+$/, ''));
+      },
+    },
+  ],
   esbuild: {
     loader: 'jsx',
     include: /src\/.*\.jsx?$/,

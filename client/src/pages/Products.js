@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter, ChevronDown, ChevronLeft, ChevronRight, LayoutGrid, List, Tag, Package, Wheat, Shield, Leaf } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
+import Breadcrumbs from '../components/Breadcrumbs';
 import ProductCard from '../components/ProductCard';
 import { fadeInUp, fadeInLeft, fadeInRight, scaleIn, staggerContainer, staggerItem, scrollReveal, scrollRevealLeft, scrollRevealRight, sectionHeaderVariants, gridStagger, cardHover, imageReveal, buttonHover, buttonHoverGold } from '../utils/animations';
 import './Products.css';
@@ -52,8 +54,8 @@ export const allProducts = productCatalog.map(([name, nameHindi, category, categ
   id: imageName.replace(/^\d+-kundu-naturals-/, ''),
   name,
   nameHindi,
-  description: 'Contact us for product details.',
-  descriptionHindi: 'उत्पाद की जानकारी के लिए संपर्क करें।',
+  description: `Explore ${name} from Kundu Naturals in Kailram, Kaithal, Haryana. Ask us about ingredients, pack sizes and availability.`,
+  descriptionHindi: `${nameHindi} के घटक, पैक आकार और उपलब्धता की जानकारी के लिए Kundu Naturals से संपर्क करें।`,
   image: `/images/Kundu-Naturals-All-Products/${imageName}.webp`,
   category,
   categoryHindi,
@@ -154,39 +156,26 @@ function Products() {
 
   return (
     <>
-      {/* Page Header */}
-      <section className="page-header" aria-labelledby="products-title">
-        <div className="page-header-bg" aria-hidden="true">
-          <img
-            src="/images/products-header.jpg"
-            alt=""
-            className="page-header-image"
-            onError={(e) => { e.target.style.display = 'none'; }}
-          />
-          <div className="page-header-overlay" />
-        </div>
-        <div className="container page-header-content">
-          <motion.h1
-            id="products-title"
-            className="page-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'सभी उत्पाद' : 'All Products'}</span>
-            <span className="text-latin">{language === 'en' ? 'All Products' : 'सभी उत्पाद'}</span>
-          </motion.h1>
-          <motion.p
-            className="page-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'किसानों के खेतों से सीधे' : 'Direct from farmers'}</span>
-            <span className="text-latin">{language === 'en' ? 'Direct from farmers' : 'किसानों के खेतों से सीधे'}</span>
-          </motion.p>
-        </div>
-      </section>
+      {/* Page Hero */}
+      <PageHero
+        title={language === 'hi' ? 'भारत में प्राकृतिक खाद्य उत्पाद' : 'Natural Food Products Online in India'}
+        titleHindi="भारत में प्राकृतिक खाद्य उत्पाद"
+        subtitle={language === 'hi' ? 'कैलराम, कैथल से प्राकृतिक खाद्य उत्पाद' : 'Natural food products from Kailram, Kaithal, Haryana'}
+        subtitleHindi="कैलराम, कैथल से प्राकृतिक खाद्य उत्पाद"
+        bgImage="/images/website-header.png"
+        ctaText="Shop Now"
+        ctaTextHindi="अभी खरीदें"
+        ctaHref="/products"
+        cta2Text="Our Story"
+        cta2TextHindi="हमारी कहानी"
+        cta2Href="/about"
+        showContact
+        language={language}
+      />
+      <Breadcrumbs items={[
+        { label: 'Home', path: '/' },
+        { label: 'Products', path: '/products' },
+      ]} />
 
       {/* Filters & Search */}
       <section className="products-toolbar" aria-label="Product filters and search">
@@ -404,6 +393,7 @@ function Products() {
             variants={sectionHeaderVariants}
           >
             <SectionHeader
+              id="cat-info-title"
               title="Product Categories"
               titleHindi="उत्पाद श्रेणियाँ"
               subtitle={language === 'hi' ? 'हमारी सभी श्रेणियाँ देखें' : 'View All Categories'}
@@ -468,6 +458,7 @@ function Products() {
             variants={sectionHeaderVariants}
           >
             <SectionHeader
+              id="quality-title"
               title="Quality Promise"
               titleHindi="गुणवत्ता का वादा"
               subtitle="Every product meets our highest standards"

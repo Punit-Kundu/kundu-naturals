@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -16,13 +16,13 @@ import {
   Package,
 } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
 import {
   staggerItem,
   scrollRevealLeft,
   scrollRevealRight,
   sectionHeaderVariants,
   gridStagger,
-  imageReveal,
   listStagger,
   buttonHover,
   buttonHoverGold,
@@ -268,46 +268,48 @@ const traditionalCards = [
 ];
 
 function About() {
+  const [language, setLanguage] = useState('en');
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      const saved = localStorage.getItem('kundu-language');
+      if (saved) setLanguage(saved);
+    };
+    syncLanguage();
+    window.addEventListener('languagechange', syncLanguage);
+    return () => window.removeEventListener('languagechange', syncLanguage);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.className = language === 'en' ? 'en' : 'hi';
+    localStorage.setItem('kundu-language', language);
+  }, [language]);
+
   return (
     <>
-      {/* Page Header */}
-      <section className="page-header" aria-labelledby="page-title">
-        <div className="page-header-bg" aria-hidden="true">
-          <img
-            src="/homepage hero section image.png"
-            alt=""
-            className="page-header-image"
-          />
-          <div className="page-header-overlay" />
-        </div>
-        <div className="container page-header-content">
-          <motion.h1
-            id="page-title"
-            className="page-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-hindi">हमारे बारे में</span>
-            <span className="text-latin">About Us</span>
-          </motion.h1>
-          <motion.p
-            className="page-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-hindi">शुद्ध भोजन • स्वस्थ जीवन</span>
-            <span className="text-latin">Pure Food • Healthy Life</span>
-          </motion.p>
-        </div>
-      </section>
+      {/* Page Hero */}
+      <PageHero
+        title={language === 'hi' ? 'कैलराम, कैथल का प्राकृतिक भोजन' : 'Natural Food from Kailram, Kaithal'}
+        titleHindi="कैलराम, कैथल का प्राकृतिक भोजन"
+        subtitle={language === 'hi' ? 'कैलराम, कैथल का प्राकृतिक खाद्य ब्रांड' : 'A natural food brand from Kailram, Kaithal, Haryana'}
+        subtitleHindi="कैलराम, कैथल का प्राकृतिक खाद्य ब्रांड"
+        bgImage="/homepage-hero.webp"
+        ctaText="View Products"
+        ctaTextHindi="उत्पाद देखें"
+        ctaHref="/products"
+        cta2Text="Contact Us"
+        cta2TextHindi="हमसे संपर्क करें"
+        cta2Href="/contact"
+        showContact
+        language={language}
+      />
 
       {/* Story Section */}
       <section className="story section" aria-labelledby="story-title">
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="story-title"
               title="Our Story"
               titleHindi="हमारी कहानी"
               subtitle="A journey from a small farm to thousands of families"
@@ -371,9 +373,15 @@ function About() {
             <motion.div className="story-image" variants={scrollRevealRight}>
               <motion.img
                 src="/images/footer-farm-strip.png"
-                alt="Kundu Naturals के खेत"
+                alt="Kundu Naturals natural food brand in Haryana"
                 className="story-main-image"
-                variants={imageReveal}
+                width="1200"
+                height="420"
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => { e.target.src = '/images/placeholder-farm.svg'; }}
               />
               <motion.div
                 className="story-badge"
@@ -407,6 +415,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="mv-title"
               title="Mission & Vision"
               titleHindi="मिशन और विजन"
               subtitle="Our purpose and direction"
@@ -448,6 +457,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="values-title"
               title="Our Core Values"
               titleHindi="हमारे मूल मूल्य"
               subtitle="What guides everything we do"
@@ -465,10 +475,10 @@ function About() {
                 <div className="value-icon">
                   <value.icon width="28" height="28" aria-hidden="true" />
                 </div>
-                <h4 className="value-title">
+                <h3 className="value-title">
                   <span className="text-hindi">{value.titleHindi}</span>
                   <span className="text-latin">{value.title}</span>
-                </h4>
+                </h3>
                 <p className="value-desc">
                   <span className="text-hindi">{value.descHindi}</span>
                   <span className="text-latin">{value.desc}</span>
@@ -484,6 +494,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="offer-title"
               title="What We Offer"
               titleHindi="हम क्या प्रदान करते हैं"
               subtitle="Everyday essentials, made the natural way"
@@ -501,8 +512,10 @@ function About() {
                 <div className="offer-image-wrapper">
                   <img
                     src={category.image}
-                    alt={category.title}
+                    alt={`${category.title} from Kundu Naturals`}
                     className="offer-image"
+                    width="640"
+                    height="480"
                     loading="lazy"
                   />
                 </div>
@@ -547,6 +560,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="journey-title"
               title="Our Journey"
               titleHindi="हमारी यात्रा"
               subtitle="Small steps towards a bigger purpose"
@@ -567,10 +581,10 @@ function About() {
                   </motion.span>
                 </div>
                 <div className="timeline-content">
-                  <h4 className="timeline-title">
+                  <h3 className="timeline-title">
                     <span className="text-hindi">{item.titleHindi}</span>
                     <span className="text-latin">{item.title}</span>
-                  </h4>
+                  </h3>
                   <p className="timeline-desc">
                     <span className="text-hindi">{item.descHindi}</span>
                     <span className="text-latin">{item.desc}</span>
@@ -587,6 +601,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="founders-title"
               title="Our Team"
               titleHindi="हमारी टीम"
               subtitle="The people behind Kundu Naturals"
@@ -601,6 +616,8 @@ function About() {
                     src={founder.image}
                     alt={founder.alt}
                     className="founder-image"
+                    width="640"
+                    height="640"
                     loading="lazy"
                   />
                 </div>
@@ -643,6 +660,7 @@ function About() {
         <div className="container">
           <motion.div className="section-header" variants={sectionHeaderVariants}>
             <SectionHeader
+              id="traditional-title"
               title="Rooted in Traditional Indian Food Culture"
               titleHindi="पारंपरिक भारतीय खाद्य संस्कृति से जुड़ाव"
               subtitle="Our roots, our identity"
@@ -660,10 +678,10 @@ function About() {
                 <div className="traditional-icon">
                   <card.icon width="32" height="32" aria-hidden="true" />
                 </div>
-                <h4 className="traditional-title">
+                <h3 className="traditional-title">
                   <span className="text-hindi">{card.titleHindi}</span>
                   <span className="text-latin">{card.title}</span>
-                </h4>
+                </h3>
                 <p className="traditional-desc">
                   <span className="text-hindi">{card.descHindi}</span>
                   <span className="text-latin">{card.desc}</span>

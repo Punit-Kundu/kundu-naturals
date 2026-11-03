@@ -8,6 +8,7 @@ function SectionHeader({
   subtitle,
   subtitleHindi,
   children,
+  id,
   className = '',
   alignment = 'center'
 }) {
@@ -22,7 +23,7 @@ function SectionHeader({
   aria-label={`${titleHindi || title}${title ? '/' + title : ''}`}
     >
       {children && <div className="section-header-badge">{children}</div>}
-      <h2 className="section-title">
+      <h2 id={id} className="section-title">
         <span className="text-hindi">{titleHindi || title}</span>
         <span className="text-latin">{title || titleHindi}</span>
       </h2>

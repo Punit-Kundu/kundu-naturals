@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Image, Filter, Grid, Loader2 } from 'lucide-react';
 import GalleryLightbox from '../components/GalleryLightbox';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
+import { allProducts } from './Products';
 import './Gallery.css';
 
 const galleryCategories = [
@@ -14,47 +16,51 @@ const galleryCategories = [
   { id: 'processing', name: 'Processing', nameEn: 'Processing' },
 ];
 
-// Sample gallery images - replace with actual images
 const galleryImages = [
-  // Products
-  { src: '/images/gallery/products-1.jpg', alt: 'Organic wheat flour', captionHindi: 'जैविक गेहूं का आटा', captionEn: 'Organic Wheat Flour', category: 'products' },
-  { src: '/images/gallery/products-2.jpg', alt: 'Organic basmati rice', captionHindi: 'जैविक बासमती चावल', captionEn: 'Organic Basmati Rice', category: 'products' },
-  { src: '/images/gallery/products-3.jpg', alt: 'Organic turmeric powder', captionHindi: 'जैविक हल्दी पाउडर', captionEn: 'Organic Turmeric Powder', category: 'products' },
-  { src: '/images/gallery/products-4.jpg', alt: 'Cold pressed mustard oil', captionHindi: 'कोल्ड प्रेस्ड सरसों तेल', captionEn: 'Cold Pressed Mustard Oil', category: 'products' },
-  { src: '/images/gallery/products-5.jpg', alt: 'Raw forest honey', captionHindi: 'कच्चा वन शहद', captionEn: 'Raw Forest Honey', category: 'products' },
-  { src: '/images/gallery/products-6.jpg', alt: 'Organic moong dal', captionHindi: 'जैविक मूंग दाल', captionEn: 'Organic Moong Dal', category: 'products' },
-
-  // Farm
-  { src: '/images/gallery/farm-1.jpg', alt: 'Organic farms', captionHindi: 'हमारे जैविक खेत', captionEn: 'Our Organic Farms', category: 'farm' },
-  { src: '/images/gallery/farm-2.jpg', alt: 'Wheat crop', captionHindi: 'गेहूं की फसल', captionEn: 'Wheat Crop', category: 'farm' },
-  { src: '/images/gallery/farm-3.jpg', alt: 'Mustard fields', captionHindi: 'सरसों के पीले खेत', captionEn: 'Mustard Fields', category: 'farm' },
-  { src: '/images/gallery/farm-4.jpg', alt: 'Farmer working', captionHindi: 'किसान परिवार खेत में', captionEn: 'Farmer Families at Work', category: 'farm' },
-  { src: '/images/gallery/farm-5.jpg', alt: 'Organic manure', captionHindi: 'जैविक खाद', captionEn: 'Organic Manure', category: 'farm' },
-  { src: '/images/gallery/farm-6.jpg', alt: 'Traditional irrigation', captionHindi: 'पारंपरिक सिंचाई विधि', captionEn: 'Traditional Irrigation', category: 'farm' },
-
-  // Packaging
-  { src: '/images/gallery/packaging-1.jpg', alt: 'Product packaging', captionHindi: 'पर्यावरण-अनुकूल पैकेजिंग', captionEn: 'Eco-friendly Packaging', category: 'packaging' },
-  { src: '/images/gallery/packaging-2.jpg', alt: 'Packaging process', captionHindi: 'हाथों से पैकिंग', captionEn: 'Hand Packing Process', category: 'packaging' },
-  { src: '/images/gallery/packaging-3.jpg', alt: 'Product in jute bag', captionHindi: 'जूट बैग में उत्पाद', captionEn: 'Traditional Jute Bags', category: 'packaging' },
-  { src: '/images/gallery/packaging-4.jpg', alt: 'Honey in glass jars', captionHindi: 'शहद के कांच के जार', captionEn: 'Honey in Glass Jars', category: 'packaging' },
-  { src: '/images/gallery/packaging-5.jpg', alt: 'Oil bottles', captionHindi: 'तेल की बोतलें', captionEn: 'Oil Bottle Packaging', category: 'packaging' },
-  { src: '/images/gallery/packaging-6.jpg', alt: 'Gift pack', captionHindi: 'त्योहारों के लिए उपहार पैक', captionEn: 'Festival Gift Packs', category: 'packaging' },
-
-  // Team
-  { src: '/images/gallery/team-1.jpg', alt: 'Ramesh Kundu', captionHindi: 'श्री रमेश कुंडू', captionEn: 'Mr. Ramesh Kundu', category: 'team' },
-  { src: '/images/gallery/team-2.jpg', alt: 'Punit Kundu', captionHindi: 'पुनीत कुंडू', captionEn: 'Punit Kundu', category: 'team' },
-  { src: '/images/gallery/team-3.jpg', alt: 'Team with farmers', captionHindi: 'किसान परिवारों के साथ', captionEn: 'With Farmer Families', category: 'team' },
-  { src: '/images/gallery/team-4.jpg', alt: 'Quality check team', captionHindi: 'गुणवत्ता जांच टीम', captionEn: 'Quality Check Team', category: 'team' },
-  { src: '/images/gallery/team-5.jpg', alt: 'Packaging team', captionHindi: 'पैकेजिंग और डिस्पैच टीम', captionEn: 'Packaging & Dispatch Team', category: 'team' },
-  { src: '/images/gallery/team-6.jpg', alt: 'Office team', captionHindi: 'कार्यालय और ग्राहक सेवा टीम', captionEn: 'Office & Customer Service Team', category: 'team' },
-
-  // Processing
-  { src: '/images/gallery/processing-1.jpg', alt: 'Stone mill', captionHindi: 'पत्थर की चक्की', captionEn: 'Traditional Stone Mill', category: 'processing' },
-  { src: '/images/gallery/processing-2.jpg', alt: 'Kachi ghani', captionHindi: 'सरसों तेल के लिए कच्ची घानी', captionEn: 'Kachi Ghani for Mustard Oil', category: 'processing' },
-  { src: '/images/gallery/processing-3.jpg', alt: 'Sun drying', captionHindi: 'प्राकृतिक धूप में सुखाना', captionEn: 'Natural Sun Drying', category: 'processing' },
-  { src: '/images/gallery/processing-4.jpg', alt: 'Hand sorting', captionHindi: 'हाथों से दानों की छंटाई', captionEn: 'Hand Sorting of Grains', category: 'processing' },
-  { src: '/images/gallery/processing-5.jpg', alt: 'Spice grinding', captionHindi: 'पत्थर पर मसाला पीसना', captionEn: 'Stone Grinding Spices', category: 'processing' },
-  { src: '/images/gallery/processing-6.jpg', alt: 'Honey extraction', captionHindi: 'मधुमक्खी पालन और शहद निकालना', captionEn: 'Beekeeping & Honey Extraction', category: 'processing' },
+  ...allProducts.slice(0, 6).map((product) => ({
+    src: product.image,
+    alt: `${product.name} from Kundu Naturals`,
+    captionHindi: product.nameHindi,
+    captionEn: product.name,
+    category: 'products',
+  })),
+  ...['farm', 'packaging'].flatMap((category) => (
+    Array.from({ length: 6 }, (_, index) => ({
+      src: '/images/gallery-placeholder.svg',
+      alt: `Kundu Naturals ${category} gallery image placeholder`,
+      captionHindi: `${category === 'farm' ? 'खेत' : 'पैकेजिंग'} गैलरी छवि ${index + 1}`,
+      captionEn: `${category[0].toUpperCase()}${category.slice(1)} gallery image ${index + 1}`,
+      category,
+    }))
+  )),
+  {
+    src: '/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png',
+    alt: 'Ramesh Kundu, owner of Kundu Naturals',
+    captionHindi: 'रमेश कुंडू, Kundu Naturals के मालिक',
+    captionEn: 'Ramesh Kundu, owner of Kundu Naturals',
+    category: 'team',
+  },
+  {
+    src: '/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png',
+    alt: 'Punit Kundu, business manager at Kundu Naturals',
+    captionHindi: 'पुनीत कुंडू, Kundu Naturals के बिज़नेस मैनेजर',
+    captionEn: 'Punit Kundu, business manager at Kundu Naturals',
+    category: 'team',
+  },
+  ...Array.from({ length: 4 }, (_, index) => ({
+    src: '/images/gallery-placeholder.svg',
+    alt: `Kundu Naturals team gallery image placeholder ${index + 1}`,
+    captionHindi: `टीम गैलरी छवि ${index + 1}`,
+    captionEn: `Team gallery image placeholder ${index + 1}`,
+    category: 'team',
+  })),
+  ...Array.from({ length: 6 }, (_, index) => ({
+    src: '/images/gallery-placeholder.svg',
+    alt: `Kundu Naturals food processing gallery image placeholder`,
+    captionHindi: `प्रसंस्करण गैलरी छवि ${index + 1}`,
+    captionEn: `Processing gallery image ${index + 1}`,
+    category: 'processing',
+  })),
 ];
 
 function Gallery() {
@@ -97,39 +103,22 @@ function Gallery() {
 
   return (
     <>
-      {/* Page Header */}
-      <section className="page-header" aria-labelledby="gallery-title">
-        <div className="page-header-bg" aria-hidden="true">
-          <img
-            src="/images/gallery-header.jpg"
-            alt=""
-            className="page-header-image"
-            onError={(e) => { e.target.style.display = 'none'; }}
-          />
-          <div className="page-header-overlay" />
-        </div>
-        <div className="container page-header-content">
-          <motion.h1
-            id="gallery-title"
-            className="page-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'हमारी गैलरी' : 'Our Gallery'}</span>
-            <span className="text-latin">{language === 'en' ? 'Our Gallery' : 'हमारी गैलरी'}</span>
-          </motion.h1>
-          <motion.p
-            className="page-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-hindi">{language === 'hi' ? 'फसल से लेकर आपके घर तक' : 'From farms to your home'}</span>
-            <span className="text-latin">{language === 'en' ? 'From farms to your home' : 'फसल से लेकर आपके घर तक'}</span>
-          </motion.p>
-        </div>
-      </section>
+      {/* Page Hero */}
+      <PageHero
+        title={language === 'hi' ? 'हरियाणा के प्राकृतिक भोजन की गैलरी' : 'Natural Food Gallery in Haryana'}
+        titleHindi="हरियाणा के प्राकृतिक भोजन की गैलरी"
+        subtitle={language === 'hi' ? 'कैथल, हरियाणा के खाद्य उत्पाद और टीम' : 'Food products and team from Kaithal, Haryana'}
+        subtitleHindi="कैथल, हरियाणा के खाद्य उत्पाद और टीम"
+        bgImage="/images/website-header.png"
+        ctaText="Shop Now"
+        ctaTextHindi="अभी खरीदें"
+        ctaHref="/products"
+        cta2Text="Our Story"
+        cta2TextHindi="हमारी कहानी"
+        cta2Href="/about"
+        showContact
+        language={language}
+      />
 
       {/* Category Filter */}
       <section className="gallery-filter" aria-label="Gallery category filter">
@@ -140,7 +129,7 @@ function Gallery() {
                 key={cat.id}
                 role="tab"
                 aria-selected={activeCategory === cat.id}
-                aria-controls={`${cat.id}-gallery-panel`}
+                aria-controls="gallery-grid-panel"
                 id={`${cat.id}-gallery-tab`}
                 className={`filter-tab ${activeCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat.id)}
@@ -156,8 +145,13 @@ function Gallery() {
       </section>
 
       {/* Gallery Grid */}
-      <section className="gallery-section section" aria-labelledby="gallery-grid-title">
+      <section
+        id="gallery-grid-panel"
+        className="gallery-section section"
+        aria-labelledby="gallery-grid-title"
+      >
         <div className="container">
+          <h2 id="gallery-grid-title" className="visually-hidden">Kundu Naturals products and team</h2>
           <motion.div
             className="gallery-grid"
             role="list"
@@ -165,7 +159,7 @@ function Gallery() {
           >
             {filteredImages.map((image, index) => (
               <motion.article
-                key={image.src}
+                key={`${image.src}-${index}`}
                 role="listitem"
                 className="gallery-item"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -180,6 +174,8 @@ function Gallery() {
                       src={image.src}
                       alt={image.alt}
                       className="gallery-image"
+                      width="640"
+                      height="480"
                       loading="lazy"
                       onLoad={() => handleImageLoad(index)}
                       onError={(e) => {
@@ -211,6 +207,7 @@ function Gallery() {
       <section className="gallery-stats section section-alt" aria-labelledby="stats-title">
         <div className="container">
           <SectionHeader
+            id="stats-title"
             title="Gallery at a Glance"
             titleHindi="गैलरी एक नज़र में"
             subtitleHindi="हमारी तस्वीरों की संख्या"

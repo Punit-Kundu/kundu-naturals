@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, MessageCircle, Package } from 'lucide-react';
 import { allProducts } from './Products';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './ProductDetails.css';
 
@@ -9,15 +10,6 @@ function ProductDetails() {
   const { id } = useParams();
   const product = allProducts.find((item) => item.id === id);
   const businessInfo = useBusinessInfo();
-
-  useEffect(() => {
-    if (!product) return undefined;
-    const previousTitle = document.title;
-    document.title = `${product.name} | Kundu Naturals`;
-    return () => {
-      document.title = previousTitle;
-    };
-  }, [product]);
 
   if (!product) {
     return <Navigate to="/products" replace />;
@@ -31,6 +23,11 @@ function ProductDetails() {
 
   return (
     <section className="product-detail-page section" aria-labelledby="product-detail-title">
+      <Breadcrumbs items={[
+        { label: 'Home', path: '/' },
+        { label: 'Products', path: '/products' },
+        { label: product.name, path: `/products/${product.id}` },
+      ]} />
       <div className="container">
         <Link to="/products" className="product-detail-back">
           <ArrowLeft width="18" height="18" aria-hidden="true" />
@@ -42,7 +39,10 @@ function ProductDetails() {
           <div className="product-detail-image">
             <img
               src={product.image || '/images/product-placeholder.svg'}
-              alt={product.name}
+              alt={`${product.name} from Kundu Naturals`}
+              width="640"
+              height="640"
+              fetchPriority="high"
               onError={(event) => { event.currentTarget.src = '/images/product-placeholder.svg'; }}
             />
           </div>

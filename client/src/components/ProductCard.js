@@ -28,17 +28,12 @@ function ProductCard({ product, variant = 'default' }) {
   const displayName = nameHindi || name;
   const displayDescription = descriptionHindi || description;
   const displayCategory = categoryHindi || category;
-
-  const handleWhatsAppOrder = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const digits = String(businessInfo.whatsapp || '').replace(/\D/g, '');
-    const phoneNumber = digits.startsWith('91') ? digits : `91${digits}`;
-    const message = encodeURIComponent(
-      `नमस्ते! मुझे "${displayName}" में दिलचस्पी है। कृपया कीमत और उपलब्धता की जानकारी दें।`
-    );
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-  };
+  const whatsappDigits = String(businessInfo.whatsapp || '').replace(/\D/g, '');
+  const whatsappNumber = whatsappDigits.startsWith('91') ? whatsappDigits : `91${whatsappDigits}`;
+  const enquiryMessage = encodeURIComponent(
+    `नमस्ते! मुझे "${displayName}" में दिलचस्पी है। कृपया कीमत और उपलब्धता की जानकारी दें।`
+  );
+  const whatsappOrderUrl = `https://wa.me/${whatsappNumber}?text=${enquiryMessage}`;
 
   if (variant === 'compact') {
     return (
@@ -47,8 +42,10 @@ function ProductCard({ product, variant = 'default' }) {
           <div className="product-image-wrapper">
             <img
               src={image || '/images/product-placeholder.svg'}
-              alt={displayName}
+              alt={`${name} from Kundu Naturals (${displayName})`}
               className="product-image"
+              width="640"
+              height="640"
               loading="lazy"
               onError={(e) => { e.target.src = '/images/product-placeholder.svg'; }}
             />
@@ -84,17 +81,19 @@ function ProductCard({ product, variant = 'default' }) {
           </div>
         </Link>
         <div className="product-actions">
-          <button
+          <a
             className="btn btn-outline btn-sm product-action-btn"
-            onClick={handleWhatsAppOrder}
-            aria-label={`${displayName} के लिए व्हाट्सऐप पर ऑर्डर करें`}
+            href={whatsappOrderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Order ${name} from Kundu Naturals on WhatsApp`}
           >
             <MessageCircle width="16" height="16" aria-hidden="true" />
             <span>
             <span className="text-hindi">ऑर्डर करें</span>
             <span className="text-latin">Order Now</span>
           </span>
-          </button>
+          </a>
         </div>
       </article>
     );
@@ -106,8 +105,10 @@ function ProductCard({ product, variant = 'default' }) {
         <div className="product-image-wrapper">
           <img
             src={image || '/images/product-placeholder.svg'}
-            alt={displayName}
+            alt={`${name} from Kundu Naturals (${displayName})`}
             className="product-image"
+            width="640"
+            height="640"
             loading="lazy"
             onError={(e) => { e.target.src = '/images/product-placeholder.svg'; }}
           />
@@ -168,18 +169,33 @@ function ProductCard({ product, variant = 'default' }) {
         </div>
       </Link>
       <div className="product-actions">
-        <button
-          className="btn btn-primary product-action-btn"
-          onClick={handleWhatsAppOrder}
-          aria-label={`${displayName} के लिए व्हाट्सऐप पर पूछताछ करें`}
-          disabled={!inStock}
-        >
-          <MessageCircle width="18" height="18" aria-hidden="true" />
-          <span>
-            <span className="text-hindi">पूछताछ / ऑर्डर</span>
-            <span className="text-latin">Enquire / Order</span>
-          </span>
-        </button>
+        {inStock ? (
+          <a
+            className="btn btn-primary product-action-btn"
+            href={whatsappOrderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Enquire about ${name} from Kundu Naturals on WhatsApp`}
+          >
+            <MessageCircle width="18" height="18" aria-hidden="true" />
+            <span>
+              <span className="text-hindi">पूछताछ / ऑर्डर</span>
+              <span className="text-latin">Enquire / Order</span>
+            </span>
+          </a>
+        ) : (
+          <button
+            className="btn btn-primary product-action-btn"
+            aria-label={`${name} is unavailable`}
+            disabled
+          >
+            <MessageCircle width="18" height="18" aria-hidden="true" />
+            <span>
+              <span className="text-hindi">पूछताछ / ऑर्डर</span>
+              <span className="text-latin">Enquire / Order</span>
+            </span>
+          </button>
+        )}
         <Link
           to={`/products/${id}`}
           className="btn btn-outline btn-sm product-detail-btn"

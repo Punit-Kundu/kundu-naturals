@@ -501,7 +501,7 @@
   justify-content: center;
 }
 
-.practice-info h4 {
+.practice-info h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-dark-text);

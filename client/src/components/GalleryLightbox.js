@@ -126,6 +126,8 @@ function GalleryLightbox({ isOpen, onClose, images, initialIndex = 0 }) {
               src={currentImage.src}
               alt={currentImage.alt || ''}
               className="lightbox-image"
+              width="1280"
+              height="960"
               onLoad={() => {}}
             />
           </motion.div>

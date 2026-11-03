@@ -139,6 +139,13 @@ Add to `client/public/images/gallery/`:
 
 ## ⚙️ Configuration
 
+### SEO Canonical URL
+
+The canonical site URL is configured in `client/src/seo/seoConfig.js`. It currently uses
+the verified Vercel domain (`https://kundu-naturals.vercel.app`); update `SITE_URL` there
+if the site moves to a custom domain. The production build regenerates the sitemap and
+`robots.txt` from this value.
+
 ### Environment Variables
 
 Copy `.env.example` to `.env` in the root directory:

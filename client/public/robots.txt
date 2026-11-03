@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://kundu-naturals.vercel.app/sitemap.xml

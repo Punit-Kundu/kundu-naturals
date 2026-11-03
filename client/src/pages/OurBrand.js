@@ -163,7 +163,7 @@ function OurBrand() {
         titleHindi="हरियाणा का प्राकृतिक खाद्य ब्रांड"
         subtitle={language === 'hi' ? 'कैलराम, कैथल का प्राकृतिक भोजन' : 'Natural food from Kailram, Kaithal, Haryana'}
         subtitleHindi="कैलराम, कैथल का प्राकृतिक भोजन"
-        bgImage="/images/website-header.png"
+        bgImage="/images/website-header.webp"
         ctaText="View Products"
         ctaTextHindi="उत्पाद देखें"
         ctaHref="/products"
@@ -196,7 +196,7 @@ function OurBrand() {
             >
               <div className="logo-showcase">
                 <img
-                  src="/images/website-logo.png"
+                  src="/images/website-logo.webp"
                   alt="Kundu Naturals logo"
                   className="logo-main"
                   width="400"
@@ -209,19 +209,19 @@ function OurBrand() {
                 <div className="variant-row">
                   <div className="variant-item">
                     <div className="variant-preview primary">
-                      <img src="/images/website-logo.png" alt="Kundu Naturals logo for the website header" width="100" height="100" loading="lazy" />
+                      <img src="/images/website-logo.webp" alt="Kundu Naturals logo for the website header" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'हेडर' : 'Header'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview mono">
-                      <img src="/images/website-logo.png" alt="Kundu Naturals logo for the website footer" width="100" height="100" loading="lazy" />
+                      <img src="/images/website-logo.webp" alt="Kundu Naturals logo for the website footer" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'फूटर' : 'Footer'}</span>
                   </div>
                   <div className="variant-item">
                     <div className="variant-preview icon">
-                      <img src="/images/website-logo.png" alt="Kundu Naturals browser icon" width="100" height="100" loading="lazy" />
+                      <img src="/images/website-logo.webp" alt="Kundu Naturals browser icon" width="100" height="100" loading="lazy" />
                     </div>
                     <span>{language === 'hi' ? 'ब्राउज़र टैब' : 'Browser tab'}</span>
                   </div>

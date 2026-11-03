@@ -148,7 +148,7 @@ const founders = [
     nameHindi: 'श्री रमेश कुंडू',
     role: 'Brand Owner',
     roleHindi: 'ब्रांड स्वामी',
-    image: '/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png',
+    image: '/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.webp',
     alt: 'Ramesh Kundu, Brand Owner at Kundu Naturals',
     bio: 'With more than 15 years of experience in agriculture, he is the guardian of our traditional farming methods. His life is dedicated to farmer welfare, soil health and pure food.',
     bioHindi: 'कृषि में 15 से अधिक वर्षों के अनुभव के साथ, वे हमारी पारंपरिक खेती पद्धतियों के संरक्षक हैं। उनका जीवन किसानों के कल्याण, मिट्टी की सेहत और शुद्ध भोजन के लिए समर्पित है।',
@@ -168,7 +168,7 @@ const founders = [
     nameHindi: 'पुनीत कुंडू',
     role: 'Business Manager',
     roleHindi: 'व्यवसाय प्रबंधक',
-    image: '/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png',
+    image: '/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.webp',
     alt: 'Punit Kundu, Business Manager at Kundu Naturals',
     bio: 'He connects traditional values with a young perspective and modern technology. He leads digital reach, quality assurance, supply chain management and customer experience.',
     bioHindi: 'वे पारंपरिक मूल्यों को युवा दृष्टिकोण और आधुनिक तकनीक से जोड़ते हैं। वे डिजिटल पहुंच, गुणवत्ता आश्वासन, सप्लाई चेन और ग्राहक अनुभव का नेतृत्व करते हैं।',
@@ -372,7 +372,7 @@ function About() {
             </motion.div>
             <motion.div className="story-image" variants={scrollRevealRight}>
               <motion.img
-                src="/images/footer-farm-strip.png"
+                src="/images/footer-farm-strip.webp"
                 alt="Kundu Naturals natural food brand in Haryana"
                 className="story-main-image"
                 width="1200"

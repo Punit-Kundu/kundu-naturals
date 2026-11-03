@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, MessageCircle, Package } from 'lucide-react';
-import { allProducts } from './Products';
+import { allProducts } from '../data/products';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './ProductDetails.css';

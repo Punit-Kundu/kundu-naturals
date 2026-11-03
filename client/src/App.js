@@ -4,18 +4,19 @@ import Layout from './components/Layout';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import PageSEO from './components/PageSEO';
-import Home from './pages/Home';
-import About from './pages/About';
-import Products from './pages/Products';
-import ProductDetails from './pages/ProductDetails';
-import Gallery from './pages/Gallery';
-import OurBrand from './pages/OurBrand';
-import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactButtons from './components/FloatingContactButtons';
 import WebsiteChatbot from './components/WebsiteChatbot';
-import NotFound from './pages/NotFound';
 import { BusinessInfoProvider } from './context/BusinessInfoContext';
+import Home from './pages/Home';
+
+const About = React.lazy(() => import('./pages/About'));
+const Products = React.lazy(() => import('./pages/Products'));
+const ProductDetails = React.lazy(() => import('./pages/ProductDetails'));
+const Gallery = React.lazy(() => import('./pages/Gallery'));
+const OurBrand = React.lazy(() => import('./pages/OurBrand'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -25,16 +26,18 @@ function App() {
         <PageSEO />
         <Header />
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetails />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/our-brand" element={<OurBrand />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <React.Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/our-brand" element={<OurBrand />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </React.Suspense>
         </Layout>
         <Footer />
         <FloatingContactButtons />

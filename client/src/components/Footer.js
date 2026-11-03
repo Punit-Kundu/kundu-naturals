@@ -154,7 +154,7 @@ function Footer() {
       <footer className="site-footer" role="contentinfo">
         {/* ---- farm photo band (crisp, no blur) ---- */}
         <div className="footer-strip" aria-hidden="true">
-          <img src="/images/footer-farm-strip.png" alt="" className="footer-strip-img" width="1920" height="320" loading="lazy" decoding="async" />
+          <img src="/images/footer-farm-strip.webp" alt="" className="footer-strip-img" width="1920" height="320" loading="lazy" decoding="async" />
           <span className="footer-strip-fade" />
         </div>
 
@@ -172,7 +172,7 @@ function Footer() {
             >
               <Link to="/" className="footer-logo" aria-label="Kundu Naturals - Home">
                 <img
-                  src="/images/website-logo.png"
+                  src="/images/website-logo.webp"
                   alt="Kundu Naturals"
                   className="footer-logo-mark"
                   width="100"

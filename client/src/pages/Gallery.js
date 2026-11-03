@@ -4,7 +4,7 @@ import { Image, Filter, Grid, Loader2 } from 'lucide-react';
 import GalleryLightbox from '../components/GalleryLightbox';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
-import { allProducts } from './Products';
+import { allProducts } from '../data/products';
 import './Gallery.css';
 
 const galleryCategories = [
@@ -34,14 +34,14 @@ const galleryImages = [
     }))
   )),
   {
-    src: '/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png',
+    src: '/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.webp',
     alt: 'Ramesh Kundu, owner of Kundu Naturals',
     captionHindi: 'रमेश कुंडू, Kundu Naturals के मालिक',
     captionEn: 'Ramesh Kundu, owner of Kundu Naturals',
     category: 'team',
   },
   {
-    src: '/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png',
+    src: '/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.webp',
     alt: 'Punit Kundu, business manager at Kundu Naturals',
     captionHindi: 'पुनीत कुंडू, Kundu Naturals के बिज़नेस मैनेजर',
     captionEn: 'Punit Kundu, business manager at Kundu Naturals',
@@ -109,7 +109,7 @@ function Gallery() {
         titleHindi="हरियाणा के प्राकृतिक भोजन की गैलरी"
         subtitle={language === 'hi' ? 'कैथल, हरियाणा के खाद्य उत्पाद और टीम' : 'Food products and team from Kaithal, Haryana'}
         subtitleHindi="कैथल, हरियाणा के खाद्य उत्पाद और टीम"
-        bgImage="/images/website-header.png"
+        bgImage="/images/website-header.webp"
         ctaText="Shop Now"
         ctaTextHindi="अभी खरीदें"
         ctaHref="/products"

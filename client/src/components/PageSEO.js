@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { allProducts } from '../pages/Products';
+import { allProducts } from '../data/products';
 import {
   absoluteUrl,
   CONTACT_FAQS,

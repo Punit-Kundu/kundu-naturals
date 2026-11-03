@@ -33,7 +33,7 @@ const PageHero = ({
     <section className="page-hero" aria-labelledby="page-hero-title">
       <div className="page-hero-bg">
         <motion.img
-          src={bgImage || '/images/website-header.png'}
+          src={bgImage || '/images/website-header.webp'}
           alt="Natural food products from Kundu Naturals in Haryana"
           className="page-hero-bg-img"
           width="1983"
@@ -44,7 +44,7 @@ const PageHero = ({
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          onError={(e) => { e.target.src = '/homepage-hero.webp'; }}
+          onError={(e) => { e.currentTarget.src = '/homepage-hero.webp'; }}
         />
         <div className="page-hero-overlay" />
         <div className="page-hero-glow" />

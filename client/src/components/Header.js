@@ -109,11 +109,13 @@ function Header() {
         <div className="container header-nav-content">
           <Link to="/" className="header-logo" aria-label="Kundu Naturals - Home">
             <img
-              src="/images/website-logo.png"
+              src="/images/website-logo.webp"
               alt="Kundu Naturals Logo"
               className="logo-image"
               width="100"
               height="100"
+              fetchPriority="high"
+              decoding="async"
             />
           </Link>
 

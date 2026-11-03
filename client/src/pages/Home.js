@@ -688,7 +688,7 @@ function Home() {
             >
               <div className="image-stack">
                 <motion.img
-                  src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
+                  src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.webp"
                   alt="रमेश कुंडू - कुंडू नेचुरल्स के ब्रांड ओनर"
                   className="main-image"
                   width="640"
@@ -700,7 +700,7 @@ function Home() {
                   onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
                 />
                 <motion.img
-                  src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
+                  src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.webp"
                   alt="पुनीत कुंडू - कुंडू नेचुरल्स के बिज़नेस मैनेजर"
                   className="overlay-image"
                   width="640"
@@ -1015,7 +1015,7 @@ function Home() {
           >
             <div className="founder-image-wrapper">
               <motion.img
-                src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.png"
+                src="/images/Kundu-Naturals-Team-Photos/ramesh-kundu-brand-owner.webp"
                 alt="रमेश कुंडू - ब्रांड ओनर"
                 className="founder-image"
                 width="640"
@@ -1075,7 +1075,7 @@ function Home() {
           >
             <div className="founder-image-wrapper">
               <motion.img
-                src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.png"
+                src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.webp"
                 alt="पुनीत कुंडू - बिज़नेस मैनेजर"
                 className="founder-image"
                 width="640"

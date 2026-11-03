@@ -112,7 +112,7 @@ function Contact() {
         titleHindi="कैथल के प्राकृतिक खाद्य ब्रांड से संपर्क करें"
         subtitle={language === 'hi' ? 'कैलराम, कैथल में उत्पादों और ऑर्डर के लिए संपर्क करें' : 'Contact us in Kailram, Kaithal for product details and orders'}
         subtitleHindi="कैलराम, कैथल में उत्पादों और ऑर्डर के लिए संपर्क करें"
-        bgImage="/images/website-header.png"
+        bgImage="/images/website-header.webp"
         ctaText="Shop Now"
         ctaTextHindi="अभी खरीदें"
         ctaHref="/products"

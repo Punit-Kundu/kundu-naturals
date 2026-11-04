@@ -42,7 +42,7 @@ function ProductDetails() {
               alt={`${product.name} from Kundu Naturals`}
               width="640"
               height="640"
-              fetchPriority="high"
+              fetchpriority="high"
               onError={(event) => { event.currentTarget.src = '/images/product-placeholder.svg'; }}
             />
           </div>

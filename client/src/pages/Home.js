@@ -254,7 +254,7 @@ function Home() {
             width="1536"
             height="639"
             loading="eager"
-            fetchPriority="high"
+            fetchpriority="high"
             decoding="async"
           />
           <div className="kn-hero-overlay" />
@@ -936,8 +936,7 @@ function Home() {
                 whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(48, 32, 24, 0.15)', transition: { duration: 0.3 } }}
               >
                 <div className="gallery-preview-image-wrapper">
-                  <div className="gallery-image-skeleton">
-                    <motion.img
+                  <motion.img
                       src={item.src}
                       alt={item.alt}
                       className="gallery-preview-image"
@@ -948,7 +947,6 @@ function Home() {
                       transition={{ duration: 0.6 }}
                       onError={(e) => { e.target.src = '/images/gallery-placeholder.svg'; }}
                     />
-                  </div>
                   <motion.div 
                     className="gallery-overlay"
                     initial={{ opacity: 0 }}

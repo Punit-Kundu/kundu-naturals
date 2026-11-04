@@ -392,13 +392,18 @@ html.hi .made-with { letter-spacing: 0; }
   .footer-features { grid-template-columns: repeat(2, 1fr); row-gap: 1.5rem; }
 }
 
-@media (max-width: 640px) {
-  .footer-strip { height: 120px; }
+@media (max-width: 768px) {
   .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
   .footer-features { grid-template-columns: 1fr; }
-  .footer-logo-mark { width: 72px; height: 72px; }
-  .footer-social-link { width: 42px; height: 42px; }
-  .footer-bottom-content { flex-direction: column; }
+  .footer-strip { height: clamp(100px, 14vw, 160px); }
+}
+
+@media (max-width: 480px) {
+  .footer-grid { gap: 1.5rem; }
+  .footer-features { gap: 1.25rem; }
+  .footer-logo-mark { width: 64px; height: 64px; }
+  .footer-social-link { width: 40px; height: 40px; }
+  .footer-bottom-content { flex-direction: column; gap: 0.5rem; }
 }
 
 /* --------------------------------------------- REDUCED MOTION */

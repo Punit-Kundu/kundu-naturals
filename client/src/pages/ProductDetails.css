@@ -113,12 +113,25 @@
   margin-top: var(--space-sm);
 }
 
+@media (max-width: 1024px) {
+  .product-detail-image {
+    max-height: 480px;
+  }
+}
+
 @media (max-width: 768px) {
   .product-detail {
     grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
 
   .product-detail-image {
     max-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail-image {
+    max-height: 320px;
   }
 }

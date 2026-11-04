@@ -109,6 +109,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-total-height);
   font-size: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -129,6 +131,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
 }
 
 main,
@@ -150,12 +155,14 @@ li,
 address,
 blockquote {
   overflow-wrap: anywhere;
+  font-size: clamp(0.9375rem, 2.4vw, 1rem);
 }
 
 iframe,
 video,
 canvas {
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -186,7 +193,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 1.3;
   color: var(--color-primary-text);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
 }
+
+h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); }
+h2 { font-size: clamp(2rem, 5vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* ========================================
    TYPOGRAPHY
@@ -266,7 +279,7 @@ html.hi .text-latin { display: none; }
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  padding-inline: var(--container-padding);
 }
 
 .section {
@@ -275,6 +288,10 @@ html.hi .text-latin { display: none; }
 
 @media (max-width: 768px) {
   .section { padding: clamp(2.5rem, 7vw, 3.5rem) 0; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 40px 16px; }
 }
 
 @media (max-width: 640px) {
@@ -327,11 +344,29 @@ html.hi .text-latin { display: none; }
   transition: all var(--transition-normal);
   white-space: nowrap;
   letter-spacing: 0.01em;
+  min-width: 44px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    padding: 12px 20px;
+    min-height: 48px;
+  }
+
+  .btn .btn-label,
+  .btn span {
+    white-space: normal;
+  }
 }
 
 .btn-primary {

@@ -889,7 +889,7 @@
     z-index: 1001;
     display: block;
     width: 100%;
-    height: calc(100vh - 78px);
+    height: calc(100dvh - 78px);
     padding: 0;
     background: rgba(8, 29, 14, 0.52);
     border: 0;
@@ -967,13 +967,14 @@
   }
 
   .header-logo {
-    width: 58px;
-    height: 58px;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
   }
 
   .logo-image {
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 40px;
   }
 
   .header-actions {
@@ -1016,7 +1017,7 @@
 
   .mobile-menu-backdrop {
     inset: 70px 0 0;
-    height: calc(100vh - 70px);
+    height: calc(100dvh - 70px);
   }
 }
 
@@ -1044,6 +1045,120 @@
   .header-cta-icon {
     width: 32px;
     height: 32px;
+  }
+}
+
+/* ---------- Mobile nav drawer: full-width, 48px+ links, no cut-off ---------- */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1002;
+    display: flex;
+    width: 100vw;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0.75rem 1rem 2rem;
+    overflow-y: auto;
+    background: var(--header-cream);
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid rgba(230, 189, 82, 0.7);
+    box-shadow: none;
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition: transform var(--transition-normal), visibility var(--transition-normal);
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .nav-links > li {
+    width: 100%;
+  }
+
+  .nav-link {
+    min-height: 52px;
+    justify-content: flex-start;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .nav-products-toggle {
+    justify-content: flex-start;
+  }
+
+  .nav-products-toggle .nav-chevron {
+    margin-left: auto;
+  }
+
+  .products-dropdown {
+    position: static;
+    display: none;
+    width: 100%;
+    min-width: 0;
+    margin-top: 0.25rem;
+    padding: 0.35rem;
+    box-shadow: none;
+  }
+
+  .nav-products.open .products-dropdown,
+  .nav-products:focus-within .products-dropdown {
+    display: block;
+  }
+
+  .products-dropdown a {
+    min-height: 46px;
+    padding-left: 2.8rem;
+  }
+
+  .mobile-menu-backdrop {
+    position: fixed;
+    inset: 70px 0 0;
+    z-index: 1001;
+    display: block;
+    width: 100%;
+    height: calc(100dvh - 70px);
+    padding: 0;
+    background: rgba(8, 29, 14, 0.52);
+    border: 0;
+  }
+}
+
+/* Top bar phone / trust text must wrap, never cut off */
+@media (max-width: 768px) {
+  .header-top-content {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .header-announcement,
+  .header-email,
+  .trust-badge {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .header-contact {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-trust-badges {
+    width: 100%;
+    justify-content: center;
   }
 }
 

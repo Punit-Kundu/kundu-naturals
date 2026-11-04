@@ -128,6 +128,8 @@ function GalleryLightbox({ isOpen, onClose, images, initialIndex = 0 }) {
               className="lightbox-image"
               width="1280"
               height="960"
+              loading="lazy"
+              decoding="async"
               onLoad={() => {}}
             />
           </motion.div>

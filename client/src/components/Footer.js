@@ -177,6 +177,8 @@ function Footer() {
                   className="footer-logo-mark"
                   width="100"
                   height="100"
+                  loading="lazy"
+                  decoding="async"
                 />
               </Link>
 

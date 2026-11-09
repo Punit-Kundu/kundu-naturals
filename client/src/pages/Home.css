@@ -5,72 +5,80 @@
 
 .kn-hero {
   position: relative;
-  min-height: min(100svh, 900px);
+  min-height: min(100svh, 820px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   isolation: isolate;
-  background: var(--color-dark-section);
+  background: #0b2014;
   color: var(--color-white);
 }
 
 .kn-hero-bg {
   position: absolute;
-  inset: -3%;
+  inset: -2%;
   z-index: 0;
   overflow: hidden;
-  transform: translate3d(calc(var(--mx, 0) * 0.4px), calc(var(--my, 0) * 0.4px), 0);
+  transform: translate3d(calc(var(--mx, 0) * 0.2px), calc(var(--my, 0) * 0.2px), 0);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 .kn-hero-bg-img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-  object-position: center 38%;
-  transform: scale(1.04);
-  animation: knKenBurns 30s ease-in-out infinite alternate;
-  will-change: transform;
+  object-position: center;
+  transform: scale(1.02);
+  opacity: 0;
+  animation: knHeroReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards, knHeroFloat 22s ease-in-out 1.05s infinite alternate;
+  will-change: transform, opacity;
 }
 .kn-hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    /* dark on the left (text) → clear/light on the right so the photo stays crisp */
-    linear-gradient(100deg,
-      rgba(9, 26, 17, 0.72) 0%,
-      rgba(11, 32, 20, 0.58) 36%,
-      rgba(15, 42, 27, 0.22) 62%,
-      rgba(15, 42, 27, 0.04) 100%),
-    /* soft bottom fade so the wave blends into the cream section */
-    linear-gradient(0deg, rgba(15, 42, 27, 0.32) 0%, rgba(15, 42, 27, 0) 40%);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(100deg,
+      rgba(9, 26, 17, 0.58) 0%,
+      rgba(11, 32, 20, 0.38) 34%,
+      rgba(15, 42, 27, 0.10) 58%,
+      rgba(15, 42, 27, 0) 74%);
 }
 .kn-hero-glow {
   position: absolute;
-  inset: -20%;
-  background: radial-gradient(circle at 70% 40%, rgba(227, 168, 43, 0.32), transparent 45%);
+  inset: -15%;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 72% 42%, rgba(227, 168, 43, 0.22), transparent 42%),
+    radial-gradient(circle at 18% 78%, rgba(246, 227, 180, 0.08), transparent 34%);
   pointer-events: none;
-  animation: knBreathGlow 6s ease-in-out infinite alternate;
+  animation: knBreathGlow 7s ease-in-out infinite alternate;
 }
 /* Slow light sweep across the background for a premium sheen */
 .kn-hero-bg::after {
   content: '';
   position: absolute;
-  inset: -40%;
-  background: linear-gradient(115deg, transparent 42%, rgba(246, 227, 180, 0.12) 50%, transparent 58%);
+  inset: -30%;
+  z-index: 2;
+  background: linear-gradient(115deg, transparent 44%, rgba(246, 227, 180, 0.10) 50%, transparent 56%);
   transform: translateX(-45%);
-  animation: knSweep 11s ease-in-out infinite;
+  animation: knSweep 12s ease-in-out infinite;
   pointer-events: none;
 }
 
-@keyframes knKenBurns {
-  from { transform: scale(1.14) translate(0, 0); }
-  to { transform: scale(1.12) translate(-0.8%, -0.5%); }
+@keyframes knHeroReveal {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1.02); }
+}
+@keyframes knHeroFloat {
+  from { transform: scale(1.02) translate3d(0, 0, 0); }
+  to   { transform: scale(1.045) translate3d(-0.35%, -0.2%, 0); }
 }
 @keyframes knBreathGlow {
-  from { opacity: 0.7; transform: scale(1); }
-  to { opacity: 1; transform: scale(1.08); }
+  from { opacity: 0.55; transform: scale(1); }
+  to   { opacity: 0.95; transform: scale(1.06); }
 }
 @keyframes knSweep {
   0%   { transform: translateX(-45%) rotate(0.001deg); opacity: 0; }

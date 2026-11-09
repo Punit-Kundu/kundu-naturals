@@ -248,11 +248,11 @@ function Home() {
         {/* Background */}
         <div className="kn-hero-bg" aria-hidden="true">
           <motion.img
-            src="/homepage-hero.webp"
+            src="/images/homepage-hero-section.png"
             alt="Natural food products from Kundu Naturals"
             className="kn-hero-bg-img"
-            width="1536"
-            height="639"
+            width="1576"
+            height="656"
             loading="eager"
             fetchpriority="high"
             decoding="async"

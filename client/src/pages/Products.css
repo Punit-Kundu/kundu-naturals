@@ -72,24 +72,11 @@
 
 .category-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-xs);
-  overflow-x: auto;
   padding: var(--space-xs);
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
-}
-
-.category-filters::-webkit-scrollbar {
-  height: 6px;
-}
-
-.category-filters::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.category-filters::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 3px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .category-tab {
@@ -250,34 +237,13 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-lg);
+  min-width: 0;
 }
 
-@media (max-width: 1024px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
-  }
-}
-
-@media (max-width: 480px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
-  }
-}
-
-@media (max-width: 360px) {
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
+.products-grid > * {
+  min-width: 0;
 }
 
 .products-grid.list {
@@ -288,12 +254,6 @@
   max-width: none;
 }
 
-@media (max-width: 1024px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
   .toolbar-content {
     flex-direction: column;
@@ -301,6 +261,7 @@
   }
 
   .search-wrapper {
+    min-width: 0;
     max-width: none;
   }
 
@@ -314,17 +275,11 @@
 
   .category-filters {
     width: 100%;
-    flex-wrap: nowrap;
   }
 
   .view-sort-controls {
     width: 100%;
     justify-content: space-between;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
   }
 }
 
@@ -332,11 +287,6 @@
   .search-wrapper {
     min-width: 0;
     width: 100%;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
   }
 
   .sort-select {
@@ -347,10 +297,6 @@
 }
 
 @media (max-width: 360px) {
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-
   .search-wrapper {
     width: 100%;
   }

@@ -1,7 +1,7 @@
 .floating-contact {
   position: fixed;
   top: auto;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  bottom: calc(86px + env(safe-area-inset-bottom));
   right: 16px;
   z-index: 850;
   display: flex;
@@ -88,10 +88,6 @@
   background: #25d366;
 }
 
-.floating-contact-call {
-  background: #14532d;
-}
-
 @keyframes floatingContactEnter {
   from {
     opacity: 0;
@@ -118,6 +114,7 @@
 @media (max-width: 768px) {
   .floating-contact {
     right: 16px;
+    bottom: calc(80px + env(safe-area-inset-bottom));
     gap: 12px;
   }
 
@@ -130,6 +127,7 @@
 @media (max-width: 480px) {
   .floating-contact {
     right: 14px;
+    bottom: calc(78px + env(safe-area-inset-bottom));
     gap: 10px;
   }
 
@@ -142,6 +140,7 @@
 @media (max-width: 380px) {
   .floating-contact {
     right: 12px;
+    bottom: calc(74px + env(safe-area-inset-bottom));
     gap: 10px;
   }
 

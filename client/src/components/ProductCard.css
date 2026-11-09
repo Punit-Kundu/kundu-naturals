@@ -257,3 +257,147 @@
   outline-offset: -3px;
   border-radius: var(--radius-lg);
 }
+@media (max-width: 768px) {
+  .products-grid:not(.list) .product-card .product-info {
+    padding: 0.7rem 0.7rem 0.6rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-name {
+    font-size: 0.92rem;
+    line-height: 1.25;
+    margin-bottom: 0.3rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-category {
+    font-size: 0.62rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-description,
+  .products-grid:not(.list) .product-card .pack-sizes-label {
+    display: none;
+  }
+
+  .products-grid:not(.list) .product-card .product-pack-sizes {
+    margin-bottom: 0.35rem;
+    padding-top: 0.35rem;
+  }
+
+  .products-grid:not(.list) .product-card .pack-size-tag {
+    font-size: 0.62rem;
+    padding: 0.12rem 0.38rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-footer {
+    align-items: center;
+    gap: 0.35rem;
+    padding-top: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .products-grid:not(.list) .product-card .product-stock {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: 0;
+    line-height: 1;
+  }
+
+  .products-grid:not(.list) .product-card .product-stock .text-hindi,
+  .products-grid:not(.list) .product-card .product-stock .text-latin {
+    display: none !important;
+  }
+
+  .products-grid:not(.list) .product-card .product-stock .in-stock,
+  .products-grid:not(.list) .product-card .product-stock .out-of-stock {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding: 0 0.28rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .products-grid:not(.list) .product-card .product-stock .in-stock {
+    color: var(--color-leaf-green);
+    background: rgba(33, 87, 50, 0.1);
+  }
+
+  .products-grid:not(.list) .product-card .product-stock .out-of-stock {
+    color: #c0392b;
+    background: rgba(192, 57, 43, 0.1);
+  }
+
+  .products-grid:not(.list) .product-card .product-price {
+    font-size: 1rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-price-placeholder {
+    font-size: 0.72rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 0.65rem 0.7rem 0.7rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-action-btn,
+  .products-grid:not(.list) .product-card .product-detail-btn {
+    width: 100%;
+    min-height: 34px;
+    padding: 0.42rem 0.45rem;
+    gap: 0.3rem;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .products-grid:not(.list) .product-card .product-action-btn svg,
+  .products-grid:not(.list) .product-card .product-detail-btn svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+  }
+
+  html.en .products-grid:not(.list) .product-card .product-action-text > .text-hindi,
+  html.hi .products-grid:not(.list) .product-card .product-action-text > .text-latin {
+    display: none !important;
+  }
+
+  html.en .products-grid:not(.list) .product-card .product-action-text > .text-latin,
+  html.hi .products-grid:not(.list) .product-card .product-action-text > .text-hindi {
+    display: inline !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .products-grid:not(.list) .product-card .product-actions {
+    gap: 0.35rem;
+    padding: 0.55rem 0.6rem 0.6rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-action-btn,
+  .products-grid:not(.list) .product-card .product-detail-btn {
+    min-height: 32px;
+    padding: 0.38rem 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-name {
+    font-size: 0.86rem;
+  }
+
+  .products-grid:not(.list) .product-card .product-stock .in-stock,
+  .products-grid:not(.list) .product-card .product-stock .out-of-stock {
+    min-width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.72rem;
+  }
+}

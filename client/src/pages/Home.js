@@ -699,18 +699,6 @@ function Home() {
                   decoding="async"
                   onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
                 />
-                <motion.img
-                  src="/images/Kundu-Naturals-Team-Photos/punit-kundu-business-manager.webp"
-                  alt="पुनीत कुंडू - कुंडू नेचुरल्स के बिज़नेस मैनेजर"
-                  className="overlay-image"
-                  width="640"
-                  height="640"
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3, type: 'spring', stiffness: 100 }}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => { e.target.src = '/images/placeholder-person.svg'; }}
-                />
                 <motion.div 
                   className="experience-badge"
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -718,15 +706,14 @@ function Home() {
                   transition={{ 
                     duration: 0.5, 
                     delay: 0.6, 
-                    type: 'spring', 
-                    stiffness: 100,
-                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+                    y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                   }}
                 >
-                  <span className="badge-years text-hindi">15+</span>
-                  <span className="badge-years text-latin">15+</span>
-                  <span className="badge-text text-hindi">साल का अनुभव</span>
-                  <span className="badge-text text-latin">15+ years experience</span>
+                  <span className="exp-number">100%</span>
+                  <span className="exp-text">
+                    <span className="text-hindi">शुद्ध और प्राकृतिक</span>
+                    <span className="text-latin">Pure & Natural</span>
+                  </span>
                 </motion.div>
               </div>
             </motion.div>

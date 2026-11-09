@@ -993,18 +993,26 @@
 
   .header-cta {
     min-height: 40px;
-    width: 40px;
-    justify-content: center;
-    padding: 0;
+    gap: 0.45rem;
+    padding: 0.25rem 0.65rem 0.25rem 0.3rem;
   }
 
   .header-cta-icon {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .header-cta-copy {
+    display: flex;
+  }
+
+  .header-cta-copy > span {
     display: none;
+  }
+
+  .header-cta-copy strong {
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
   }
 
   .mobile-menu-toggle {
@@ -1038,13 +1046,19 @@
   }
 
   .header-cta {
-    width: 36px;
+    width: auto;
     min-height: 36px;
+    gap: 0.35rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.25rem;
   }
 
   .header-cta-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .header-cta-copy strong {
+    font-size: 0.72rem;
   }
 }
 

@@ -44,7 +44,6 @@ function getBreadcrumbs(pathname, product) {
     '/about': 'About',
     '/products': 'Products',
     '/gallery': 'Gallery',
-    '/our-brand': 'Our Brand',
     '/contact': 'Contact',
   };
   const name = pageNames[pathname];

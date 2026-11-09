@@ -10,7 +10,7 @@ const MAX_MESSAGE_LENGTH = 500;
 const websiteContext = `
 Kundu Naturals website information:
 - Kundu Naturals is an Indian food brand focused on traditional foods and natural products.
-- The website has pages for Home, About, Products, Our Brand, Gallery, and Contact.
+- The website has pages for Home, About, Products, Gallery, and Contact.
 - The website lists these products: Buffalo Desi Ghee, Basmati Rice, Jeera Biscuit, Khichdi Rice, Kala Dhan Chawal, Saunf, Amla Murabba, Gajar Achar, Dhaga Mishri, Kadi Patta, Moong Dhuli Dal, Besan Biscuit, Red Chili Powder, Bajra Atta, Coriander Powder, Kala Chana, Tur Dal, Moong Chilka Dal, Turmeric Powder, Sona Moti Wheat Daliya, Sarbati Atta, Urad Dal, Besan Flour, Panchvati Chutney, Sweet Lemon Pickle, Mixed Pickle, Methi Pickle, A2 Desi Cow Ghee, Crushed Turmeric, Chana Dal, Shakkar, Desi Khand, Yellow Mustard Oil, Sesame Oil, Black Mustard Oil, Shatavari Powder, Multifloral Honey, Ginger Powder, Black Turmeric Powder, and Ginger Pickle.
 - Product-specific ingredients, prices, pack sizes, stock, health benefits, certifications, and delivery estimates are not provided here. Do not invent them; direct customers to contact the business for current details.
 - Ramesh Kundu is the Brand Owner. Punit Kundu is the Business Manager.

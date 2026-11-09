@@ -148,10 +148,7 @@ function WebsiteChatbot() {
         {isOpen ? (
           <X size={24} />
         ) : (
-          <>
-            <img src="/chatboticon.png" alt="Kundu Naturals assistant" className="website-chat-launcher-icon" width="48" height="48" />
-            {!isOpen && <span className="website-chat-launcher-label">Ask us</span>}
-          </>
+          <img src="/chatboticon.png" alt="Kundu Naturals assistant" className="website-chat-launcher-icon" width="48" height="48" />
         )}
       </button>
     </div>

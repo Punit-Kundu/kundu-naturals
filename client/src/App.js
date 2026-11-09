@@ -14,7 +14,6 @@ const About = React.lazy(() => import('./pages/About'));
 const Products = React.lazy(() => import('./pages/Products'));
 const ProductDetails = React.lazy(() => import('./pages/ProductDetails'));
 const Gallery = React.lazy(() => import('./pages/Gallery'));
-const OurBrand = React.lazy(() => import('./pages/OurBrand'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
@@ -33,7 +32,6 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetails />} />
               <Route path="/gallery" element={<Gallery />} />
-              <Route path="/our-brand" element={<OurBrand />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

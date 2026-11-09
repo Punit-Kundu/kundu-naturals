@@ -23,11 +23,6 @@ export const PAGE_SEO = {
     description:
       'See Kundu Naturals products and team in our food gallery. Explore natural food from Kailram, Kaithal, Haryana, then browse products or contact us today.',
   },
-  '/our-brand': {
-    title: 'Natural Food Brand Story in Haryana | Kundu Naturals',
-    description:
-      'Discover the story and identity of Kundu Naturals, a natural food brand based in Kailram, Kaithal, Haryana. Explore our products or contact our team today.',
-  },
   '/contact': {
     title: 'Natural Food Contact in Kaithal, Haryana | Kundu Naturals',
     description:

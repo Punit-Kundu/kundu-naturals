@@ -17,7 +17,7 @@ const galleryCategories = [
 ];
 
 const galleryImages = [
-  ...allProducts.slice(0, 6).map((product) => ({
+  ...allProducts.map((product) => ({
     src: product.image,
     alt: `${product.name} from Kundu Naturals`,
     captionHindi: product.nameHindi,

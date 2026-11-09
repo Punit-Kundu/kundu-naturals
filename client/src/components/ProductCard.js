@@ -177,8 +177,8 @@ function ProductCard({ product, variant = 'default' }) {
             rel="noopener noreferrer"
             aria-label={`Enquire about ${name} from Kundu Naturals on WhatsApp`}
           >
-            <MessageCircle width="18" height="18" aria-hidden="true" />
-            <span>
+            <MessageCircle width="16" height="16" aria-hidden="true" />
+            <span className="product-action-text">
               <span className="text-hindi">पूछताछ / ऑर्डर</span>
               <span className="text-latin">Enquire / Order</span>
             </span>
@@ -189,8 +189,8 @@ function ProductCard({ product, variant = 'default' }) {
             aria-label={`${name} is unavailable`}
             disabled
           >
-            <MessageCircle width="18" height="18" aria-hidden="true" />
-            <span>
+            <MessageCircle width="16" height="16" aria-hidden="true" />
+            <span className="product-action-text">
               <span className="text-hindi">पूछताछ / ऑर्डर</span>
               <span className="text-latin">Enquire / Order</span>
             </span>
@@ -202,7 +202,7 @@ function ProductCard({ product, variant = 'default' }) {
           aria-label={`${displayName} का पूरा विवरण देखें`}
         >
           <Eye width="16" height="16" aria-hidden="true" />
-          <span>
+          <span className="product-action-text">
             <span className="text-hindi">विवरण</span>
             <span className="text-latin">Details</span>
           </span>

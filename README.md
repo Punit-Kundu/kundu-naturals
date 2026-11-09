@@ -6,7 +6,7 @@ Authentic Indian organic food website built with React, Node.js, and traditional
 
 ## 🌿 Features
 
-- **7 Page types**: Home, About, Product Listing, Product Details, Gallery, Our Brand, Contact
+- **6 Page types**: Home, About, Product Listing, Product Details, Gallery, Contact
 - **Authentic Indian Desi Design**: Earth tones, traditional patterns, cultural aesthetics
 - **Real Images**: Uses your actual logo, founder photos, and product images
 - **Bilingual**: Hindi (primary) + English support
@@ -80,7 +80,6 @@ kundunaturals/
 │   │   │   ├── Products.js
 │   │   ├── ProductDetails.js
 │   │   │   ├── Gallery.js
-│   │   │   ├── OurBrand.js
 │   │   │   └── Contact.js
 │   │   ├── App.js
 │   │   ├── index.js
@@ -109,7 +108,6 @@ Place your actual images in `client/public/images/`:
 | `products-header.jpg` | Products page header | Optional |
 | `gallery-header.jpg` | Gallery page header | Optional |
 | `contact-header.jpg` | Contact page header | Optional |
-| `brand-header.jpg` | Our Brand page header | Optional |
 | `about-story.jpg` | About story section | Optional |
 | `products/` | Product photos (see below) | ✅ Yes |
 | `gallery/` | Gallery photos (see below) | Recommended |

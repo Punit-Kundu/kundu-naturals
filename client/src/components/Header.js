@@ -6,15 +6,16 @@ import {
   Leaf,
   Truck,
   ShieldCheck,
-  Globe,
+  Phone,
   Home,
   UserRound,
-  ChevronDown,
   Images,
-  ShoppingCart,
   Mail,
   Search,
-  Phone,
+  MapPin,
+  Banknote,
+  ShoppingCart,
+  Globe,
 } from 'lucide-react';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Header.css';
@@ -41,7 +42,6 @@ const formatPhoneNumber = (rawPhone) => {
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
   const [language, setLanguage] = useState('en');
   const businessInfo = useBusinessInfo();
   const location = useLocation();
@@ -76,7 +76,6 @@ function Header() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setIsProductsMenuOpen(false);
   }, [location]);
 
   return (
@@ -142,22 +141,11 @@ function Header() {
                 <span className="nav-label"><span className="text-hindi">हमारे बारे में</span><span className="text-latin">About</span></span>
               </Link>
             </li>
-            <li className={`nav-products ${isProductsMenuOpen ? 'open' : ''}`}>
-              <button
-                type="button"
-                className={`nav-link nav-products-toggle ${location.pathname.startsWith('/products') || location.pathname === '/our-brand' ? 'active' : ''}`}
-                aria-expanded={isProductsMenuOpen}
-                aria-haspopup="true"
-                onClick={() => setIsProductsMenuOpen((open) => !open)}
-              >
+            <li>
+              <Link to="/products" className={`nav-link ${location.pathname === '/products' || location.pathname.startsWith('/products/') ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
                 <Leaf size={19} aria-hidden="true" />
                 <span className="nav-label"><span className="text-hindi">प्रोडक्ट्स</span><span className="text-latin">Products</span></span>
-                <ChevronDown size={16} className="nav-chevron" aria-hidden="true" />
-              </button>
-              <ul className="products-dropdown">
-                <li><Link to="/products" onClick={() => { setIsMobileMenuOpen(false); setIsProductsMenuOpen(false); }}><span className="text-hindi">सभी प्रोडक्ट्स</span><span className="text-latin">All Products</span></Link></li>
-                <li><Link to="/our-brand" onClick={() => { setIsMobileMenuOpen(false); setIsProductsMenuOpen(false); }}><span className="text-hindi">हमारा ब्रांड</span><span className="text-latin">Our Brand</span></Link></li>
-              </ul>
+              </Link>
             </li>
             {navLinks.slice(2).map((link) => (
               <li key={link.path}>

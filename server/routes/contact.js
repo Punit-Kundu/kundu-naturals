@@ -1,7 +1,16 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const router = express.Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
 
 const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
   '&': '&amp;',
@@ -10,6 +19,14 @@ const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
   '"': '&quot;',
   "'": '&#39;',
 })[character]);
+
+// Ensure data directory and contacts file exist
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+if (!fs.existsSync(CONTACTS_FILE)) {
+  fs.writeFileSync(CONTACTS_FILE, JSON.stringify([], null, 2));
+}
 
 // Validation middleware
 const validateContactForm = (req, res, next) => {
@@ -48,12 +65,11 @@ const validateContactForm = (req, res, next) => {
   next();
 };
 
-// Create email transporter
+// Create email transporter (returns null if SMTP not configured)
 const createTransporter = () => {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE } = process.env;
+  const { SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_SECURE, SMTP_PORT } = process.env;
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.warn('SMTP credentials not configured. Contact form email cannot be delivered.');
     return null;
   }
 
@@ -66,6 +82,17 @@ const createTransporter = () => {
       pass: SMTP_PASS,
     },
   });
+};
+
+// Append submission to local JSON store
+const saveContactSubmission = (data) => {
+  try {
+    const contacts = JSON.parse(fs.readFileSync(CONTACTS_FILE, 'utf8'));
+    contacts.push({ ...data, receivedAt: new Date().toISOString() });
+    fs.writeFileSync(CONTACTS_FILE, JSON.stringify(contacts, null, 2));
+  } catch (err) {
+    console.error('Failed to save contact submission:', err);
+  }
 };
 
 // POST /api/contact - Submit contact form
@@ -82,20 +109,18 @@ router.post('/', validateContactForm, async (req, res) => {
       message: message.trim(),
     };
 
-    const transporter = createTransporter();
-    if (!transporter) {
-      return res.status(503).json({
-        success: false,
-        message: 'संपर्क फ़ॉर्म अभी ईमेल सेवा से जुड़ा नहीं है। कृपया दिए गए फोन या WhatsApp नंबर पर संपर्क करें।',
-      });
-    }
+    // Always store the submission locally so the form works even without SMTP
+    saveContactSubmission(sanitizedData);
 
-    const mailOptions = {
-      from: `"Kundu Naturals Contact" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
-      replyTo: sanitizedData.email,
-      subject: `[Kundu Naturals] ${sanitizedData.subject}`,
-      html: `
+    // Attempt email delivery only if SMTP is configured (non-blocking)
+    const transporter = createTransporter();
+    if (transporter) {
+      const mailOptions = {
+        from: `"Kundu Naturals Contact" <${process.env.SMTP_USER}>`,
+        to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+        replyTo: sanitizedData.email,
+        subject: `[Kundu Naturals] ${sanitizedData.subject}`,
+        html: `
             <!DOCTYPE html>
             <html>
             <head>
@@ -147,16 +172,15 @@ router.post('/', validateContactForm, async (req, res) => {
             </body>
             </html>
           `,
-    };
+      };
 
-    try {
-      await transporter.sendMail(mailOptions);
-    } catch (emailError) {
-      console.error('Contact email delivery failed:', emailError);
-      return res.status(502).json({
-        success: false,
-        message: 'आपका संदेश ईमेल से नहीं भेजा जा सका। कृपया दिए गए फोन या WhatsApp नंबर पर संपर्क करें।',
-      });
+      try {
+        await transporter.sendMail(mailOptions);
+      } catch (emailError) {
+        console.error('Contact email delivery failed:', emailError);
+      }
+    } else {
+      console.warn('SMTP not configured. Submission saved locally; email not sent.');
     }
 
     return res.json({

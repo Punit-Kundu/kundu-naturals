@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Ramesh Kundu",
+    "phone": "+91 9034677123",
+    "email": "ramesh@example.com",
+    "subject": "Product enquiry",
+    "message": "I am interested in organic wheat flour. Please contact me.",
+    "receivedAt": "2026-11-11T05:08:58.280Z"
+  },
+  {
+    "name": "sachin",
+    "phone": "8950985074",
+    "email": "sachinmoun22@gmail.com",
+    "subject": "about products",
+    "message": "hlo i am sachin ,i am intrested in your products",
+    "receivedAt": "2026-11-11T05:14:01.261Z"
+  }
+]

@@ -92,34 +92,31 @@ function ContactForm() {
     setSubmitMessage('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || '';
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: '55712b12-384e-40f4-baa0-def4dc57e653',
+          ...formData,
+          _subject: 'Kundu Naturals - New Enquiry',
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
         setStatus('success');
-        setSubmitMessage(data.message || 'आपका संदेश सफलतापूर्वक भेज दिया गया है। हम जल्द ही आपसे संपर्क करेंगे।');
+        setSubmitMessage('Aapka message bhej diya gaya hai, hum 24 ghante mein reply karenge');
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+        setErrors({});
         setTouched({});
       } else {
-        if (data.errors) {
-          setErrors((previous) => ({ ...previous, ...data.errors }));
-          setTouched((previous) => ({
-            ...previous,
-            ...Object.keys(data.errors).reduce((fields, field) => ({ ...fields, [field]: true }), {}),
-          }));
-        }
         setStatus('error');
-        setSubmitMessage(data.message || 'कुछ गलत हो गया। कृपया पुनः प्रयास करें।');
+        setSubmitMessage(data.message || 'Message bhejne mein dikkat hui. Kripya dobara koshish karein.');
       }
     } catch (error) {
       setStatus('error');
-      setSubmitMessage('नेटवर्क त्रुटि। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।');
+      setSubmitMessage('Message bhejne mein dikkat hui. Kripya apna internet connection check karke dobara koshish karein.');
       console.error('Contact form submission failed:', error);
     }
   };

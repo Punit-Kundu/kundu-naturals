@@ -5,6 +5,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import ContactForm from '../components/ContactForm';
 import WhatsApp from '../components/icons/WhatsAppIcon';
+import { WhatsAppBrandIcon } from '../components/icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import { businessMapEmbedUrl, businessMapsUrl } from '../utils/businessLocation';
 import { CONTACT_FAQS } from '../seo/seoConfig';
@@ -335,7 +336,7 @@ function Contact() {
               <a href={`https://wa.me/${getWhatsAppNumber(businessInfo.whatsapp)}`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-lg">
                 <span className="text-hindi">{language === 'hi' ? 'WhatsApp Connect' : 'व्हाट्सऐप पर जुड़ें'}</span>
                 <span className="text-latin">{language === 'en' ? 'WhatsApp Connect' : 'WhatsApp Connect'}</span>
-                <WhatsApp width="20" height="20" aria-hidden="true" />
+                <WhatsAppBrandIcon width="20" height="20" aria-hidden="true" />
               </a>
               <a href={`tel:${getInternationalPhone(businessInfo.phone)}`} className="btn btn-outline btn-lg">
                 <span className="text-hindi">{language === 'hi' ? 'Call Now' : 'अभी कॉल करें'}</span>

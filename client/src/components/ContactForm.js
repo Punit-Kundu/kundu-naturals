@@ -97,8 +97,11 @@ function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: '55712b12-384e-40f4-baa0-def4dc57e653',
-          ...formData,
-          _subject: 'Kundu Naturals - New Enquiry',
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          subject: 'Kundu Naturals - New Enquiry',
+          message: formData.message,
         }),
       });
 
@@ -254,8 +257,7 @@ function ContactForm() {
           {status === 'submitting' ? (
             <>
               <Loader2 width="20" height="20" className="spinning" aria-hidden="true" />
-              <span className="text-hindi">भेजा जा रहा है...</span>
-              <span className="text-latin">Sending...</span>
+              <span>Sending...</span>
             </>
           ) : (
             <>

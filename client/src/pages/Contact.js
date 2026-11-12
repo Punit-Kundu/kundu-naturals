@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Map, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Map, CheckCircle } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import ContactForm from '../components/ContactForm';
-import WhatsApp from '../components/icons/WhatsAppIcon';
 import { WhatsAppBrandIcon } from '../components/icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import { businessMapEmbedUrl, businessMapsUrl } from '../utils/businessLocation';
@@ -71,7 +70,7 @@ const getContactInfo = (businessInfo) => [
     actionLabel: { hi: 'ईमेल करें', en: 'Email' },
   },
   {
-    icon: WhatsApp,
+    icon: WhatsAppBrandIcon,
     title: 'WhatsApp',
     titleHindi: 'व्हाट्सऐप',
     titleEn: 'WhatsApp',
@@ -168,7 +167,7 @@ function Contact() {
                     rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
                   >
                     <span>{language === 'hi' ? item.actionLabel.hi : item.actionLabel.en}</span>
-                    {item.icon === WhatsApp && <Send width="18" height="18" />}
+                    {item.icon === WhatsAppBrandIcon && <WhatsAppBrandIcon width="18" height="18" />}
                     {item.icon === Phone && <Phone width="18" height="18" />}
                     {item.icon === Mail && <Mail width="18" height="18" />}
                     {item.icon === MapPin && <Map width="18" height="18" />}

@@ -20,7 +20,7 @@ function SectionHeader({
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
       role="region"
-  aria-label={`${titleHindi || title}${title ? '/' + title : ''}`}
+      aria-label={titleHindi ? `${titleHindi} / ${title || titleHindi}` : title}
     >
       {children && <div className="section-header-badge">{children}</div>}
       <h2 id={id} className="section-title">

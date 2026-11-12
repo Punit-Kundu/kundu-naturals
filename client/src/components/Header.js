@@ -17,6 +17,7 @@ import {
   ShoppingCart,
   Globe,
 } from 'lucide-react';
+import { WhatsAppBrandIcon } from './icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './Header.css';
 
@@ -167,7 +168,7 @@ function Header() {
             </Link>
             <div className="header-cta">
               <a className="header-cta-icon" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                <Phone size={20} aria-hidden="true" />
+                <WhatsAppBrandIcon width={20} height={20} aria-hidden="true" />
               </a>
               <span className="header-cta-copy">
                 <span>{language === 'hi' ? 'कॉल / व्हाट्सऐप' : 'Call / WhatsApp'}</span>

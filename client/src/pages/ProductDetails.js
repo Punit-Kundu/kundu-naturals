@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, MessageCircle, Package } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Package } from 'lucide-react';
 import { allProducts } from '../data/products';
 import Breadcrumbs from '../components/Breadcrumbs';
+import { WhatsAppBrandIcon } from '../components/icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './ProductDetails.css';
 
@@ -101,7 +102,7 @@ function ProductDetails() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageCircle width="20" height="20" aria-hidden="true" />
+              <WhatsAppBrandIcon width="20" height="20" aria-hidden="true" />
               <span className="text-hindi">WhatsApp पर पूछताछ करें</span>
               <span className="text-latin">Enquire on WhatsApp</span>
             </a>

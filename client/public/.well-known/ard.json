@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Kundu Naturals",
+  "description": "Organic, chemical-free natural food brand from Kailram, Kaithal, Haryana, India. A2 desi ghee, basmati rice, dals, spices, pickles, honey and oils. Orders by WhatsApp or phone.",
+  "url": "https://kundu-naturals.vercel.app",
+  "resources": [
+    {
+      "type": "webpage",
+      "url": "https://kundu-naturals.vercel.app/",
+      "title": "Kundu Naturals - Organic Food Online India"
+    },
+    {
+      "type": "webpage",
+      "url": "https://kundu-naturals.vercel.app/about",
+      "title": "About Kundu Naturals"
+    },
+    {
+      "type": "webpage",
+      "url": "https://kundu-naturals.vercel.app/products",
+      "title": "Kundu Naturals Products"
+    },
+    {
+      "type": "webpage",
+      "url": "https://kundu-naturals.vercel.app/gallery",
+      "title": "Kundu Naturals Gallery"
+    },
+    {
+      "type": "webpage",
+      "url": "https://kundu-naturals.vercel.app/contact",
+      "title": "Contact Kundu Naturals"
+    }
+  ]
+}

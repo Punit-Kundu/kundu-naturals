@@ -158,8 +158,9 @@ function Gallery() {
             aria-label={`${getCategoryName(activeCategory)} images`}
           >
             {filteredImages.map((image, index) => (
-              <motion.article
+              <motion.button
                 key={`${image.src}-${index}`}
+                type="button"
                 role="listitem"
                 className="gallery-item"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -167,6 +168,7 @@ function Gallery() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 onClick={() => openLightbox(index)}
+                aria-label={`${image.captionEn} - ${index + 1} of ${filteredImages.length}`}
               >
                 <div className="gallery-image-wrapper">
                   <div className={`gallery-image-skeleton ${loadedImages.has(index) ? 'loaded' : ''}`}>
@@ -177,6 +179,7 @@ function Gallery() {
                       width="640"
                       height="480"
                       loading="lazy"
+                      decoding="async"
                       onLoad={() => handleImageLoad(index)}
                       onError={(e) => {
                         e.target.src = '/images/gallery-placeholder.svg';
@@ -197,7 +200,7 @@ function Gallery() {
                     <span className="text-latin filter-name">{image.captionEn}</span>
                   </div>
                 </div>
-              </motion.article>
+              </motion.button>
             ))}
           </motion.div>
         </div>

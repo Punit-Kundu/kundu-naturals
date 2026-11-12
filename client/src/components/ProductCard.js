@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Eye, MessageCircle, Tag, Package } from 'lucide-react';
+import { ShoppingCart, Eye, Tag, Package } from 'lucide-react';
+import { WhatsAppBrandIcon } from './icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './ProductCard.css';
 
@@ -88,7 +89,7 @@ function ProductCard({ product, variant = 'default' }) {
             rel="noopener noreferrer"
             aria-label={`Order ${name} from Kundu Naturals on WhatsApp`}
           >
-            <MessageCircle width="16" height="16" aria-hidden="true" />
+            <WhatsAppBrandIcon width="16" height="16" aria-hidden="true" />
             <span>
             <span className="text-hindi">ऑर्डर करें</span>
             <span className="text-latin">Order Now</span>
@@ -177,7 +178,7 @@ function ProductCard({ product, variant = 'default' }) {
             rel="noopener noreferrer"
             aria-label={`Enquire about ${name} from Kundu Naturals on WhatsApp`}
           >
-            <MessageCircle width="16" height="16" aria-hidden="true" />
+            <WhatsAppBrandIcon width="16" height="16" aria-hidden="true" />
             <span className="product-action-text">
               <span className="text-hindi">पूछताछ / ऑर्डर</span>
               <span className="text-latin">Enquire / Order</span>
@@ -189,7 +190,7 @@ function ProductCard({ product, variant = 'default' }) {
             aria-label={`${name} is unavailable`}
             disabled
           >
-            <MessageCircle width="16" height="16" aria-hidden="true" />
+            <WhatsAppBrandIcon width="16" height="16" aria-hidden="true" />
             <span className="product-action-text">
               <span className="text-hindi">पूछताछ / ऑर्डर</span>
               <span className="text-latin">Enquire / Order</span>

@@ -66,16 +66,15 @@ function GalleryLightbox({ isOpen, onClose, images, initialIndex = 0 }) {
 
   return (
     <AnimatePresence>
-      <motion.div
+      <motion.button
         className="lightbox-overlay"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={onClose}
-        role="dialog"
         aria-modal="true"
-        aria-label="छवि दर्शक"
+        aria-label="Close image viewer — बंद करें"
       >
         <motion.div
           className="lightbox-content"
@@ -141,11 +140,11 @@ function GalleryLightbox({ isOpen, onClose, images, initialIndex = 0 }) {
           )}
 
           <div className="lightbox-counter" aria-label={`${currentIndex + 1} / ${images.length}`}>
-            {currentIndex + 1} / {images.length}
-          </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+{currentIndex + 1} / {images.length}
+            </div>
+          </motion.div>
+        </motion.button>
+      </AnimatePresence>
   );
 }
 

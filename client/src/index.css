@@ -6,6 +6,8 @@
    ======================================== */
 
 :root {
+  --scroll-progress-track: 2px;
+  --scroll-progress-color: var(--color-antique-gold);
   --color-deep-emerald: #14532D;
   --color-emerald: #2E7D4F;
   --color-emerald-light: #4A9E6F;
@@ -148,6 +150,24 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Reserve space for images whose dimensions are not known at paint time */
+img:not([width]):not([height]) {
+  aspect-ratio: 4 / 3;
+}
+
+/* Scroll progress bar - fixed height so it never shifts layout */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: var(--scroll-progress-track);
+  background: var(--scroll-progress-color);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.1s linear;
 }
 
 p,

@@ -1,0 +1,62 @@
+# Kundu Naturals
+
+> Kundu Naturals is an organic, chemical-free natural food brand from Kailram, Kaithal, Haryana, India. We sell A2 desi ghee, basmati rice, dals, spices, pickles, honey, oils and traditional Indian staples direct from our farmers. Orders are placed by WhatsApp or phone — there is no checkout on the website.
+
+## Site
+
+- [Kundu Naturals](https://kundu-naturals.vercel.app/): Home page with featured products, our story, team and latest offers.
+
+## Pages
+
+- [About](https://kundu-naturals.vercel.app/about): Our story, mission and vision, core values, farmer journey timeline and team profiles.
+- [Products](https://kundu-naturals.vercel.app/products): Browse all natural food products with filters, search and sort.
+- [Gallery](https://kundu-naturals.vercel.app/gallery): Photos of products, farm, packaging and the team.
+- [Contact](https://kundu-naturals.vercel.app/contact): Address, phone, email, WhatsApp, business hours, map, enquiry form and FAQs.
+
+## Product Pages
+
+- [Buffalo Desi Ghee](https://kundu-naturals.vercel.app/products/buffalo-desi-ghee)
+- [Basmati Rice](https://kundu-naturals.vercel.app/products/basmati-rice)
+- [Jeera Biscuit](https://kundu-naturals.vercel.app/products/jeera-biscuit)
+- [Khichdi Rice](https://kundu-naturals.vercel.app/products/khichdi-chawal)
+- [Kala Dhan Chawal](https://kundu-naturals.vercel.app/products/kala-dhan-chawal)
+- [Saunf](https://kundu-naturals.vercel.app/products/saunf)
+- [Amla Murabba](https://kundu-naturals.vercel.app/products/amla-murabba)
+- [Gajar Achar](https://kundu-naturals.vercel.app/products/gajar-achar)
+- [Dhaga Mishri](https://kundu-naturals.vercel.app/products/dhaga-mishri)
+- [Kadi Patta](https://kundu-naturals.vercel.app/products/kadi-patta)
+- [Moong Dhuli Dal](https://kundu-naturals.vercel.app/products/moong-dhuli-dal)
+- [Besan Biscuit](https://kundu-naturals.vercel.app/products/besan-biscuit)
+- [Red Chili Powder](https://kundu-naturals.vercel.app/products/lal-mirch-powder)
+- [Bajra Atta](https://kundu-naturals.vercel.app/products/bajra-atta)
+- [Coriander Powder](https://kundu-naturals.vercel.app/products/dhaniya-powder)
+- [Kala Chana](https://kundu-naturals.vercel.app/products/kala-chana)
+- [Tur Dal](https://kundu-naturals.vercel.app/products/tur-dal)
+- [Moong Chilka Dal](https://kundu-naturals.vercel.app/products/moong-chilka-dal)
+- [Turmeric Powder](https://kundu-naturals.vercel.app/products/haldi-powder)
+- [Sona Moti Wheat Daliya](https://kundu-naturals.vercel.app/products/sona-moti-gehu-daliya)
+- [Sarbati Atta](https://kundu-naturals.vercel.app/products/sarbati-atta)
+- [Urad Dal](https://kundu-naturals.vercel.app/products/urad-dal)
+- [Besan Flour](https://kundu-naturals.vercel.app/products/besan-flour)
+- [Panchvati Chutney](https://kundu-naturals.vercel.app/products/panchvati-chutney)
+- [Sweet Lemon Pickle](https://kundu-naturals.vercel.app/products/meetha-nimbu-achar)
+- [Mixed Pickle](https://kundu-naturals.vercel.app/products/mix-achar)
+- [Methi Pickle](https://kundu-naturals.vercel.app/products/methi-achar)
+- [A2 Desi Cow Ghee](https://kundu-naturals.vercel.app/products/a2-desi-cow-ghee)
+- [Crushed Turmeric](https://kundu-naturals.vercel.app/products/kuti-haldi-powder)
+- [Chana Dal](https://kundu-naturals.vercel.app/products/chana-dal)
+- [Shakkar](https://kundu-naturals.vercel.app/products/shakkar)
+- [Desi Khand](https://kundu-naturals.vercel.app/products/desi-khand)
+- [Yellow Mustard Oil](https://kundu-naturals.vercel.app/products/yellow-mustard-oil)
+- [Sesame Oil](https://kundu-naturals.vercel.app/products/til-oil)
+- [Black Mustard Oil](https://kundu-naturals.vercel.app/products/black-mustard-oil)
+- [Shatavari Powder](https://kundu-naturals.vercel.app/products/shatavari-powder)
+- [Multifloral Honey](https://kundu-naturals.vercel.app/products/multifloral-honey)
+- [Ginger Powder](https://kundu-naturals.vercel.app/products/ginger-powder)
+- [Black Turmeric Powder](https://kundu-naturals.vercel.app/products/black-haldi-powder)
+- [Ginger Pickle](https://kundu-naturals.vercel.app/products/adrak-achar)
+
+## Notes
+
+- This site is a product catalogue. There is no online checkout; to order, WhatsApp or call the numbers shown on the site.
+- Content is available in English and Hindi (Hindi Devanagari).

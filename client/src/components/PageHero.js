@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MessageCircle as WhatsAppIcon, Phone, Mail } from 'lucide-react';
+import { ArrowRight, Phone, Mail } from 'lucide-react';
+import { WhatsAppBrandIcon } from './icons/BrandIcons';
 import { useBusinessInfo } from '../context/BusinessInfoContext';
 import './PageHero.css';
 
@@ -123,7 +124,7 @@ const PageHero = ({
                   className="hero-contact-item hero-contact-whatsapp"
                   aria-label="Contact Kundu Naturals on WhatsApp"
                 >
-                  <WhatsAppIcon width="20" height="20" aria-hidden="true" />
+                  <WhatsAppBrandIcon width="20" height="20" aria-hidden="true" />
                   <span className="contact-label">
                     <span className="text-hindi">व्हाट्सऐप</span>
                     <span className="text-latin">WhatsApp</span>

@@ -124,10 +124,24 @@
   overflow: hidden;
   cursor: zoom-in;
   transition: transform var(--transition-normal);
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  display: block;
+  width: 100%;
 }
 
 .gallery-item:hover {
   transform: scale(1.01);
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid var(--color-antique-gold);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
 }
 
 .gallery-image-wrapper {

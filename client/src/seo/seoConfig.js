@@ -1,6 +1,6 @@
 export const SITE_URL = 'https://kundu-naturals.vercel.app';
 export const SITE_NAME = 'Kundu Naturals';
-export const SOCIAL_IMAGE_PATH = '/images/website-logo.png';
+export const SOCIAL_IMAGE_PATH = '/images/website-logo.webp';
 
 export const PAGE_SEO = {
   '/': {

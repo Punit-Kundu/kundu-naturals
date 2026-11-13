@@ -77,7 +77,7 @@ function WebsiteChatbot() {
       {isOpen && (
         <section className="website-chat-panel" aria-label="Kundu Naturals chat">
           <header className="website-chat-header">
-            <span className="website-chat-avatar" aria-hidden="true"><img src="/chatboticon.png" alt="" className="website-chat-avatar-img" width="40" height="40" loading="lazy" decoding="async" /></span>
+            <span className="website-chat-avatar" aria-hidden="true"><img src="/images/website-logo-icon.svg" alt="" className="website-chat-avatar-img" width="40" height="40" loading="lazy" decoding="async" /></span>
             <div className="website-chat-heading">
               <strong>Kundu Naturals</strong>
               <span><span className="website-chat-status-dot" /> Online assistant</span>
@@ -148,7 +148,7 @@ function WebsiteChatbot() {
         {isOpen ? (
           <X size={24} />
         ) : (
-          <img src="/chatboticon.png" alt="Kundu Naturals assistant" className="website-chat-launcher-icon" width="48" height="48" />
+          <img src="/images/website-logo-icon.svg" alt="Kundu Naturals assistant" className="website-chat-launcher-icon" width="48" height="48" />
         )}
       </button>
     </div>

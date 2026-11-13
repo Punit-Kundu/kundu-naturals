@@ -218,6 +218,13 @@ html.hi .footer-tagline { line-height: 1.75; letter-spacing: 0; }
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-social > li {
+  display: contents;
 }
 
 .footer-social-link {

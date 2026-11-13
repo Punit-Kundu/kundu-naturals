@@ -152,57 +152,63 @@ function Gallery() {
       >
         <div className="container">
           <h2 id="gallery-grid-title" className="visually-hidden">Kundu Naturals products and team</h2>
-          <motion.div
+          <motion.ul
             className="gallery-grid"
-            role="list"
             aria-label={`${getCategoryName(activeCategory)} images`}
           >
             {filteredImages.map((image, index) => (
-              <motion.button
+              <motion.li
                 key={`${image.src}-${index}`}
-                type="button"
-                role="listitem"
-                className="gallery-item"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1 },
+                }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                onClick={() => openLightbox(index)}
-                aria-label={`${image.captionEn} - ${index + 1} of ${filteredImages.length}`}
+                style={{ listStyle: 'none' }}
               >
-                <div className="gallery-image-wrapper">
-                  <div className={`gallery-image-skeleton ${loadedImages.has(index) ? 'loaded' : ''}`}>
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="gallery-image"
-                      width="640"
-                      height="480"
-                      loading="lazy"
-                      decoding="async"
-                      onLoad={() => handleImageLoad(index)}
-                      onError={(e) => {
-                        e.target.src = '/images/gallery-placeholder.svg';
-                        handleImageLoad(index);
-                      }}
-                    />
-                  </div>
-                  <div className="gallery-overlay">
-                    <div className="overlay-content">
-                      <span>
-                        <span className="text-hindi filter-name">{image.captionHindi}</span>
-                        <span className="text-latin filter-name">{image.captionEn}</span>
-                      </span>
+                <button
+                  type="button"
+                  className="gallery-item"
+                  onClick={() => openLightbox(index)}
+                  aria-label={`${image.captionEn} - ${index + 1} of ${filteredImages.length}`}
+                >
+                  <div className="gallery-image-wrapper">
+                    <div className={`gallery-image-skeleton ${loadedImages.has(index) ? 'loaded' : ''}`}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="gallery-image"
+                        width="640"
+                        height="480"
+                        loading="lazy"
+                        decoding="async"
+                        onLoad={() => handleImageLoad(index)}
+                        onError={(e) => {
+                          e.target.src = '/images/gallery-placeholder.svg';
+                          handleImageLoad(index);
+                        }}
+                      />
+                    </div>
+                    <div className="gallery-overlay">
+                      <div className="overlay-content">
+                        <span>
+                          <span className="text-hindi filter-name">{image.captionHindi}</span>
+                          <span className="text-latin filter-name">{image.captionEn}</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="gallery-caption">
+                      <span className="text-hindi filter-name">{image.captionHindi}</span>
+                      <span className="text-latin filter-name">{image.captionEn}</span>
                     </div>
                   </div>
-                  <div className="gallery-caption">
-                    <span className="text-hindi filter-name">{image.captionHindi}</span>
-                    <span className="text-latin filter-name">{image.captionEn}</span>
-                  </div>
-                </div>
-              </motion.button>
+                </button>
+              </motion.li>
             ))}
-          </motion.div>
+          </motion.ul>
         </div>
       </section>
 

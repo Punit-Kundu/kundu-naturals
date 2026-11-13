@@ -241,6 +241,9 @@
   gap: var(--space-md);
   min-width: 0;
   align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .products-grid > * {

@@ -289,27 +289,27 @@ function Footer() {
                 <span className="text-latin">Follow Us</span>
               </motion.span>
 
-              <div className="footer-social" role="list" aria-label="Quick contact links">
+              <ul className="footer-social" aria-label="Quick contact links">
                 {socials.map((social, i) => (
-                  <motion.a
-                    key={social.label}
-                    role="listitem"
-                    href={social.href}
-                    className="footer-social-link"
-                    aria-label={social.label}
-                    title={social.label}
-                    style={{ '--brand-tint': social.tint }}
-                    custom={0.44 + i * 0.08}
-                    variants={pop}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: '-60px' }}
-                    {...(social.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  >
-                    <social.Icon width={20} height={20} />
-                  </motion.a>
+                  <li key={social.label}>
+                    <motion.a
+                      href={social.href}
+                      className="footer-social-link"
+                      aria-label={social.label}
+                      title={social.label}
+                      style={{ '--brand-tint': social.tint }}
+                      custom={0.44 + i * 0.08}
+                      variants={pop}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true, margin: '-60px' }}
+                      {...(social.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    >
+                      <social.Icon width={20} height={20} />
+                    </motion.a>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               <motion.span
                 className="footer-seal"

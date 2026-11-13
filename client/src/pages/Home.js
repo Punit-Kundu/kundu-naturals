@@ -693,6 +693,7 @@ function Home() {
                   className="main-image"
                   width="640"
                   height="640"
+                  initial={{ opacity: 1, scale: 1 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8 }}
                   loading="lazy"
@@ -865,25 +866,23 @@ function Home() {
               <ArrowRight width="18" height="18" aria-hidden="true" />
             </MotionLink>
           </motion.div>
-          <motion.div
+          <motion.ul
             className="products-grid"
             variants={gridStagger(0.08)}
-            role="list"
             aria-label="Featured products"
           >
             {featuredProducts.map((product, index) => (
-              <motion.div
+              <motion.li
                 key={product.id}
-                role="listitem"
                 variants={staggerItem}
               >
                 <ProductCard
                   product={product}
                   // variant="compact" // or "default"
                 />
-              </motion.div>
+              </motion.li>
             ))}
-          </motion.div>
+          </motion.ul>
         </div>
       </section>
 
@@ -902,10 +901,9 @@ function Home() {
               subtitleHindi="खेतों, उत्पादों और हमारी टीम की तस्वीरें"
             />
           </motion.div>
-          <motion.div
+          <motion.ul
             className="gallery-preview-grid"
             variants={gridStagger(0.08)}
-            role="list"
             aria-label="Gallery preview"
           >
             {[
@@ -916,7 +914,7 @@ function Home() {
               { src: '/images/Kundu-Naturals-All-Products/37-kundu-naturals-multifloral-honey.webp', alt: 'Raw forest honey', captionHindi: 'कच्चा वन शहद', captionEn: 'Raw Forest Honey' },
               { src: '/images/Kundu-Naturals-All-Products/11-kundu-naturals-moong-dhuli-dal.webp', alt: 'Organic moong dal', captionHindi: 'जैविक मूंग दाल', captionEn: 'Organic Moong Dal' },
             ].map((item, index) => (
-              <motion.div
+              <motion.li
                 key={index}
                 className="gallery-preview-item"
                 variants={staggerItem}
@@ -930,6 +928,8 @@ function Home() {
                       width="640"
                       height="480"
                       loading="lazy"
+                      decoding="async"
+                      initial={{ opacity: 1, scale: 1 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6 }}
                       onError={(e) => { e.target.src = '/images/gallery-placeholder.svg'; }}
@@ -937,9 +937,8 @@ function Home() {
                   <motion.div 
                     className="gallery-overlay"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    variants={{ whileHover: { opacity: 1 } }}
                   >
                     <div className="overlay-content">
                       <span>
@@ -950,7 +949,7 @@ function Home() {
                   </motion.div>
                   <motion.div 
                     className="gallery-caption"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 1, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 }}
                   >
@@ -958,9 +957,9 @@ function Home() {
                     <span className="text-latin">{item.captionEn}</span>
                   </motion.div>
                 </div>
-              </motion.div>
+              </motion.li>
             ))}
-          </motion.div>
+          </motion.ul>
           <motion.div 
             className="gallery-preview-cta"
             initial={{ opacity: 0, y: 20 }}
@@ -1005,6 +1004,7 @@ function Home() {
                 className="founder-image"
                 width="640"
                 height="640"
+                initial={{ opacity: 1, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 loading="lazy"
@@ -1065,6 +1065,7 @@ function Home() {
                 className="founder-image"
                 width="640"
                 height="640"
+                initial={{ opacity: 1, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 loading="lazy"

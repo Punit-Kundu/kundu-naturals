@@ -269,9 +269,8 @@ function Products() {
               </motion.button>
             </motion.div>
           ) : (
-            <motion.div
+            <motion.ul
               className={`products-grid ${viewMode}`}
-              role="list"
               aria-label={
                 activeCategory !== 'all'
                   ? (language === 'hi' ? 'उत्पाद सूची' : 'Product list')
@@ -280,18 +279,17 @@ function Products() {
               variants={gridStagger(0.06)}
             >
               {visibleProducts.map((product) => (
-                <motion.div
+                <motion.li
                   key={product.id}
-                  role="listitem"
                   variants={staggerItem}
                 >
                   <ProductCard
                     product={product}
                     variant={viewMode === 'list' ? 'compact' : 'default'}
                   />
-                </motion.div>
+                </motion.li>
               ))}
-            </motion.div>
+            </motion.ul>
           )}
 
           {pageCount > 1 && (

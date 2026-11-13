@@ -843,6 +843,9 @@ html.hi .kn-hero-btn {
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
   overflow-x: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* ========================================
@@ -857,6 +860,9 @@ html.hi .kn-hero-btn {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 1024px) {

@@ -45,7 +45,7 @@ const PageHero = ({
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          onError={(e) => { e.currentTarget.src = '/images/website-header.webp'; }}
+          onError={(e) => { e.currentTarget.src = '/images/homepage-hero-section.png'; }}
         />
         <div className="page-hero-overlay" />
         <div className="page-hero-glow" />

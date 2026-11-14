@@ -187,6 +187,7 @@ html.hi .footer-tagline { line-height: 1.75; letter-spacing: 0; }
   text-transform: uppercase;
   color: var(--panel-accent);
   line-height: 1.55;
+  font-family: var(--font-body);
 }
 .footer-contact-value {
   font-size: 0.95rem;

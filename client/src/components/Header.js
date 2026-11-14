@@ -6,14 +6,10 @@ import {
   Leaf,
   Truck,
   ShieldCheck,
-  Phone,
   Home,
   UserRound,
   Images,
   Mail,
-  Search,
-  MapPin,
-  Banknote,
   ShoppingCart,
   Globe,
 } from 'lucide-react';
@@ -163,9 +159,16 @@ function Header() {
           </ul>
 
           <div className="header-actions">
-            <Link to="/products" className="header-search" aria-label={language === 'hi' ? 'प्रोडक्ट खोजें' : 'Search products'} title={language === 'hi' ? 'प्रोडक्ट खोजें' : 'Search products'}>
-              <Search size={21} aria-hidden="true" />
-            </Link>
+            <button
+              type="button"
+              className="lang-toggle"
+              onClick={() => setLanguage(language === 'hi' ? 'en' : 'hi')}
+              aria-label={language === 'hi' ? 'Switch to English' : 'हिन्दी में बदलें'}
+              title={language === 'hi' ? 'English' : 'हिन्दी'}
+            >
+              <Globe size={17} aria-hidden="true" />
+              <span>{language === 'hi' ? 'EN' : 'हिंदी'}</span>
+            </button>
             <div className="header-cta">
               <a className="header-cta-icon" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <WhatsAppBrandIcon width={20} height={20} aria-hidden="true" />
@@ -178,21 +181,6 @@ function Header() {
           </div>
         </div>
       </nav>
-
-      <div className="language-toggle-wrapper" role="navigation" aria-label="Language selection">
-        <div className="container">
-          <button
-            type="button"
-            className="lang-toggle"
-            onClick={() => setLanguage(language === 'hi' ? 'en' : 'hi')}
-            aria-label={language === 'hi' ? 'Switch to English' : 'हिन्दी में बदलें'}
-            title={language === 'hi' ? 'English' : 'हिन्दी'}
-          >
-            <Globe size={17} aria-hidden="true" />
-            <span>{language === 'hi' ? 'EN' : 'हिंदी'}</span>
-          </button>
-        </div>
-      </div>
 
       {isMobileMenuOpen && (
         <button

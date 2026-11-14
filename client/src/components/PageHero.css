@@ -127,10 +127,12 @@
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(227, 168, 43, 0.55);
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
   font-weight: 600;
   color: var(--color-gold-soft);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 16px rgba(227, 168, 43, 0.15);
@@ -146,10 +148,10 @@
 
 .page-hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
   margin: 0 0 1rem;
   color: var(--color-white);
   text-wrap: balance;
@@ -157,8 +159,9 @@
 
 .page-hero-sub {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.35vw, 1.15rem);
-  line-height: 1.7;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.86);
   max-width: 540px;
   margin: 0 0 2rem;
@@ -181,8 +184,10 @@
   padding: 0.95rem 1.7rem;
   border-radius: var(--radius-full);
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;

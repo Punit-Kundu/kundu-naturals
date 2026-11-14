@@ -42,11 +42,13 @@
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 600;
   color: var(--color-leaf-green);
   margin-bottom: var(--space-md);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
   position: relative;
   display: inline-block;
 }

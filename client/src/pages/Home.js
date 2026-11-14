@@ -468,11 +468,21 @@ function Home() {
         <div className="kn-hero-floaters" aria-hidden="true">
           <motion.div
             className="kn-hero-card kn-hero-card-1"
-            initial={{ opacity: 0, x: 40, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.95 }}
+            initial={{ opacity: 0, x: 40, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, y: [0, -10, 0], scale: 1, rotate: [0, -1.5, 0] }}
+            transition={{
+              opacity: { duration: 0.6, delay: 0.95 },
+              x: { duration: 0.7, delay: 0.95, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 0.6, delay: 0.95 },
+              y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.6 },
+              rotate: { duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.6 },
+            }}
           >
-            <span className="kn-hero-card-icon">🫙</span>
+            <motion.span
+              className="kn-hero-card-icon"
+              animate={{ scale: [1, 1.15, 1], rotate: [0, 6, 0] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
+            >🫙</motion.span>
             <span className="kn-hero-card-name">
               <span className="text-hindi">A2 देसी घी</span>
               <span className="text-latin">A2 Desi Ghee</span>
@@ -481,11 +491,21 @@ function Home() {
           </motion.div>
           <motion.div
             className="kn-hero-card kn-hero-card-2"
-            initial={{ opacity: 0, x: -40, y: -10 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
+            initial={{ opacity: 0, x: -40, y: -10, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, y: [0, -12, 0], scale: 1, rotate: [0, 1.5, 0] }}
+            transition={{
+              opacity: { duration: 0.6, delay: 1.1 },
+              x: { duration: 0.7, delay: 1.1, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 0.6, delay: 1.1 },
+              y: { duration: 6.2, repeat: Infinity, ease: 'easeInOut', delay: 1.9 },
+              rotate: { duration: 6.2, repeat: Infinity, ease: 'easeInOut', delay: 1.9 },
+            }}
           >
-            <span className="kn-hero-card-icon">🛢️</span>
+            <motion.span
+              className="kn-hero-card-icon"
+              animate={{ scale: [1, 1.15, 1], rotate: [0, -6, 0] }}
+              transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 2.1 }}
+            >🛢️</motion.span>
             <span className="kn-hero-card-name">
               <span className="text-hindi">कोल्ड-प्रेस तेल</span>
               <span className="text-latin">Cold-Pressed Oil</span>
@@ -494,11 +514,20 @@ function Home() {
           </motion.div>
           <motion.div
             className="kn-hero-card kn-hero-card-3"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.25 }}
+            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+            animate={{ opacity: 1, y: [0, -9, 0], scale: 1, rotate: [0, -1, 0] }}
+            transition={{
+              opacity: { duration: 0.6, delay: 1.25 },
+              scale: { duration: 0.6, delay: 1.25 },
+              y: { duration: 6.8, repeat: Infinity, ease: 'easeInOut', delay: 2.1 },
+              rotate: { duration: 6.8, repeat: Infinity, ease: 'easeInOut', delay: 2.1 },
+            }}
           >
-            <span className="kn-hero-card-icon">🍯</span>
+            <motion.span
+              className="kn-hero-card-icon"
+              animate={{ scale: [1, 1.18, 1], rotate: [0, 8, 0] }}
+              transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 2.4 }}
+            >🍯</motion.span>
             <span className="kn-hero-card-name">
               <span className="text-hindi">कच्चा शहद</span>
               <span className="text-latin">Raw Honey</span>
@@ -508,20 +537,35 @@ function Home() {
 
           <motion.div
             className="kn-hero-ring-badge"
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
+            initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
+            animate={{ opacity: 1, scale: [1, 1.04, 1], rotate: 0 }}
+            transition={{
+              opacity: { duration: 0.6, delay: 0.9 },
+              rotate: { type: 'spring', stiffness: 120, damping: 14, delay: 0.9 },
+              scale: { duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 },
+            }}
             aria-label="100% Organic"
           >
-            <svg viewBox="0 0 140 140" className="kn-hero-ring-svg" aria-hidden="true">
+            <motion.svg
+              viewBox="0 0 140 140"
+              className="kn-hero-ring-svg"
+              aria-hidden="true"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+            >
               <defs>
                 <path id="kn-ring-text-path" d="M 70,70 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" />
               </defs>
               <text fill="rgba(255,255,255,0.9)" fontSize="11" fontWeight="600" letterSpacing="2.6">
                 <textPath href="#kn-ring-text-path">ORGANIC • NATURAL • DESI • PURE • </textPath>
               </text>
-            </svg>
-            <span className="kn-hero-ring-center" aria-hidden="true">🌿</span>
+            </motion.svg>
+            <motion.span
+              className="kn-hero-ring-center"
+              aria-hidden="true"
+              animate={{ rotate: [-6, 6, -6], scale: [1, 1.08, 1] }}
+              transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            >🌿</motion.span>
           </motion.div>
         </div>
 
